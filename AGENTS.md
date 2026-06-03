@@ -1,7 +1,7 @@
-# AGENTS.md - Milk N Rose Shopify Theme
+# AGENTS.md - Cinelin Shopify Theme
 
 ## Project
-Milk N Rose is a high-end handmade jewelry Shopify theme, based on Dawn. The site has three signature experiences:
+Cinelin is a high-end handmade jewelry Shopify theme, based on Dawn. The site has three signature experiences:
 1. The Entry - a dark, full-screen "TV wall" splash page with email capture
 2. The Home - collections as visual stories plus creative between-collection navigation
 3. The Product Page - anchored by an interactive, rotatable 3D rendering

@@ -120,12 +120,13 @@
 
 .cinelin-entry__headline {
   color: rgb(var(--cinelin-color-text));
-  font-family: var(--cinelin-font-heading);
+  font-family: var(--cinelin-font-wordmark);
   font-size: clamp(2.8rem, 9vw, 5.8rem);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 0.95;
   margin: 0;
+  text-transform: uppercase;
 }
 
 .cinelin-entry__copy,
