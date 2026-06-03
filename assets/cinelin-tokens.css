@@ -1,0 +1,16 @@
+:root {
+  --cinelin-color-ink: 8 8 9;
+  --cinelin-color-ink-soft: 18 18 20;
+  --cinelin-color-text: 246 242 235;
+  --cinelin-color-text-muted: 185 178 168;
+  --cinelin-color-line: 86 82 78;
+  --cinelin-color-panel: 16 15 15;
+  --cinelin-color-panel-strong: 28 26 25;
+  --cinelin-color-accent: 213 189 151;
+  --cinelin-color-accent-contrast: 17 15 13;
+  --cinelin-color-focus: 238 220 182;
+  --cinelin-color-static-light: 221 217 206;
+  --cinelin-color-static-dark: 35 34 34;
+  --cinelin-font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --cinelin-font-heading: Georgia, "Times New Roman", serif;
+}

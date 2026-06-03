@@ -1,0 +1,172 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-entry.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cinelin-entry.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign grid_columns = section.settings.grid_columns | default: 4
+  assign grid_rows = section.settings.grid_rows | default: 3
+  assign frame_count = grid_columns | times: grid_rows
+-%}
+
+<section
+  id="CinelinEntry-{{ section.id }}"
+  class="cinelin-entry"
+  data-cinelin-entry
+  data-live-duration="{{ section.settings.frame_live_duration }}"
+  data-gap-duration="{{ section.settings.gap_duration }}"
+  data-cookie-name="cinelin_entry_bypass"
+  style="--cinelin-entry-columns: {{ grid_columns }}; --cinelin-entry-rows: {{ grid_rows }}; --cinelin-entry-frame-live: {{ section.settings.frame_live_duration }}ms; --cinelin-entry-gap: {{ section.settings.gap_duration }}ms;"
+>
+  <div class="cinelin-entry__wall" aria-hidden="true">
+    {%- for frame_index in (1..frame_count) -%}
+      {%- liquid
+        assign video_url = blank
+        if section.blocks.size > 0
+          assign block_index = forloop.index0 | modulo: section.blocks.size
+          assign video_url = section.blocks[block_index].settings.video_url
+        endif
+      -%}
+
+      <div class="cinelin-entry__frame" data-entry-frame>
+        {%- if video_url != blank -%}
+          <video class="cinelin-entry__video" muted playsinline preload="metadata" loop>
+            <source src="{{ video_url | escape }}" type="video/mp4">
+          </video>
+        {%- else -%}
+          <span class="cinelin-entry__placeholder"></span>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="cinelin-entry__scanlines" aria-hidden="true"></div>
+  <div class="cinelin-entry__grain" aria-hidden="true"></div>
+
+  <div class="cinelin-entry__content">
+    <form class="cinelin-entry__form" data-entry-form>
+      <h2 class="cinelin-entry__headline" id="CinelinEntryHeading-{{ section.id }}">
+        {{ section.settings.headline_text | escape }}
+      </h2>
+
+      {%- if section.settings.sub_copy_text != blank -%}
+        <p class="cinelin-entry__copy">{{ section.settings.sub_copy_text | escape }}</p>
+      {%- endif -%}
+
+      <div class="cinelin-entry__field">
+        <label class="visually-hidden" for="CinelinEntryEmail-{{ section.id }}">Email address</label>
+        <input
+          id="CinelinEntryEmail-{{ section.id }}"
+          class="cinelin-entry__input"
+          type="email"
+          name="email"
+          autocomplete="email"
+          placeholder="Email address"
+          required
+          data-entry-email
+        >
+      </div>
+
+      <button class="cinelin-entry__button" type="submit">Join</button>
+
+      <p class="cinelin-entry__note">for VIP events, secret sales &amp; birthday gifts,</p>
+      <p class="cinelin-entry__success" role="status" data-entry-success hidden></p>
+    </form>
+
+    <div class="cinelin-entry__controls">
+      <button class="cinelin-entry__control" type="button" data-entry-mute aria-pressed="false">
+        <span data-entry-mute-label>Sound on</span>
+      </button>
+      <button class="cinelin-entry__control" type="button" data-entry-skip>skip</button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinelin entry splash",
+  "tag": "section",
+  "class": "section-cinelin-entry",
+  "settings": [
+    {
+      "type": "range",
+      "id": "grid_columns",
+      "label": "Grid columns",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "grid_rows",
+      "label": "Grid rows",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "frame_live_duration",
+      "label": "Frame live duration",
+      "min": 300,
+      "max": 4000,
+      "step": 100,
+      "unit": "ms",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "gap_duration",
+      "label": "Gap duration",
+      "min": 100,
+      "max": 2000,
+      "step": 100,
+      "unit": "ms",
+      "default": 250
+    },
+    {
+      "type": "text",
+      "id": "headline_text",
+      "label": "Headline text",
+      "default": "Milk N Rose"
+    },
+    {
+      "type": "textarea",
+      "id": "sub_copy_text",
+      "label": "Sub-copy text",
+      "default": "A private first look at new pieces, intimate releases, and after-dark invitations."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "placeholder_video",
+      "name": "Placeholder video",
+      "settings": [
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "Video URL",
+          "info": "Use an MP4 URL for placeholder TV-wall footage."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinelin entry splash",
+      "blocks": [
+        {
+          "type": "placeholder_video"
+        },
+        {
+          "type": "placeholder_video"
+        },
+        {
+          "type": "placeholder_video"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
