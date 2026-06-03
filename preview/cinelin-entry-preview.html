@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cinelin Entry Splash Preview</title>
+    <link rel="stylesheet" href="../assets/cinelin-tokens.css">
+    <link rel="stylesheet" href="../assets/cinelin-entry.css">
+    <style>
+      body {
+        margin: 0;
+      }
+
+      .visually-hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+    </style>
+    <script src="../assets/cinelin-entry.js" defer></script>
+  </head>
+  <body>
+    <section
+      id="CinelinEntry-preview"
+      class="cinelin-entry"
+      data-cinelin-entry
+      data-live-duration="900"
+      data-gap-duration="250"
+      data-cookie-name="cinelin_entry_preview_bypass"
+      style="--cinelin-entry-columns: 4; --cinelin-entry-rows: 3; --cinelin-entry-frame-live: 900ms; --cinelin-entry-gap: 250ms;"
+    >
+      <div class="cinelin-entry__wall" aria-hidden="true">
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame><span class="cinelin-entry__placeholder"></span></div>
+      </div>
+
+      <div class="cinelin-entry__scanlines" aria-hidden="true"></div>
+      <div class="cinelin-entry__grain" aria-hidden="true"></div>
+
+      <div class="cinelin-entry__content">
+        <form class="cinelin-entry__form" data-entry-form>
+          <h2 class="cinelin-entry__headline" id="CinelinEntryHeading-preview">CINELIN</h2>
+          <p class="cinelin-entry__copy">A private first look at new pieces, intimate releases, and after-dark invitations.</p>
+
+          <div class="cinelin-entry__field">
+            <label class="visually-hidden" for="CinelinEntryEmail-preview">Email address</label>
+            <input
+              id="CinelinEntryEmail-preview"
+              class="cinelin-entry__input"
+              type="email"
+              name="email"
+              autocomplete="email"
+              placeholder="Email address"
+              required
+              data-entry-email
+            >
+          </div>
+
+          <button class="cinelin-entry__button" type="submit">Join</button>
+          <p class="cinelin-entry__note">for VIP events, secret sales &amp; birthday gifts,</p>
+          <p class="cinelin-entry__success" role="status" data-entry-success hidden></p>
+        </form>
+
+        <div class="cinelin-entry__controls">
+          <button class="cinelin-entry__control" type="button" data-entry-mute aria-pressed="false">
+            <span data-entry-mute-label>Sound on</span>
+          </button>
+          <button class="cinelin-entry__control" type="button" data-entry-skip>skip</button>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
