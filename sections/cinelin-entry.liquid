@@ -15,7 +15,7 @@
   data-live-duration="{{ section.settings.frame_live_duration }}"
   data-gap-duration="{{ section.settings.gap_duration }}"
   data-cookie-name="cinelin_entry_bypass"
-  style="--cinelin-entry-columns: {{ grid_columns }}; --cinelin-entry-rows: {{ grid_rows }}; --cinelin-entry-frame-live: {{ section.settings.frame_live_duration }}ms; --cinelin-entry-gap: {{ section.settings.gap_duration }}ms; --cinelin-wordmark-image: url('{{ 'cinelin-wordmark-bg.png' | asset_url }}');"
+  style="--cinelin-entry-columns: {{ grid_columns }}; --cinelin-entry-rows: {{ grid_rows }}; --cinelin-entry-frame-live: {{ section.settings.frame_live_duration }}ms; --cinelin-entry-gap: {{ section.settings.gap_duration }}ms;"
 >
   <div class="cinelin-entry__wall" aria-hidden="true">
     {%- for frame_index in (1..frame_count) -%}
@@ -68,7 +68,6 @@
 
       <button class="cinelin-entry__button" type="submit">Join</button>
 
-      <p class="cinelin-entry__note">for VIP events, secret sales &amp; birthday gifts.</p>
       <p class="cinelin-entry__success" role="status" data-entry-success hidden></p>
     </form>
 

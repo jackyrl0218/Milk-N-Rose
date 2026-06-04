@@ -24,7 +24,6 @@
 }
 
 .cinelin-entry::before {
-  background: var(--cinelin-wordmark-image, none) center / contain no-repeat;
   color: rgb(var(--cinelin-color-text) / 0.035);
   content: "CINELIN";
   font-family: var(--cinelin-font-wordmark);
@@ -40,11 +39,6 @@
   top: 5svh;
   white-space: nowrap;
   z-index: 1;
-}
-
-.cinelin-entry[style*="cinelin-wordmark-image"]::before {
-  color: rgb(var(--cinelin-color-text) / 0.012);
-  opacity: 0.62;
 }
 
 .cinelin-entry[hidden],
@@ -230,16 +224,6 @@
   z-index: 1;
 }
 
-.cinelin-entry__content::after {
-  background: var(--cinelin-wordmark-image, none) center 12% / min(76%, 50rem) auto no-repeat;
-  content: "";
-  inset: 0;
-  opacity: 0.08;
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-}
-
 .cinelin-entry__form {
   display: grid;
   gap: 1.2rem;
@@ -330,15 +314,6 @@
 
 .cinelin-entry__button:hover {
   background: rgb(var(--cinelin-color-text));
-}
-
-.cinelin-entry__note {
-  color: rgb(var(--cinelin-color-text) / 0.76);
-  font-family: var(--cinelin-font-copy);
-  font-size: 1.05rem;
-  font-weight: 400;
-  line-height: 1.22;
-  text-align: center;
 }
 
 .cinelin-entry__success {
@@ -437,7 +412,6 @@ html.shopify-design-mode .cinelin-entry {
 
   .cinelin-entry__headline,
   .cinelin-entry__copy,
-  .cinelin-entry__note,
   .cinelin-entry__success {
     grid-column: 1 / -1;
   }
