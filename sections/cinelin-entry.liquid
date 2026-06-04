@@ -27,7 +27,7 @@
         endif
       -%}
 
-      <div class="cinelin-entry__frame" data-entry-frame>
+      <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: {{ forloop.index }};">
         {%- if video_url != blank -%}
           <video class="cinelin-entry__video" muted playsinline preload="metadata" loop>
             <source src="{{ video_url | escape }}" type="video/mp4">
@@ -113,7 +113,7 @@
       "max": 4000,
       "step": 100,
       "unit": "ms",
-      "default": 900
+      "default": 3000
     },
     {
       "type": "range",

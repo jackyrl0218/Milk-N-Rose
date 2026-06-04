@@ -1,7 +1,9 @@
 .cinelin-entry {
-  --cinelin-entry-frame-live: 900ms;
+  --cinelin-entry-frame-live: 3000ms;
   --cinelin-entry-gap: 250ms;
-  background: rgb(var(--cinelin-color-ink));
+  background:
+    radial-gradient(circle at 50% 38%, rgb(var(--cinelin-color-static-light) / 0.09), rgb(var(--cinelin-color-ink) / 0) 34rem),
+    rgb(var(--cinelin-color-ink));
   color: rgb(var(--cinelin-color-text));
   display: grid;
   font-family: var(--cinelin-font-body);
@@ -14,6 +16,31 @@
   z-index: 40;
 }
 
+.cinelin-entry,
+.cinelin-entry *,
+.cinelin-entry *::before,
+.cinelin-entry *::after {
+  box-sizing: border-box;
+}
+
+.cinelin-entry::before {
+  color: rgb(var(--cinelin-color-text) / 0.035);
+  content: "CINELIN";
+  font-family: var(--cinelin-font-wordmark);
+  font-size: clamp(9rem, 24vw, 30rem);
+  font-weight: 400;
+  inset-inline: -2vw;
+  letter-spacing: 0;
+  line-height: 0.75;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 5svh;
+  white-space: nowrap;
+  z-index: 1;
+}
+
 .cinelin-entry[hidden],
 .cinelin-entry.is-hidden {
   display: none;
@@ -21,44 +48,74 @@
 
 .cinelin-entry__wall {
   display: grid;
-  gap: 0.4rem;
-  grid-template-columns: repeat(var(--cinelin-entry-columns, 3), minmax(0, 1fr));
-  grid-template-rows: repeat(var(--cinelin-entry-rows, 3), minmax(0, 1fr));
+  gap: 0.2rem;
+  grid-template-columns: repeat(var(--cinelin-entry-columns, 5), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--cinelin-entry-rows, 4), minmax(0, 1fr));
   height: 100%;
   inset: 0;
-  padding: 0.4rem;
+  padding: 0.2rem;
   position: absolute;
   width: 100%;
+  z-index: 0;
 }
 
 .cinelin-entry__frame {
   background:
-    radial-gradient(circle at 50% 45%, rgb(var(--cinelin-color-static-light) / 0.16), rgb(var(--cinelin-color-static-dark) / 0.72) 56%),
+    linear-gradient(140deg, rgb(var(--cinelin-color-static-light) / 0.08), rgb(var(--cinelin-color-ink) / 0) 34%),
+    radial-gradient(circle at 52% 48%, rgb(var(--cinelin-color-static-light) / 0.08), rgb(var(--cinelin-color-ink) / 0.88) 60%),
     rgb(var(--cinelin-color-ink-soft));
-  border: 0.1rem solid rgb(var(--cinelin-color-line) / 0.45);
+  border: 0.1rem solid rgb(var(--cinelin-color-line) / 0.62);
+  box-shadow:
+    inset 0 0 0 0.1rem rgb(var(--cinelin-color-text) / 0.03),
+    inset 0 -1.8rem 5rem rgb(var(--cinelin-color-ink) / 0.92);
   min-height: 0;
-  opacity: 0.26;
+  opacity: 0.46;
   overflow: hidden;
   position: relative;
-  transform: scale(0.985);
+  transform: scale(0.992);
   transition:
     opacity var(--cinelin-entry-gap) ease,
     transform var(--cinelin-entry-gap) ease,
-    filter var(--cinelin-entry-gap) ease;
+    filter var(--cinelin-entry-gap) ease,
+    box-shadow var(--cinelin-entry-gap) ease;
+}
+
+.cinelin-entry__frame::before {
+  background:
+    linear-gradient(100deg, rgb(var(--cinelin-color-text) / 0.18), rgb(var(--cinelin-color-text) / 0) 22% 74%, rgb(var(--cinelin-color-text) / 0.08)),
+    repeating-linear-gradient(0deg, rgb(var(--cinelin-color-text) / 0.055) 0 0.1rem, rgb(var(--cinelin-color-ink) / 0) 0.1rem 0.42rem);
+  content: "";
+  inset: 0;
+  mix-blend-mode: screen;
+  opacity: 0.18;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
 }
 
 .cinelin-entry__frame::after {
-  background: radial-gradient(circle at 50% 50%, rgb(var(--cinelin-color-text) / 0), rgb(var(--cinelin-color-ink) / 0.8) 76%);
+  background:
+    radial-gradient(circle at 50% 50%, rgb(var(--cinelin-color-text) / 0), rgb(var(--cinelin-color-ink) / 0.74) 70%),
+    linear-gradient(180deg, rgb(var(--cinelin-color-ink) / 0.08), rgb(var(--cinelin-color-ink) / 0.5));
   content: "";
   inset: 0;
   pointer-events: none;
   position: absolute;
+  z-index: 3;
 }
 
 .cinelin-entry__frame.is-live {
-  filter: contrast(1.14) saturate(0.82);
+  filter: contrast(1.22) saturate(0.82);
   opacity: 1;
   transform: scale(1);
+  box-shadow:
+    inset 0 0 0 0.1rem rgb(var(--cinelin-color-text) / 0.16),
+    inset 0 -1.8rem 5rem rgb(var(--cinelin-color-ink) / 0.58),
+    0 0 2.8rem rgb(var(--cinelin-color-static-light) / 0.18);
+}
+
+.cinelin-entry__frame.is-live::before {
+  opacity: 0.4;
 }
 
 .cinelin-entry__video,
@@ -71,8 +128,29 @@
 
 .cinelin-entry__placeholder {
   background:
-    linear-gradient(135deg, rgb(var(--cinelin-color-static-light) / 0.18), rgb(var(--cinelin-color-ink-soft) / 0.32)),
-    repeating-linear-gradient(90deg, rgb(var(--cinelin-color-line) / 0.22) 0 0.1rem, rgb(var(--cinelin-color-ink) / 0) 0.1rem 0.5rem);
+    linear-gradient(180deg, rgb(var(--cinelin-color-ink) / 0.18), rgb(var(--cinelin-color-ink) / 0.74)),
+    radial-gradient(circle at calc(var(--cinelin-frame-index, 1) * 7%) 18%, rgb(var(--cinelin-color-static-light) / 0.3), rgb(var(--cinelin-color-ink) / 0) 28%),
+    linear-gradient(calc(var(--cinelin-frame-index, 1) * 24deg), rgb(var(--cinelin-color-panel-strong)), rgb(var(--cinelin-color-line) / 0.52), rgb(var(--cinelin-color-ink-soft)));
+  filter: grayscale(1) brightness(0.52) contrast(1.35);
+  transform: scale(1.06);
+}
+
+.cinelin-entry__frame:nth-child(3n) .cinelin-entry__placeholder {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-color-ink) / 0.08), rgb(var(--cinelin-color-ink) / 0.78)),
+    radial-gradient(ellipse at 48% 28%, rgb(var(--cinelin-color-static-light) / 0.36), rgb(var(--cinelin-color-ink) / 0) 25%),
+    linear-gradient(90deg, rgb(var(--cinelin-color-line) / 0.22), rgb(var(--cinelin-color-panel-strong)), rgb(var(--cinelin-color-ink)));
+}
+
+.cinelin-entry__frame:nth-child(4n) .cinelin-entry__placeholder {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-color-ink) / 0.16), rgb(var(--cinelin-color-ink) / 0.82)),
+    radial-gradient(circle at 65% 42%, rgb(var(--cinelin-color-static-light) / 0.26), rgb(var(--cinelin-color-ink) / 0) 22%),
+    linear-gradient(155deg, rgb(var(--cinelin-color-static-dark)), rgb(var(--cinelin-color-panel)), rgb(var(--cinelin-color-line) / 0.48));
+}
+
+.cinelin-entry__frame.is-live .cinelin-entry__placeholder {
+  filter: grayscale(0.78) brightness(0.92) contrast(1.48);
 }
 
 .cinelin-entry__scanlines,
@@ -80,52 +158,74 @@
   inset: 0;
   pointer-events: none;
   position: absolute;
+  z-index: 4;
 }
 
 .cinelin-entry__scanlines {
   background: repeating-linear-gradient(
     0deg,
-    rgb(var(--cinelin-color-text) / 0.06) 0 0.1rem,
-    rgb(var(--cinelin-color-ink) / 0) 0.1rem 0.4rem
+    rgb(var(--cinelin-color-text) / 0.055) 0 0.1rem,
+    rgb(var(--cinelin-color-ink) / 0) 0.1rem 0.36rem
   );
   mix-blend-mode: screen;
-  opacity: 0.5;
+  opacity: 0.38;
 }
 
 .cinelin-entry__grain {
-  animation: cinelin-entry-grain 1.1s steps(2, end) infinite;
+  animation: cinelin-entry-grain 1s steps(2, end) infinite;
   background:
-    radial-gradient(circle at 18% 31%, rgb(var(--cinelin-color-text) / 0.12), rgb(var(--cinelin-color-ink) / 0) 18%),
-    radial-gradient(circle at 78% 22%, rgb(var(--cinelin-color-text-muted) / 0.1), rgb(var(--cinelin-color-ink) / 0) 16%),
-    radial-gradient(circle at 44% 80%, rgb(var(--cinelin-color-text) / 0.08), rgb(var(--cinelin-color-ink) / 0) 20%);
-  background-size: 18rem 18rem, 22rem 22rem, 16rem 16rem;
-  opacity: 0.42;
+    radial-gradient(circle at 18% 31%, rgb(var(--cinelin-color-text) / 0.14), rgb(var(--cinelin-color-ink) / 0) 17%),
+    radial-gradient(circle at 78% 22%, rgb(var(--cinelin-color-text-muted) / 0.12), rgb(var(--cinelin-color-ink) / 0) 16%),
+    radial-gradient(circle at 44% 80%, rgb(var(--cinelin-color-text) / 0.08), rgb(var(--cinelin-color-ink) / 0) 19%);
+  background-size: 16rem 16rem, 21rem 21rem, 13rem 13rem;
+  opacity: 0.34;
 }
 
 .cinelin-entry__content {
-  align-items: center;
-  background: rgb(var(--cinelin-color-panel) / 0.74);
-  border: 0.1rem solid rgb(var(--cinelin-color-line) / 0.72);
-  border-radius: 0.8rem;
-  box-shadow: 0 2.4rem 8rem rgb(var(--cinelin-color-ink) / 0.58);
-  display: flex;
-  flex-direction: column;
-  gap: 1.4rem;
-  inline-size: min(90vw, 46rem);
-  padding: 2.2rem;
+  align-items: stretch;
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-color-ink) / 0.32), rgb(var(--cinelin-color-ink) / 0.86)),
+    rgb(var(--cinelin-color-panel) / 0.82);
+  border: 0.1rem solid rgb(var(--cinelin-color-text) / 0.32);
+  box-shadow:
+    0 0 0 0.1rem rgb(var(--cinelin-color-ink)),
+    0 0 7rem rgb(var(--cinelin-color-static-light) / 0.14),
+    0 2.8rem 8rem rgb(var(--cinelin-color-ink) / 0.78);
+  display: grid;
+  gap: 1.8rem;
+  inline-size: min(90vw, 72rem);
+  padding: 1.2rem;
   position: relative;
-  text-align: center;
+  text-align: left;
+  z-index: 5;
+}
+
+.cinelin-entry__content::before {
+  border: 0.1rem solid rgb(var(--cinelin-color-text) / 0.16);
+  content: "";
+  inset: 0.7rem;
+  pointer-events: none;
+  position: absolute;
+}
+
+.cinelin-entry__form {
+  display: grid;
+  gap: 1.2rem;
+  padding: 1.6rem;
+  position: relative;
+  width: 100%;
   z-index: 1;
 }
 
 .cinelin-entry__headline {
   color: rgb(var(--cinelin-color-text));
   font-family: var(--cinelin-font-wordmark);
-  font-size: clamp(2.8rem, 9vw, 5.8rem);
+  font-size: clamp(5.2rem, 14vw, 13rem);
   font-weight: 400;
   letter-spacing: 0;
-  line-height: 0.95;
-  margin: 0;
+  line-height: 0.68;
+  margin: 0 0 0.8rem;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -137,15 +237,12 @@
 }
 
 .cinelin-entry__copy {
-  color: rgb(var(--cinelin-color-text-muted));
-  font-size: 1.4rem;
-  line-height: 1.45;
-}
-
-.cinelin-entry__form {
-  display: grid;
-  gap: 1.2rem;
-  width: 100%;
+  color: rgb(var(--cinelin-color-text));
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  line-height: 1.22;
+  max-width: 58rem;
+  text-align: center;
+  text-wrap: balance;
 }
 
 .cinelin-entry__field {
@@ -155,51 +252,59 @@
 
 .cinelin-entry__input {
   appearance: none;
-  background: rgb(var(--cinelin-color-panel-strong) / 0.86);
-  border: 0.1rem solid rgb(var(--cinelin-color-line));
-  border-radius: 0.6rem;
+  background: rgb(var(--cinelin-color-text) / 0.02);
+  border: 0;
+  border-bottom: 0.1rem solid rgb(var(--cinelin-color-text) / 0.82);
   color: rgb(var(--cinelin-color-text));
   font: inherit;
+  font-size: 1.7rem;
   inline-size: 100%;
   letter-spacing: 0;
-  min-height: 4.8rem;
-  padding: 1.2rem 1.4rem;
+  min-height: 5.6rem;
+  padding: 1.2rem 0.2rem;
 }
 
 .cinelin-entry__input::placeholder {
-  color: rgb(var(--cinelin-color-text-muted) / 0.78);
+  color: rgb(var(--cinelin-color-text) / 0.64);
 }
 
 .cinelin-entry__input:focus-visible,
 .cinelin-entry__button:focus-visible,
 .cinelin-entry__control:focus-visible {
   outline: 0.2rem solid rgb(var(--cinelin-color-focus));
-  outline-offset: 0.2rem;
+  outline-offset: 0.3rem;
 }
 
 .cinelin-entry__button {
   appearance: none;
   background: rgb(var(--cinelin-color-accent));
   border: 0.1rem solid rgb(var(--cinelin-color-accent));
-  border-radius: 0.6rem;
   color: rgb(var(--cinelin-color-accent-contrast));
   cursor: pointer;
   font: inherit;
+  font-size: 1.6rem;
   font-weight: 700;
   letter-spacing: 0;
-  min-height: 4.8rem;
-  padding: 1.1rem 1.6rem;
+  min-height: 5.4rem;
+  padding: 1.2rem 1.6rem;
+  text-transform: uppercase;
+}
+
+.cinelin-entry__button:hover {
+  background: rgb(var(--cinelin-color-text));
 }
 
 .cinelin-entry__note {
-  color: rgb(var(--cinelin-color-text-muted));
-  font-size: 1.2rem;
+  color: rgb(var(--cinelin-color-text) / 0.76);
+  font-size: 1.25rem;
   line-height: 1.35;
+  text-align: center;
 }
 
 .cinelin-entry__success {
   color: rgb(var(--cinelin-color-text));
   font-size: 1.3rem;
+  text-align: center;
 }
 
 .cinelin-entry__controls {
@@ -208,20 +313,24 @@
   flex-wrap: wrap;
   gap: 1.2rem;
   justify-content: center;
+  padding: 0 1.6rem 1.4rem;
+  position: relative;
+  z-index: 1;
 }
 
 .cinelin-entry__control {
   appearance: none;
   background: rgb(var(--cinelin-color-ink) / 0);
   border: 0;
-  color: rgb(var(--cinelin-color-text-muted));
+  color: rgb(var(--cinelin-color-text) / 0.72);
   cursor: pointer;
   font: inherit;
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   letter-spacing: 0;
   padding: 0.4rem;
   text-decoration: underline;
   text-underline-offset: 0.3rem;
+  text-transform: uppercase;
 }
 
 .cinelin-entry__control:hover {
@@ -248,18 +357,58 @@ html.shopify-design-mode .cinelin-entry {
   }
 }
 
-@media screen and (min-width: 750px) {
-  .cinelin-entry__wall {
-    gap: 0.6rem;
-    padding: 0.6rem;
+@media screen and (max-width: 749px) {
+  .cinelin-entry {
+    --cinelin-entry-columns: 3;
+    --cinelin-entry-rows: 5;
+  }
+
+  .cinelin-entry::before {
+    top: 9svh;
   }
 
   .cinelin-entry__content {
-    padding: 3rem;
+    inline-size: min(92vw, 40rem);
+  }
+
+  .cinelin-entry__form {
+    padding: 1.4rem;
+  }
+
+  .cinelin-entry__headline {
+    font-size: clamp(4.2rem, 17vw, 7rem);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .cinelin-entry__content {
+    inline-size: min(68vw, 86rem);
+    padding: 1.4rem;
+  }
+
+  .cinelin-entry__form {
+    gap: 1.4rem;
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 32rem);
+    padding: 2rem;
+  }
+
+  .cinelin-entry__headline,
+  .cinelin-entry__copy,
+  .cinelin-entry__note,
+  .cinelin-entry__success {
+    grid-column: 1 / -1;
+  }
+
+  .cinelin-entry__headline {
+    font-size: clamp(7rem, 11vw, 12rem);
   }
 
   .cinelin-entry__copy {
-    font-size: 1.5rem;
+    justify-self: center;
+  }
+
+  .cinelin-entry__button {
+    align-self: end;
   }
 }
 
@@ -272,14 +421,14 @@ html.shopify-design-mode .cinelin-entry {
   }
 
   .cinelin-entry__frame {
-    opacity: 0.5;
+    opacity: 0.42;
     transform: none;
   }
 
   .cinelin-entry__frame:first-child,
-  .cinelin-entry__frame:nth-child(4),
-  .cinelin-entry__frame:nth-child(7) {
-    opacity: 0.86;
+  .cinelin-entry__frame:nth-child(6),
+  .cinelin-entry__frame:nth-child(14) {
+    opacity: 0.92;
   }
 
   .cinelin-entry__grain {
