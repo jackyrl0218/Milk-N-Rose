@@ -24,6 +24,7 @@
 }
 
 .cinelin-entry::before {
+  background: var(--cinelin-wordmark-image, none) center / contain no-repeat;
   color: rgb(var(--cinelin-color-text) / 0.035);
   content: "CINELIN";
   font-family: var(--cinelin-font-wordmark);
@@ -39,6 +40,11 @@
   top: 5svh;
   white-space: nowrap;
   z-index: 1;
+}
+
+.cinelin-entry[style*="cinelin-wordmark-image"]::before {
+  color: rgb(var(--cinelin-color-text) / 0.012);
+  opacity: 0.62;
 }
 
 .cinelin-entry[hidden],
@@ -119,11 +125,20 @@
 }
 
 .cinelin-entry__video,
-.cinelin-entry__placeholder {
+.cinelin-entry__placeholder,
+.cinelin-entry__placeholder-image {
   display: block;
   height: 100%;
   object-fit: cover;
   width: 100%;
+}
+
+.cinelin-entry__placeholder-image {
+  filter: grayscale(1) brightness(0.42) contrast(1.42);
+  transform: scale(1.04);
+  transition:
+    filter var(--cinelin-entry-gap) ease,
+    transform var(--cinelin-entry-gap) ease;
 }
 
 .cinelin-entry__placeholder {
@@ -151,6 +166,11 @@
 
 .cinelin-entry__frame.is-live .cinelin-entry__placeholder {
   filter: grayscale(0.78) brightness(0.92) contrast(1.48);
+}
+
+.cinelin-entry__frame.is-live .cinelin-entry__placeholder-image {
+  filter: grayscale(0.22) brightness(0.92) contrast(1.18) saturate(0.7);
+  transform: scale(1);
 }
 
 .cinelin-entry__scanlines,
