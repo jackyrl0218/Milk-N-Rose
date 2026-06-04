@@ -212,6 +212,7 @@
     0 0 7rem rgb(var(--cinelin-color-static-light) / 0.14),
     0 2.8rem 8rem rgb(var(--cinelin-color-ink) / 0.78);
   display: grid;
+  font-family: var(--cinelin-font-copy);
   gap: 1.8rem;
   inline-size: min(90vw, 72rem);
   padding: 1.2rem;
@@ -226,6 +227,17 @@
   inset: 0.7rem;
   pointer-events: none;
   position: absolute;
+  z-index: 1;
+}
+
+.cinelin-entry__content::after {
+  background: var(--cinelin-wordmark-image, none) center 12% / min(76%, 50rem) auto no-repeat;
+  content: "";
+  inset: 0;
+  opacity: 0.08;
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
 }
 
 .cinelin-entry__form {
@@ -245,8 +257,11 @@
   letter-spacing: 0;
   line-height: 0.68;
   margin: 0 0 0.8rem;
+  position: relative;
   text-align: center;
+  text-shadow: 0 0 2.4rem rgb(var(--cinelin-color-text) / 0.16);
   text-transform: uppercase;
+  z-index: 1;
 }
 
 .cinelin-entry__copy,
