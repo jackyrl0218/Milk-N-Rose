@@ -11,7 +11,8 @@
   --cinelin-color-focus: 238 220 182;
   --cinelin-color-static-light: 221 217 206;
   --cinelin-color-static-dark: 35 34 34;
-  --cinelin-font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --cinelin-font-heading: "Ketsiyo Regular", Didot, "Bodoni 72", Georgia, serif;
-  --cinelin-font-wordmark: "Ketsiyo Regular", Didot, "Bodoni 72", Georgia, serif;
+  --cinelin-font-body: Consolas, "Courier New", "Nimbus Mono PS", "Courier", monospace;
+  --cinelin-font-copy: Consolas, "Courier New", "Nimbus Mono PS", "Courier", monospace;
+  --cinelin-font-heading: "Eldra", "Garamond", "Times New Roman", serif;
+  --cinelin-font-wordmark: "Ketsiyo Regular", Didot, "Bodoni 72", "Bodoni 72 Smallcaps", Georgia, serif;
 }
