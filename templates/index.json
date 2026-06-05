@@ -74,6 +74,39 @@
             "label": "Oval gold",
             "model_style": "style-4"
           }
+        },
+        "featured_1": {
+          "type": "featured_piece",
+          "settings": {
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all",
+            "title": "Silver loop",
+            "price": "Explore",
+            "placeholder_style": "style-1"
+          }
+        },
+        "featured_2": {
+          "type": "featured_piece",
+          "settings": {
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all",
+            "title": "Rose form",
+            "price": "Explore",
+            "placeholder_style": "style-2"
+          }
+        },
+        "featured_3": {
+          "type": "featured_piece",
+          "settings": {
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all",
+            "title": "Golden orbit",
+            "price": "Explore",
+            "placeholder_style": "style-3"
+          }
         }
       },
       "block_order": [
@@ -84,7 +117,10 @@
         "model_5",
         "model_6",
         "model_7",
-        "model_8"
+        "model_8",
+        "featured_1",
+        "featured_2",
+        "featured_3"
       ],
       "settings": {
         "brand_name": "MILK & ROSE",
@@ -97,7 +133,9 @@
         "video_url": "",
         "video_image": "",
         "video_alt": "Jewelry making process close-up",
-        "video_button_label": "Play the making process video"
+        "video_button_label": "Play the making process video",
+        "featured_kicker": "Selected objects",
+        "featured_title": "Featured pieces"
       }
     }
   },

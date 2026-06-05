@@ -3,7 +3,9 @@
 <script src="{{ 'homepage.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
-  assign model_count = section.blocks.size
+  assign model_blocks = section.blocks | where: 'type', 'model_item'
+  assign featured_blocks = section.blocks | where: 'type', 'featured_piece'
+  assign model_count = model_blocks.size
   assign video_image = section.settings.video_image
   assign default_menu_link = section.settings.default_menu_link | default: routes.all_products_collection_url
   if model_count == 0
@@ -71,8 +73,8 @@
 
     <div class="homepage__orbit-wrap" aria-label="{{ section.settings.orbit_label | escape }}">
       <div class="homepage__orbit" data-homepage-orbit style="--homepage-model-count: {{ model_count | at_least: 1 }};">
-        {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
+        {%- if model_blocks.size > 0 -%}
+          {%- for block in model_blocks -%}
             {%- liquid
               assign linked_product = block.settings.product
               assign item_link = block.settings.link
@@ -179,6 +181,82 @@
       {%- endif -%}
     </div>
   </div>
+
+  <section class="homepage__featured" aria-labelledby="HomepageFeatured-{{ section.id }}">
+    <header class="homepage__featured-header">
+      <p class="homepage__featured-kicker">{{ section.settings.featured_kicker | escape }}</p>
+      <h2 class="homepage__featured-title" id="HomepageFeatured-{{ section.id }}">
+        {{ section.settings.featured_title | escape }}
+      </h2>
+    </header>
+
+    <div class="homepage__featured-list">
+      {%- if featured_blocks.size > 0 -%}
+        {%- for block in featured_blocks -%}
+          {%- liquid
+            assign featured_product = block.settings.product
+            assign featured_link = block.settings.link
+            assign featured_image = block.settings.image
+            assign featured_title = block.settings.title
+            assign featured_price = block.settings.price
+            if featured_product != blank
+              assign featured_link = featured_product.url
+              assign featured_title = featured_product.title
+              assign featured_price = featured_product.price | money
+              if featured_image == blank
+                assign featured_image = featured_product.featured_image
+              endif
+            endif
+            if featured_link == blank
+              assign featured_link = routes.all_products_collection_url
+            endif
+          -%}
+          <a
+            class="homepage__featured-piece homepage__featured-piece--{{ block.settings.placeholder_style }}"
+            href="{{ featured_link }}"
+            {{ block.shopify_attributes }}
+          >
+            <span class="homepage__featured-media">
+              {%- if featured_image != blank -%}
+                {{ featured_image | image_url: width: 1200 | image_tag:
+                  loading: 'lazy',
+                  widths: '360, 540, 720, 960, 1200',
+                  sizes: '(min-width: 990px) 33vw, (min-width: 750px) 50vw, 100vw',
+                  alt: featured_title
+                }}
+              {%- else -%}
+                <span class="homepage__featured-placeholder" aria-hidden="true">
+                  <span class="homepage__featured-placeholder-ring"></span>
+                  <span class="homepage__featured-placeholder-stone"></span>
+                </span>
+              {%- endif -%}
+            </span>
+            <span class="homepage__featured-copy">
+              <span class="homepage__featured-index">{{ forloop.index | prepend: '0' }}</span>
+              <span class="homepage__featured-name">{{ featured_title | escape }}</span>
+              <span class="homepage__featured-price">{{ featured_price | escape }}</span>
+            </span>
+          </a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for placeholder_index in (1..3) -%}
+          <a class="homepage__featured-piece homepage__featured-piece--style-{{ placeholder_index }}" href="{{ routes.all_products_collection_url }}">
+            <span class="homepage__featured-media">
+              <span class="homepage__featured-placeholder" aria-hidden="true">
+                <span class="homepage__featured-placeholder-ring"></span>
+                <span class="homepage__featured-placeholder-stone"></span>
+              </span>
+            </span>
+            <span class="homepage__featured-copy">
+              <span class="homepage__featured-index">{{ forloop.index | prepend: '0' }}</span>
+              <span class="homepage__featured-name">Featured piece</span>
+              <span class="homepage__featured-price">Explore</span>
+            </span>
+          </a>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </section>
 </section>
 
 {% schema %}
@@ -257,6 +335,18 @@
       "id": "video_button_label",
       "label": "Video play label",
       "default": "Play the making process video"
+    },
+    {
+      "type": "text",
+      "id": "featured_kicker",
+      "label": "Featured pieces kicker",
+      "default": "Selected objects"
+    },
+    {
+      "type": "text",
+      "id": "featured_title",
+      "label": "Featured pieces title",
+      "default": "Featured pieces"
     }
   ],
   "blocks": [
@@ -300,6 +390,59 @@
             {
               "value": "style-4",
               "label": "Gold pendant"
+            }
+          ],
+          "default": "style-1"
+        }
+      ]
+    },
+    {
+      "type": "featured_piece",
+      "name": "Featured piece",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Fallback image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Fallback link"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Fallback title",
+          "default": "Featured piece"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Fallback price",
+          "default": "Explore"
+        },
+        {
+          "type": "select",
+          "id": "placeholder_style",
+          "label": "Placeholder style",
+          "options": [
+            {
+              "value": "style-1",
+              "label": "Silver"
+            },
+            {
+              "value": "style-2",
+              "label": "Rose"
+            },
+            {
+              "value": "style-3",
+              "label": "Gold"
             }
           ],
           "default": "style-1"

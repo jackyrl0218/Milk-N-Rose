@@ -15,6 +15,7 @@ Shopify requires theme files to live in root theme folders, so the live files ar
 - Replace each placeholder model block with the real product in the theme customizer.
 - Set each block's product or fallback link so clicking a model opens that product.
 - Add the process video URL and poster image in the section settings.
+- Replace the three `Featured piece` placeholder blocks with real Shopify products.
 - When real 3D product files are ready, this section can be upgraded from CSS placeholders to Shopify product model media or a lazy-loaded model viewer.
 
 ## Notes
