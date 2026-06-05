@@ -1,0 +1,346 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'homepage.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'homepage.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign model_count = section.blocks.size
+  assign video_image = section.settings.video_image
+  assign default_menu_link = section.settings.default_menu_link | default: routes.all_products_collection_url
+  if model_count == 0
+    assign model_count = 8
+  endif
+-%}
+
+<section
+  id="Homepage-{{ section.id }}"
+  class="homepage"
+  data-homepage
+  data-auto-rotate="{{ section.settings.auto_rotate }}"
+  data-rotation-speed="{{ section.settings.rotation_speed }}"
+>
+  <header class="homepage__topbar" aria-label="{{ section.settings.brand_name | escape }} home navigation">
+    <button class="homepage__icon-button" type="button" data-homepage-menu-toggle aria-controls="HomepageMenu-{{ section.id }}" aria-expanded="false">
+      <span class="visually-hidden">Open menu</span>
+      {{ 'icon-hamburger.svg' | inline_asset_content }}
+    </button>
+
+    <a class="homepage__brand" href="{{ routes.root_url }}" aria-label="{{ section.settings.brand_name | escape }}">
+      {{ section.settings.brand_name | escape }}
+    </a>
+
+    <div class="homepage__actions">
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="homepage__icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+      {%- endif -%}
+      <a class="homepage__icon-button" href="{{ routes.cart_url }}" aria-label="Cart">
+        {{ 'icon-cart.svg' | inline_asset_content }}
+      </a>
+    </div>
+  </header>
+
+  <div class="homepage__stage" data-homepage-stage>
+    <canvas class="homepage__particle-canvas" data-homepage-particles aria-hidden="true"></canvas>
+
+    <div class="homepage__menu" id="HomepageMenu-{{ section.id }}" data-homepage-menu>
+      <nav class="homepage__nav" aria-label="Featured navigation">
+        {%- assign menu_items = section.settings.menu_items | newline_to_br | split: '<br />' -%}
+        {%- for item in menu_items -%}
+          {%- assign item_text = item | strip -%}
+          {%- if item_text != blank -%}
+            <a
+              class="homepage__nav-link{% if item_text == 'SALE' or item_text == 'Sale' or item_text == 'sale' %} homepage__nav-link--sale{% endif %}"
+              href="{{ default_menu_link }}"
+            >
+              {{ item_text | escape }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <div class="homepage__socials" aria-label="Social links">
+        <a href="{{ settings.social_instagram_link | default: '#' }}" aria-label="Instagram">
+          {{ 'icon-instagram.svg' | inline_asset_content }}
+        </a>
+        <a href="{{ settings.social_facebook_link | default: '#' }}" aria-label="Facebook">
+          {{ 'icon-facebook.svg' | inline_asset_content }}
+        </a>
+      </div>
+    </div>
+
+    <div class="homepage__orbit-wrap" aria-label="{{ section.settings.orbit_label | escape }}">
+      <div class="homepage__orbit" data-homepage-orbit style="--homepage-model-count: {{ model_count | at_least: 1 }};">
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign linked_product = block.settings.product
+              assign item_link = block.settings.link
+              if linked_product != blank
+                assign item_link = linked_product.url
+              endif
+              if item_link == blank
+                assign item_link = routes.all_products_collection_url
+              endif
+              assign item_label = block.settings.label
+              if item_label == blank and linked_product != blank
+                assign item_label = linked_product.title
+              endif
+              if item_label == blank
+                assign item_label = 'Milk & Rose piece'
+              endif
+            -%}
+            <a
+              class="homepage__model homepage__model--{{ block.settings.model_style }}"
+              href="{{ item_link }}"
+              style="--homepage-model-index: {{ forloop.index0 }};"
+              {{ block.shopify_attributes }}
+            >
+              <span class="homepage__model-object" aria-hidden="true">
+                <span class="homepage__model-gem"></span>
+                <span class="homepage__model-ring"></span>
+                <span class="homepage__model-stone"></span>
+              </span>
+              <span class="homepage__model-label">{{ item_label | escape }}</span>
+            </a>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for placeholder_index in (1..8) -%}
+            <a
+              class="homepage__model homepage__model--style-{{ placeholder_index | modulo: 4 | plus: 1 }}"
+              href="{{ routes.all_products_collection_url }}"
+              style="--homepage-model-index: {{ forloop.index0 }};"
+            >
+              <span class="homepage__model-object" aria-hidden="true">
+                <span class="homepage__model-gem"></span>
+                <span class="homepage__model-ring"></span>
+                <span class="homepage__model-stone"></span>
+              </span>
+              <span class="homepage__model-label">Milk & Rose piece</span>
+            </a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="homepage__controls" aria-label="Model controls">
+      <button class="homepage__control" type="button" data-homepage-prev aria-label="Previous model">&lsaquo;</button>
+      <button class="homepage__control homepage__control--wide" type="button" data-homepage-expand aria-pressed="false">
+        {{ section.settings.expand_label | escape }}
+      </button>
+      <button class="homepage__control" type="button" data-homepage-next aria-label="Next model">&rsaquo;</button>
+    </div>
+  </div>
+
+  <div class="homepage__video-section">
+    <div class="homepage__video-shell">
+      {%- if section.settings.video_url != blank -%}
+        <deferred-media class="homepage__video media deferred-media no-js-hidden" data-media-id="{{ section.settings.video_url.id }}">
+          <button
+            id="Deferred-Poster-{{ section.settings.video_url.id }}"
+            class="homepage__video-poster deferred-media__poster"
+            type="button"
+            aria-label="{{ section.settings.video_button_label | escape }}"
+          >
+            {%- if video_image != blank -%}
+              {{ video_image | image_url: width: 1600 | image_tag:
+                loading: 'lazy',
+                widths: '375, 550, 750, 1100, 1500, 1600',
+                sizes: '(min-width: 990px) 88vw, 92vw',
+                alt: section.settings.video_alt
+              }}
+            {%- else -%}
+              <span class="homepage__video-placeholder"></span>
+            {%- endif -%}
+            <span class="homepage__play" aria-hidden="true">{{ 'icon-play.svg' | inline_asset_content }}</span>
+          </button>
+          <template>
+            {%- if section.settings.video_url.type == 'youtube' -%}
+              <iframe src="https://www.youtube.com/embed/{{ section.settings.video_url.id }}?enablejsapi=1&autoplay=1" class="js-youtube" allow="autoplay; encrypted-media" allowfullscreen title="{{ section.settings.video_button_label | escape }}"></iframe>
+            {%- else -%}
+              <iframe src="https://player.vimeo.com/video/{{ section.settings.video_url.id }}?autoplay=1" class="js-vimeo" allow="autoplay; encrypted-media" allowfullscreen title="{{ section.settings.video_button_label | escape }}"></iframe>
+            {%- endif -%}
+          </template>
+        </deferred-media>
+      {%- else -%}
+        <button class="homepage__video homepage__video-poster" type="button" aria-label="{{ section.settings.video_button_label | escape }}">
+          {%- if video_image != blank -%}
+            {{ video_image | image_url: width: 1600 | image_tag:
+              loading: 'lazy',
+              widths: '375, 550, 750, 1100, 1500, 1600',
+              sizes: '(min-width: 990px) 88vw, 92vw',
+              alt: section.settings.video_alt
+            }}
+          {%- else -%}
+            <span class="homepage__video-placeholder"></span>
+          {%- endif -%}
+          <span class="homepage__play" aria-hidden="true">{{ 'icon-play.svg' | inline_asset_content }}</span>
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Homepage 3D orbit",
+  "tag": "section",
+  "class": "section-homepage",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "MILK & ROSE"
+    },
+    {
+      "type": "textarea",
+      "id": "menu_items",
+      "label": "Menu items",
+      "default": "NEW ARRIVALS\nHANDMADE\nESSENTIALS\nWOMEN\nMEN\nALL JEWELRY\nSALE\nABOUT"
+    },
+    {
+      "type": "url",
+      "id": "default_menu_link",
+      "label": "Default menu link"
+    },
+    {
+      "type": "text",
+      "id": "orbit_label",
+      "label": "Orbit accessibility label",
+      "default": "Interactive Milk & Rose product model orbit"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_rotate",
+      "label": "Auto-rotate model orbit",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "rotation_speed",
+      "label": "Rotation speed",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "s",
+      "default": 18
+    },
+    {
+      "type": "text",
+      "id": "expand_label",
+      "label": "Expand button label",
+      "default": "VIEW"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "label": "Process video URL",
+      "accept": [
+        "youtube",
+        "vimeo"
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "video_image",
+      "label": "Process video poster"
+    },
+    {
+      "type": "text",
+      "id": "video_alt",
+      "label": "Video poster alt text",
+      "default": "Jewelry making process close-up"
+    },
+    {
+      "type": "text",
+      "id": "video_button_label",
+      "label": "Video play label",
+      "default": "Play the making process video"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "model_item",
+      "name": "Model item",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Fallback link"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Milk & Rose piece"
+        },
+        {
+          "type": "select",
+          "id": "model_style",
+          "label": "Placeholder model style",
+          "options": [
+            {
+              "value": "style-1",
+              "label": "Blue charm"
+            },
+            {
+              "value": "style-2",
+              "label": "Green stone"
+            },
+            {
+              "value": "style-3",
+              "label": "Pink pearl"
+            },
+            {
+              "value": "style-4",
+              "label": "Gold pendant"
+            }
+          ],
+          "default": "style-1"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage 3D orbit",
+      "blocks": [
+        {
+          "type": "model_item",
+          "settings": {
+            "label": "Pearl loop",
+            "model_style": "style-1"
+          }
+        },
+        {
+          "type": "model_item",
+          "settings": {
+            "label": "Green drop",
+            "model_style": "style-2"
+          }
+        },
+        {
+          "type": "model_item",
+          "settings": {
+            "label": "Rose charm",
+            "model_style": "style-3"
+          }
+        },
+        {
+          "type": "model_item",
+          "settings": {
+            "label": "Gold piece",
+            "model_style": "style-4"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
