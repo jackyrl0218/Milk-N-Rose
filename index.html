@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Milk & Rose Prototype</title>
+    <link rel="stylesheet" href="assets/cinelin-tokens.css">
+    <link rel="stylesheet" href="assets/cinelin-entry.css">
+    <script>
+      document.cookie = "cinelin_entry_client_demo=; Max-Age=0; Path=/; SameSite=Lax";
+    </script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: rgb(var(--cinelin-home-background));
+        overflow: hidden;
+      }
+
+      .prototype-home {
+        border: 0;
+        display: block;
+        height: 100svh;
+        width: 100%;
+      }
+
+      .visually-hidden {
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+    </style>
+    <script src="assets/cinelin-entry.js" defer></script>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const entry = document.querySelector("[data-cinelin-entry]");
+        window.setTimeout(() => {
+          entry?.removeAttribute("hidden");
+        }, 1000);
+      });
+    </script>
+  </head>
+  <body>
+    <iframe
+      class="prototype-home"
+      src="preview/homepage-preview.html"
+      title="Milk & Rose homepage prototype"
+    ></iframe>
+
+    <section
+      id="CinelinEntry-client-demo"
+      class="cinelin-entry"
+      data-cinelin-entry
+      data-live-duration="3000"
+      data-gap-duration="250"
+      data-cookie-name="cinelin_entry_client_demo"
+      hidden
+      style="--cinelin-entry-columns: 5; --cinelin-entry-rows: 4; --cinelin-entry-frame-live: 3000ms; --cinelin-entry-gap: 250ms;"
+    >
+      <div class="cinelin-entry__wall" aria-hidden="true">
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 1;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 2;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 3;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 4;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 5;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 6;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 7;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 8;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 9;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 10;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 11;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 12;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 13;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 14;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 15;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 16;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 17;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 18;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 19;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 20;"><span class="cinelin-entry__placeholder"></span></div>
+      </div>
+
+      <div class="cinelin-entry__scanlines" aria-hidden="true"></div>
+      <div class="cinelin-entry__grain" aria-hidden="true"></div>
+
+      <div class="cinelin-entry__content">
+        <form class="cinelin-entry__form" data-entry-form>
+          <h2 class="cinelin-entry__headline" id="CinelinEntryHeading-client-demo">CINELIN</h2>
+          <p class="cinelin-entry__copy">Handcrafted in small batches. Each piece exists between sculpture and machine.</p>
+
+          <div class="cinelin-entry__field">
+            <label class="visually-hidden" for="CinelinEntryEmail-client-demo">Email address</label>
+            <input
+              id="CinelinEntryEmail-client-demo"
+              class="cinelin-entry__input"
+              type="email"
+              name="email"
+              autocomplete="email"
+              placeholder="Email address"
+              required
+              data-entry-email
+            >
+          </div>
+
+          <button class="cinelin-entry__button" type="submit">Join</button>
+          <p class="cinelin-entry__success" role="status" data-entry-success hidden></p>
+        </form>
+
+        <div class="cinelin-entry__controls">
+          <button class="cinelin-entry__control" type="button" data-entry-mute aria-pressed="false">
+            <span data-entry-mute-label>Sound on</span>
+          </button>
+          <button class="cinelin-entry__control" type="button" data-entry-skip>skip</button>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
