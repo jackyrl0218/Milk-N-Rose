@@ -124,7 +124,7 @@
       ],
       "settings": {
         "brand_name": "MILK & ROSE",
-        "menu_items": "NEW ARRIVALS\nHANDMADE\nESSENTIALS\nWOMEN\nMEN\nALL JEWELRY\nSALE\nABOUT",
+        "menu_items": "Home\nProduct\nMaker\nCollection\nAbout\nCart\nContact",
         "default_menu_link": "shopify://collections/all",
         "orbit_label": "Interactive Milk & Rose product model orbit",
         "auto_rotate": true,

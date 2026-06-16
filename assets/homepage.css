@@ -2,6 +2,11 @@ body.template-index .shopify-section-group-header-group {
   display: none;
 }
 
+html.homepage-menu-open,
+body.homepage-menu-open {
+  overflow: hidden;
+}
+
 .homepage {
   background: rgb(var(--cinelin-home-background));
   color: rgb(var(--cinelin-home-ink));
@@ -144,7 +149,7 @@ body.template-index .shopify-section-group-header-group {
   inset-block: 0;
   inset-inline-start: 0;
   padding: 8rem 1.4rem 1.4rem;
-  position: absolute;
+  position: fixed;
   transform: translateX(-100%);
   transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
   z-index: 10;
@@ -163,19 +168,19 @@ body.template-index .shopify-section-group-header-group {
   color: rgb(var(--cinelin-home-ink));
   display: block;
   border-radius: 0.4rem;
-  font-size: 2.6rem;
+  font-size: 2rem;
   font-weight: 800;
   isolation: isolate;
-  line-height: 0.98;
+  line-height: 1.12;
   min-width: 0;
   overflow: hidden;
-  padding: 0.32rem 0.55rem 0.38rem;
+  overflow-wrap: anywhere;
+  padding: 0.5rem 0.55rem 0.56rem;
   position: relative;
-  text-transform: uppercase;
   transition:
     color 220ms ease,
     transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
-  width: fit-content;
+  width: 100%;
 }
 
 .homepage__nav-link::before {
@@ -412,15 +417,34 @@ body.template-index .shopify-section-group-header-group {
   border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
   border-radius: 999rem;
   color: rgb(var(--cinelin-home-ink) / 0.76);
-  display: block;
+  display: grid;
   font-size: 0.95rem;
   font-weight: 700;
   line-height: 1.1;
   max-width: 8rem;
   overflow-wrap: anywhere;
   padding: 0.42rem 0.62rem;
+  position: relative;
   text-align: center;
   text-transform: uppercase;
+  transform-style: preserve-3d;
+}
+
+.homepage__model-label-text,
+.homepage__model-label::after {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: block;
+  grid-area: 1 / 1;
+}
+
+.homepage__model-label-text {
+  transform: translateZ(0.02rem);
+}
+
+.homepage__model-label::after {
+  content: attr(data-label);
+  transform: rotateY(180deg) translateZ(0.02rem);
 }
 
 .homepage__controls {
@@ -713,10 +737,10 @@ body.template-index .shopify-section-group-header-group {
 
 @keyframes homepage-orbit-spin {
   from {
-    transform: rotateX(-8deg) rotateY(0deg);
+    transform: rotateX(-8deg) rotateY(var(--homepage-rotation));
   }
   to {
-    transform: rotateX(-8deg) rotateY(360deg);
+    transform: rotateX(-8deg) rotateY(calc(var(--homepage-rotation) + 360deg));
   }
 }
 
@@ -754,7 +778,7 @@ body.template-index .shopify-section-group-header-group {
   }
 
   .homepage__nav-link {
-    font-size: 2.2rem;
+    font-size: 1.9rem;
   }
 
   .homepage__model-label {

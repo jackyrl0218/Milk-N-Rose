@@ -4,6 +4,7 @@ class HomepageOrbit {
     this.stage = section.querySelector('[data-homepage-stage]');
     this.orbit = section.querySelector('[data-homepage-orbit]');
     this.menuToggle = section.querySelector('[data-homepage-menu-toggle]');
+    this.menu = section.querySelector('[data-homepage-menu]');
     this.canvas = section.querySelector('[data-homepage-particles]');
     this.prevButton = section.querySelector('[data-homepage-prev]');
     this.nextButton = section.querySelector('[data-homepage-next]');
@@ -29,8 +30,13 @@ class HomepageOrbit {
 
   bindEvents() {
     this.menuToggle?.addEventListener('click', () => {
-      const isOpen = this.stage.classList.toggle('is-menu-open');
-      this.menuToggle.setAttribute('aria-expanded', String(isOpen));
+      this.setMenuOpen(!this.stage.classList.contains('is-menu-open'));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && this.stage.classList.contains('is-menu-open')) {
+        this.setMenuOpen(false);
+      }
     });
 
     this.prevButton?.addEventListener('click', () => this.rotateBy(-28));
@@ -39,21 +45,34 @@ class HomepageOrbit {
     this.expandButton?.addEventListener('click', () => {
       const isExpanded = this.stage.classList.toggle('is-expanded');
       this.expandButton.setAttribute('aria-pressed', String(isExpanded));
-      this.stage.classList.remove('is-menu-open');
-      this.menuToggle?.setAttribute('aria-expanded', 'false');
+      this.setMenuOpen(false);
     });
 
     this.orbit.addEventListener('pointerdown', (event) => this.onPointerDown(event));
     this.orbit.addEventListener('pointermove', (event) => this.onPointerMove(event));
     this.orbit.addEventListener('pointerup', () => this.onPointerUp());
     this.orbit.addEventListener('pointercancel', () => this.onPointerUp());
-    this.orbit.addEventListener('mouseenter', () => this.orbit.classList.add('is-paused'));
+    this.orbit.addEventListener('mouseenter', () => this.pauseAtCurrentRotation());
     this.orbit.addEventListener('mouseleave', () => {
       if (!this.reducedMotion && !this.isDragging) this.orbit.classList.remove('is-paused');
     });
   }
 
+  setMenuOpen(isOpen) {
+    this.stage.classList.toggle('is-menu-open', isOpen);
+    this.menuToggle?.setAttribute('aria-expanded', String(isOpen));
+    document.documentElement.classList.toggle('homepage-menu-open', isOpen);
+    document.body.classList.toggle('homepage-menu-open', isOpen);
+
+    if (isOpen) {
+      this.menu?.querySelector('a, button')?.focus();
+    } else if (document.activeElement && this.menu?.contains(document.activeElement)) {
+      this.menuToggle?.focus();
+    }
+  }
+
   onPointerDown(event) {
+    this.pauseAtCurrentRotation();
     this.isDragging = true;
     this.startX = event.clientX;
     this.startRotation = this.rotation;
@@ -75,6 +94,7 @@ class HomepageOrbit {
   }
 
   rotateBy(amount) {
+    this.pauseAtCurrentRotation();
     this.orbit.classList.add('is-paused');
     this.rotation += amount;
     this.updateRotation();
@@ -87,6 +107,22 @@ class HomepageOrbit {
 
   updateRotation() {
     this.orbit.style.setProperty('--homepage-rotation', `${this.rotation}deg`);
+  }
+
+  pauseAtCurrentRotation() {
+    if (this.orbit.classList.contains('is-paused')) return;
+
+    const transform = window.getComputedStyle(this.orbit).transform;
+    if (transform && transform !== 'none') {
+      const Matrix = window.DOMMatrixReadOnly || window.WebKitCSSMatrix;
+      if (Matrix) {
+        const matrix = new Matrix(transform);
+        this.rotation = Math.atan2(-matrix.m13, matrix.m11) * (180 / Math.PI);
+        this.updateRotation();
+      }
+    }
+
+    this.orbit.classList.add('is-paused');
   }
 
   initParticles() {
