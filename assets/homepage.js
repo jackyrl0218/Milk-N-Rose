@@ -8,11 +8,14 @@ class HomepageOrbit {
     this.canvas = section.querySelector('[data-homepage-particles]');
     this.prevButton = section.querySelector('[data-homepage-prev]');
     this.nextButton = section.querySelector('[data-homepage-next]');
-    this.expandButton = section.querySelector('[data-homepage-expand]');
     this.rotation = 0;
+    this.tilt = -10;
     this.startX = 0;
+    this.startY = 0;
     this.startRotation = 0;
+    this.startTilt = 0;
     this.isDragging = false;
+    this.userPaused = false;
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!this.stage || !this.orbit) return;
@@ -24,6 +27,7 @@ class HomepageOrbit {
       this.orbit.classList.add('is-paused');
     }
 
+    this.updateRotation();
     this.bindEvents();
     this.initParticles();
   }
@@ -39,14 +43,8 @@ class HomepageOrbit {
       }
     });
 
-    this.prevButton?.addEventListener('click', () => this.rotateBy(-28));
-    this.nextButton?.addEventListener('click', () => this.rotateBy(28));
-
-    this.expandButton?.addEventListener('click', () => {
-      const isExpanded = this.stage.classList.toggle('is-expanded');
-      this.expandButton.setAttribute('aria-pressed', String(isExpanded));
-      this.setMenuOpen(false);
-    });
+    this.prevButton?.addEventListener('click', () => this.rotateBy(-45));
+    this.nextButton?.addEventListener('click', () => this.rotateBy(45));
 
     this.orbit.addEventListener('pointerdown', (event) => this.onPointerDown(event));
     this.orbit.addEventListener('pointermove', (event) => this.onPointerMove(event));
@@ -54,7 +52,15 @@ class HomepageOrbit {
     this.orbit.addEventListener('pointercancel', () => this.onPointerUp());
     this.orbit.addEventListener('mouseenter', () => this.pauseAtCurrentRotation());
     this.orbit.addEventListener('mouseleave', () => {
-      if (!this.reducedMotion && !this.isDragging) this.orbit.classList.remove('is-paused');
+      if (!this.reducedMotion && !this.isDragging && !this.userPaused) this.orbit.classList.remove('is-paused');
+    });
+
+    this.orbit.querySelectorAll('.homepage__model-button').forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        this.userPaused = true;
+        this.pauseAtCurrentRotation();
+      });
     });
   }
 
@@ -72,41 +78,45 @@ class HomepageOrbit {
   }
 
   onPointerDown(event) {
+    if (event.target.closest?.('.homepage__model-label')) return;
+
+    event.preventDefault();
+    this.userPaused = true;
     this.pauseAtCurrentRotation();
     this.isDragging = true;
     this.startX = event.clientX;
+    this.startY = event.clientY;
     this.startRotation = this.rotation;
+    this.startTilt = this.tilt;
     this.orbit.classList.add('is-dragging', 'is-paused');
     this.orbit.setPointerCapture(event.pointerId);
   }
 
   onPointerMove(event) {
     if (!this.isDragging) return;
-    const delta = event.clientX - this.startX;
-    this.rotation = this.startRotation + delta * 0.42;
+    const deltaX = event.clientX - this.startX;
+    const deltaY = event.clientY - this.startY;
+    this.rotation = this.startRotation + deltaX * 0.5;
+    this.tilt = Math.max(-48, Math.min(28, this.startTilt - deltaY * 0.32));
     this.updateRotation();
   }
 
   onPointerUp() {
     this.isDragging = false;
     this.orbit.classList.remove('is-dragging');
-    if (!this.reducedMotion) this.orbit.classList.remove('is-paused');
   }
 
   rotateBy(amount) {
+    this.userPaused = true;
     this.pauseAtCurrentRotation();
     this.orbit.classList.add('is-paused');
     this.rotation += amount;
     this.updateRotation();
-
-    if (!this.reducedMotion) {
-      window.clearTimeout(this.resumeTimer);
-      this.resumeTimer = window.setTimeout(() => this.orbit.classList.remove('is-paused'), 1200);
-    }
   }
 
   updateRotation() {
     this.orbit.style.setProperty('--homepage-rotation', `${this.rotation}deg`);
+    this.orbit.style.setProperty('--homepage-tilt-x', `${this.tilt}deg`);
   }
 
   pauseAtCurrentRotation() {

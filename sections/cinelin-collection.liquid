@@ -1,0 +1,175 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-pages.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cinelin-pages.js' | asset_url }}" defer="defer"></script>
+
+<section class="cinelin-page cinelin-page--collection" data-cinelin-page>
+  <div class="cinelin-page__shell">
+    <nav class="cinelin-page__topline" aria-label="Page navigation">
+      <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
+        <span class="visually-hidden">Open menu</span>
+        {{ 'icon-hamburger.svg' | inline_asset_content }}
+      </button>
+      <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}">Milk &amp; Rose</a>
+      <div class="cinelin-page__actions">
+        <span class="cinelin-page__topline-meta">Collection</span>
+      </div>
+      <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
+        <div class="cinelin-page__menu-nav">
+          <a href="{{ routes.root_url }}">Home</a>
+          <a href="{{ routes.all_products_collection_url }}">Product</a>
+          <a href="{{ routes.all_products_collection_url }}">Maker</a>
+          <a href="{{ routes.all_products_collection_url }}">Collection</a>
+          <a href="/pages/about">About</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
+          <a href="/pages/contact">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="cinelin-page__hero">
+      <div>
+        <p class="cinelin-page__kicker">{{ section.settings.kicker | escape }}</p>
+        <h1 class="cinelin-page__title">
+          {%- if collection.title != blank -%}
+            {{ collection.title | escape }}
+          {%- else -%}
+            {{ section.settings.title | escape }}
+          {%- endif -%}
+        </h1>
+      </div>
+      <div>
+        <p class="cinelin-page__intro">{{ section.settings.intro | escape }}</p>
+        <p class="cinelin-page__copy">
+          {%- if collection.description != blank -%}
+            {{ collection.description | strip_html }}
+          {%- else -%}
+            {{ section.settings.copy | escape }}
+          {%- endif -%}
+        </p>
+      </div>
+    </header>
+
+    <div class="cinelin-story">
+      <div class="cinelin-story__panel">
+        <p class="cinelin-page__eyebrow">{{ section.settings.story_kicker | escape }}</p>
+        <h2 class="cinelin-story__title">{{ section.settings.story_title | escape }}</h2>
+      </div>
+      <p class="cinelin-page__copy">{{ section.settings.story_copy | escape }}</p>
+    </div>
+
+    <div class="cinelin-page__toolbar">
+      <span>{{ section.settings.grid_label | escape }}</span>
+      <span>4 per row</span>
+    </div>
+
+    <div class="cinelin-page__grid" aria-label="{{ section.settings.grid_label | escape }}" data-cinelin-product-grid>
+      {%- paginate collection.products by section.settings.products_per_page -%}
+        {%- if collection.products.size > 0 -%}
+          {%- for product in collection.products -%}
+            <article class="cinelin-card" data-cinelin-model-card>
+              <button class="cinelin-card__media" type="button" aria-label="Spin {{ product.title | escape }} 3D model" data-cinelin-model-button>
+                <span class="cinelin-card__model">
+                  <span class="cinelin-card__gem"></span>
+                  <span class="cinelin-card__ring"></span>
+                  <span class="cinelin-card__stone"></span>
+                  <span class="cinelin-card__shadow"></span>
+                </span>
+              </button>
+              <a class="cinelin-card__body" href="{{ product.url }}">
+                <span class="cinelin-card__title">{{ product.title | escape }}</span>
+                <span class="cinelin-card__price">{{ product.price | money }}</span>
+              </a>
+            </article>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for index in (1..8) -%}
+            <article class="cinelin-card" data-cinelin-model-card>
+              <button class="cinelin-card__media" type="button" aria-label="Spin collection piece {{ index }} 3D model" data-cinelin-model-button>
+                <span class="cinelin-card__model">
+                  <span class="cinelin-card__gem"></span>
+                  <span class="cinelin-card__ring"></span>
+                  <span class="cinelin-card__stone"></span>
+                  <span class="cinelin-card__shadow"></span>
+                </span>
+              </button>
+              <a class="cinelin-card__body" href="{{ routes.all_products_collection_url }}">
+                <span class="cinelin-card__title">Collection piece {{ index }}</span>
+                <span class="cinelin-card__price">Coming soon</span>
+              </a>
+            </article>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinelin collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Fallback title",
+      "default": "Objects in orbit"
+    },
+    {
+      "type": "text",
+      "id": "intro",
+      "label": "Intro",
+      "default": "A quiet room for pieces with presence."
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Fallback copy",
+      "default": "Handmade jewelry arranged as a visual story. Each piece is meant to feel considered, collectible, and easy to explore."
+    },
+    {
+      "type": "text",
+      "id": "story_kicker",
+      "label": "Story kicker",
+      "default": "Between-collection navigation"
+    },
+    {
+      "type": "text",
+      "id": "story_title",
+      "label": "Story title",
+      "default": "Move through material, mood, and form."
+    },
+    {
+      "type": "textarea",
+      "id": "story_copy",
+      "label": "Story copy",
+      "default": "The collection page keeps the shop simple while still feeling like a gallery. Product cards stay calm, readable, and image-led."
+    },
+    {
+      "type": "text",
+      "id": "grid_label",
+      "label": "Grid accessibility label",
+      "default": "Collection products"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 32,
+      "step": 4,
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinelin collection"
+    }
+  ]
+}
+{% endschema %}

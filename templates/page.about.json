@@ -1,11 +1,11 @@
 {
   "sections": {
-    "contact": {
-      "type": "cinelin-contact",
+    "about": {
+      "type": "cinelin-about",
       "settings": {}
     }
   },
   "order": [
-    "contact"
+    "about"
   ]
 }
