@@ -17,7 +17,7 @@
   id="Homepage-{{ section.id }}"
   class="homepage"
   data-homepage
-  data-auto-rotate="{{ section.settings.auto_rotate }}"
+  data-auto-rotate="false"
   data-rotation-speed="{{ section.settings.rotation_speed }}"
 >
   <header class="homepage__topbar" aria-label="{{ section.settings.brand_name | escape }} home navigation">
@@ -103,7 +103,7 @@
     <div class="homepage__orbit-wrap" aria-label="{{ section.settings.orbit_label | escape }}">
       <div class="homepage__orbit homepage__orbit--single" data-homepage-orbit style="--homepage-model-count: 1;">
         {%- if model_blocks.size > 0 -%}
-          {%- for block in model_blocks limit: 1 -%}
+          {%- for block in model_blocks -%}
             {%- liquid
               assign linked_product = block.settings.product
               assign item_link = block.settings.link
@@ -118,7 +118,7 @@
                 assign item_label = linked_product.title
               endif
               if item_label == blank
-                assign item_label = 'Milk & Rose piece'
+              assign item_label = 'Milk & Rose piece'
               endif
             -%}
             <article
@@ -139,9 +139,10 @@
             </article>
           {%- endfor -%}
         {%- else -%}
+          {%- for placeholder_index in (1..4) -%}
           <article
-            class="homepage__model homepage__model--style-1"
-            style="--homepage-model-index: 0;"
+            class="homepage__model homepage__model--style-{{ placeholder_index }}"
+            style="--homepage-model-index: {{ forloop.index0 }};"
           >
             <button class="homepage__model-button" type="button" aria-label="Spin Milk &amp; Rose piece 3D model">
               <span class="homepage__model-object" aria-hidden="true">
@@ -154,14 +155,13 @@
               <span class="homepage__model-label-text">Milk &amp; Rose piece</span>
             </a>
           </article>
+          {%- endfor -%}
         {%- endif -%}
       </div>
+      <button class="homepage__control homepage__control--prev" type="button" data-homepage-prev aria-label="Previous model">&lsaquo;</button>
+      <button class="homepage__control homepage__control--next" type="button" data-homepage-next aria-label="Next model">&rsaquo;</button>
     </div>
 
-    <div class="homepage__controls" aria-label="Model controls">
-      <button class="homepage__control" type="button" data-homepage-prev aria-label="Previous model">&lsaquo;</button>
-      <button class="homepage__control" type="button" data-homepage-next aria-label="Next model">&rsaquo;</button>
-    </div>
   </div>
 
   <div class="homepage__video-section">

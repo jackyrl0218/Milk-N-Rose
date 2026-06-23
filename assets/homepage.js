@@ -8,6 +8,8 @@ class HomepageOrbit {
     this.canvas = section.querySelector('[data-homepage-particles]');
     this.prevButton = section.querySelector('[data-homepage-prev]');
     this.nextButton = section.querySelector('[data-homepage-next]');
+    this.models = Array.from(this.orbit?.querySelectorAll('.homepage__model') || []);
+    this.activeIndex = 0;
     this.rotation = 0;
     this.tilt = -10;
     this.startX = 0;
@@ -15,6 +17,8 @@ class HomepageOrbit {
     this.startRotation = 0;
     this.startTilt = 0;
     this.isDragging = false;
+    this.didDrag = false;
+    this.pendingFrame = null;
     this.userPaused = false;
     this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -28,6 +32,7 @@ class HomepageOrbit {
     }
 
     this.updateRotation();
+    this.showActiveModel(0, false);
     this.bindEvents();
     this.initParticles();
   }
@@ -43,13 +48,13 @@ class HomepageOrbit {
       }
     });
 
-    this.prevButton?.addEventListener('click', () => this.rotateBy(-45));
-    this.nextButton?.addEventListener('click', () => this.rotateBy(45));
+    this.prevButton?.addEventListener('click', () => this.showActiveModel(this.activeIndex - 1));
+    this.nextButton?.addEventListener('click', () => this.showActiveModel(this.activeIndex + 1));
 
     this.orbit.addEventListener('pointerdown', (event) => this.onPointerDown(event));
     this.orbit.addEventListener('pointermove', (event) => this.onPointerMove(event));
-    this.orbit.addEventListener('pointerup', () => this.onPointerUp());
-    this.orbit.addEventListener('pointercancel', () => this.onPointerUp());
+    this.orbit.addEventListener('pointerup', (event) => this.onPointerUp(event));
+    this.orbit.addEventListener('pointercancel', (event) => this.onPointerUp(event));
     this.orbit.addEventListener('mouseenter', () => this.pauseAtCurrentRotation());
     this.orbit.addEventListener('mouseleave', () => {
       if (!this.reducedMotion && !this.isDragging && !this.userPaused) this.orbit.classList.remove('is-paused');
@@ -58,8 +63,12 @@ class HomepageOrbit {
     this.orbit.querySelectorAll('.homepage__model-button').forEach((button) => {
       button.addEventListener('click', (event) => {
         event.preventDefault();
+        if (this.didDrag) {
+          this.didDrag = false;
+          return;
+        }
         this.userPaused = true;
-        this.pauseAtCurrentRotation();
+        this.rotateBy(45);
       });
     });
   }
@@ -84,6 +93,7 @@ class HomepageOrbit {
     this.userPaused = true;
     this.pauseAtCurrentRotation();
     this.isDragging = true;
+    this.didDrag = false;
     this.startX = event.clientX;
     this.startY = event.clientY;
     this.startRotation = this.rotation;
@@ -94,16 +104,21 @@ class HomepageOrbit {
 
   onPointerMove(event) {
     if (!this.isDragging) return;
+    event.preventDefault();
     const deltaX = event.clientX - this.startX;
     const deltaY = event.clientY - this.startY;
+    if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) this.didDrag = true;
     this.rotation = this.startRotation + deltaX * 0.5;
     this.tilt = Math.max(-48, Math.min(28, this.startTilt - deltaY * 0.32));
-    this.updateRotation();
+    this.scheduleRotationUpdate();
   }
 
-  onPointerUp() {
+  onPointerUp(event) {
     this.isDragging = false;
     this.orbit.classList.remove('is-dragging');
+    if (event?.pointerId !== undefined && this.orbit.hasPointerCapture?.(event.pointerId)) {
+      this.orbit.releasePointerCapture(event.pointerId);
+    }
   }
 
   rotateBy(amount) {
@@ -114,9 +129,50 @@ class HomepageOrbit {
     this.updateRotation();
   }
 
+  showActiveModel(index, shouldResetRotation = true) {
+    if (!this.models.length) return;
+
+    this.activeIndex = (index + this.models.length) % this.models.length;
+    const previousIndex = (this.activeIndex - 1 + this.models.length) % this.models.length;
+    const nextIndex = (this.activeIndex + 1) % this.models.length;
+
+    this.models.forEach((model, modelIndex) => {
+      const isActive = modelIndex === this.activeIndex;
+      const isPrevious = this.models.length > 1 && modelIndex === previousIndex;
+      const isNext = this.models.length > 1 && modelIndex === nextIndex;
+
+      model.classList.toggle('is-active', isActive);
+      model.classList.toggle('is-previous', isPrevious);
+      model.classList.toggle('is-next', isNext);
+      model.setAttribute('aria-hidden', String(!isActive && !isPrevious && !isNext));
+    });
+    this.orbit.classList.add('has-active-model');
+
+    const hasMultipleModels = this.models.length > 1;
+    this.prevButton?.toggleAttribute('hidden', !hasMultipleModels);
+    this.nextButton?.toggleAttribute('hidden', !hasMultipleModels);
+
+    if (shouldResetRotation) {
+      this.userPaused = true;
+      this.rotation = 0;
+      this.tilt = -10;
+      this.orbit.classList.add('is-paused');
+      this.updateRotation();
+    }
+  }
+
   updateRotation() {
     this.orbit.style.setProperty('--homepage-rotation', `${this.rotation}deg`);
     this.orbit.style.setProperty('--homepage-tilt-x', `${this.tilt}deg`);
+  }
+
+  scheduleRotationUpdate() {
+    if (this.pendingFrame) return;
+
+    this.pendingFrame = window.requestAnimationFrame(() => {
+      this.pendingFrame = null;
+      this.updateRotation();
+    });
   }
 
   pauseAtCurrentRotation() {
