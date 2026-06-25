@@ -1,0 +1,205 @@
+body.template-page .shopify-section-group-header-group,
+body.template-page .shopify-section-group-footer-group {
+  display: none;
+}
+
+.cinelin-maker {
+  background:
+    radial-gradient(38rem 24rem at 80% 16rem, rgb(var(--cinelin-home-blue) / 0.12), rgb(var(--cinelin-home-background) / 0) 72%),
+    radial-gradient(34rem 22rem at 96% 42rem, rgb(var(--cinelin-home-pink) / 0.1), rgb(var(--cinelin-home-background) / 0) 72%),
+    rgb(var(--cinelin-home-background));
+}
+
+.cinelin-maker__shell {
+  margin: 0 auto;
+  max-width: 120rem;
+  padding: 6.8rem 1rem 0;
+}
+
+.cinelin-maker__hero {
+  border-block-end: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  display: grid;
+  gap: 1.4rem;
+  min-height: calc(100svh - 6.8rem);
+  padding-block: 2.4rem;
+}
+
+.cinelin-maker__portrait {
+  background:
+    radial-gradient(circle at 52% 32%, rgb(var(--cinelin-home-panel) / 0.9), rgb(var(--cinelin-home-surface) / 0) 24%),
+    linear-gradient(145deg, rgb(var(--cinelin-home-surface)), rgb(var(--cinelin-home-panel)));
+  border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.1);
+  min-height: 32rem;
+  overflow: hidden;
+}
+
+.cinelin-maker__portrait img {
+  display: block;
+  filter: grayscale(0.18) saturate(0.84);
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cinelin-maker__portrait span {
+  display: block;
+  min-height: 32rem;
+  position: relative;
+}
+
+.cinelin-maker__portrait span::before,
+.cinelin-maker__portrait span::after {
+  content: "";
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.cinelin-maker__portrait span::before {
+  background: rgb(var(--cinelin-home-ink) / 0.1);
+  border-radius: 50%;
+  height: 7rem;
+  top: 7rem;
+  width: 7rem;
+}
+
+.cinelin-maker__portrait span::after {
+  background: rgb(var(--cinelin-home-ink) / 0.08);
+  border-radius: 48% 48% 0 0;
+  height: 17rem;
+  top: 15rem;
+  width: min(62%, 24rem);
+}
+
+.cinelin-maker__intro {
+  align-self: end;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.cinelin-maker__intro h1 {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(4.4rem, 14vw, 8.4rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 0.84;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.cinelin-maker__role,
+.cinelin-maker__location {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: clamp(1.8rem, 6vw, 3.6rem);
+  font-weight: 800;
+  line-height: 0.98;
+  margin: 0;
+  max-width: 18ch;
+  text-transform: uppercase;
+}
+
+.cinelin-maker__location {
+  color: rgb(var(--cinelin-home-muted));
+}
+
+.cinelin-maker__bio,
+.cinelin-maker__note p,
+.cinelin-footer__note {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 48rem;
+}
+
+.cinelin-maker__note {
+  border-block-end: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  display: grid;
+  gap: 1rem;
+  padding-block: 2.6rem;
+}
+
+.cinelin-maker__note h2 {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(2.4rem, 8vw, 5.2rem);
+  font-weight: 800;
+  line-height: 0.96;
+  margin: 0;
+  max-width: 14ch;
+  text-transform: uppercase;
+}
+
+.cinelin-maker__pieces {
+  padding-block: 1.4rem 2.6rem;
+}
+
+.cinelin-footer {
+  background: rgb(var(--cinelin-home-panel));
+  border-block-start: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  display: grid;
+  gap: 1rem;
+  margin-inline: -1rem;
+  padding: 1.4rem 1rem;
+}
+
+.cinelin-footer__brand {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.cinelin-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.cinelin-footer__links a {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 750px) {
+  .cinelin-maker__shell {
+    padding: 7rem 1.6rem 0;
+  }
+
+  .cinelin-maker__hero {
+    gap: 1.6rem;
+    grid-template-columns: minmax(0, 0.9fr) minmax(28rem, 1.1fr);
+    padding-block: 3rem;
+  }
+
+  .cinelin-maker__portrait {
+    min-height: calc(100svh - 13rem);
+  }
+
+  .cinelin-maker__intro {
+    padding-block-end: 2rem;
+  }
+
+  .cinelin-maker__note {
+    grid-template-columns: minmax(0, 0.9fr) minmax(24rem, 1.1fr);
+  }
+
+  .cinelin-footer {
+    margin-inline: -1.6rem;
+    padding-inline: 1.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinelin-maker *,
+  .cinelin-maker *::before,
+  .cinelin-maker *::after {
+    animation: none;
+    transition: none;
+  }
+}

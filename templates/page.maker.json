@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "maker": {
+      "type": "cinelin-maker",
+      "settings": {}
+    }
+  },
+  "order": [
+    "maker"
+  ]
+}
