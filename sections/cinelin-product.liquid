@@ -1,0 +1,213 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-pages.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cinelin-pages.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cinelin-product.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign first_model = product.media | where: 'media_type', 'model' | first
+  assign fallback_image = section.settings.static_fallback
+  if fallback_image == blank and product.featured_image != blank
+    assign fallback_image = product.featured_image
+  endif
+  assign product_form_id = 'CinelinProductForm-' | append: section.id
+  assign selected_variant = product.selected_or_first_available_variant
+-%}
+
+{%- if first_model -%}
+  {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
+  <link id="ModelViewerStyle" rel="stylesheet" href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css" media="print" onload="this.media='all'">
+  <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
+  <script src="{{ 'product-model.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- liquid
+  assign nav_menu_id = 'CinelinProductMenu-' | append: section.id
+-%}
+
+<section class="cinelin-page cinelin-product" data-cinelin-page data-cinelin-product>
+  {%- render 'cinelin-page-nav',
+    nav_label: 'Product page navigation',
+    page_label: 'Product',
+    brand_name: section.settings.brand_name,
+    menu_id: nav_menu_id
+  -%}
+
+  <div class="cinelin-product__shell">
+    <div class="cinelin-product__exhibit">
+      <div class="cinelin-product__model-card" data-cinelin-model-stage>
+        <div class="cinelin-product__model-skeleton" data-cinelin-model-skeleton aria-hidden="true"></div>
+
+        {%- if first_model -%}
+          <product-model class="cinelin-product__model deferred-media media media--transparent" data-media-id="{{ first_model.id }}">
+            <button id="CinelinProductPoster-{{ first_model.id }}" class="cinelin-product__poster deferred-media__poster" type="button" aria-label="{{ section.settings.model_button_label | escape }}">
+              {%- if fallback_image != blank -%}
+                {{ fallback_image | image_url: width: 1200 | image_tag:
+                  loading: 'lazy',
+                  widths: '360, 540, 720, 960, 1200',
+                  sizes: '(min-width: 990px) 58vw, 100vw',
+                  alt: product.title
+                }}
+              {%- else -%}
+                <span class="cinelin-product__fallback-art" aria-hidden="true"></span>
+              {%- endif -%}
+              <span class="cinelin-product__model-button">{{ section.settings.model_button_label | escape }}</span>
+            </button>
+            <template>
+              {{ first_model | media_tag: image_size: '1200x', toggleable: true }}
+            </template>
+          </product-model>
+          <script type="application/json" id="ProductJSON-{{ product.id }}">
+            {{ product.media | where: 'media_type', 'model' | json }}
+          </script>
+        {%- elsif fallback_image != blank -%}
+          {{ fallback_image | image_url: width: 1200 | image_tag:
+            class: 'cinelin-product__static-fallback',
+            loading: 'lazy',
+            widths: '360, 540, 720, 960, 1200',
+            sizes: '(min-width: 990px) 58vw, 100vw',
+            alt: product.title
+          }}
+        {%- else -%}
+          <span class="cinelin-product__fallback-art" aria-hidden="true"></span>
+        {%- endif -%}
+
+        <div class="cinelin-product__webgl-fallback" data-cinelin-webgl-fallback>
+          {%- if fallback_image != blank -%}
+            {{ fallback_image | image_url: width: 900 | image_tag:
+              loading: 'lazy',
+              widths: '360, 540, 720, 900',
+              sizes: '(min-width: 990px) 48vw, 100vw',
+              alt: product.title
+            }}
+          {%- else -%}
+            <span class="cinelin-product__fallback-art" aria-hidden="true"></span>
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="cinelin-product__info">
+        <p class="cinelin-page__kicker">{{ section.settings.kicker | escape }}</p>
+        <h1 class="cinelin-product__title">{{ product.title | escape }}</h1>
+        {%- if product.collections.first != blank -%}
+          <a class="cinelin-product__collection" href="{{ product.collections.first.url }}">{{ product.collections.first.title | escape }}</a>
+        {%- else -%}
+          <span class="cinelin-product__collection">{{ section.settings.collection_label | escape }}</span>
+        {%- endif -%}
+        {% render 'price', product: product, use_variant: true, price_class: 'cinelin-product__price', show_compare_at_price: true %}
+
+        {%- form 'product', product, id: product_form_id, class: 'cinelin-product__form' -%}
+          {%- unless product.has_only_default_variant -%}
+            <label class="cinelin-product__label" for="CinelinVariant-{{ section.id }}">Variant</label>
+            <select class="cinelin-product__select" id="CinelinVariant-{{ section.id }}" name="id">
+              {%- for variant in product.variants -%}
+                <option
+                  value="{{ variant.id }}"
+                  {% if variant == selected_variant %}selected="selected"{% endif %}
+                  {% unless variant.available %}disabled{% endunless %}
+                >
+                  {{ variant.title | escape }}{% unless variant.available %} - {{ 'products.product.sold_out' | t }}{% endunless %}
+                </option>
+              {%- endfor -%}
+            </select>
+          {%- else -%}
+            <input type="hidden" name="id" value="{{ selected_variant.id }}">
+          {%- endunless -%}
+
+          <label class="cinelin-product__label" for="CinelinQuantity-{{ section.id }}">Quantity</label>
+          <input class="cinelin-product__quantity" id="CinelinQuantity-{{ section.id }}" type="number" name="quantity" min="1" value="1">
+
+          <button class="cinelin-product__submit" type="submit" name="add" {% unless selected_variant.available %}disabled{% endunless %}>
+            {%- if selected_variant.available -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- else -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+
+        {%- if product.description != blank -%}
+          <div class="cinelin-product__description rte">{{ product.description }}</div>
+        {%- else -%}
+          <p class="cinelin-page__copy">{{ section.settings.description_fallback | escape }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="cinelin-product__pieces" aria-label="Product exhibit pieces">
+      <article class="cinelin-product__piece cinelin-product__piece--wide">
+        <p class="cinelin-page__eyebrow">{{ section.settings.studio_kicker | escape }}</p>
+        <h2>{{ section.settings.studio_title | escape }}</h2>
+        <div class="cinelin-product__placeholder-grid" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+      </article>
+
+      <article class="cinelin-product__piece">
+        <p class="cinelin-page__eyebrow">{{ section.settings.model_kicker | escape }}</p>
+        <h2>{{ section.settings.model_title | escape }}</h2>
+        <div class="cinelin-product__wear-placeholder" aria-hidden="true"></div>
+      </article>
+
+      <article class="cinelin-product__piece cinelin-product__piece--label">
+        <p class="cinelin-page__eyebrow">{{ section.settings.sketch_kicker | escape }}</p>
+        <h2>{{ section.settings.sketch_title | escape }}</h2>
+        <p>{{ section.settings.sketch_copy | escape }}</p>
+      </article>
+
+      <article class="cinelin-product__piece cinelin-product__piece--video">
+        <p class="cinelin-page__eyebrow">{{ section.settings.video_kicker | escape }}</p>
+        <h2>{{ section.settings.video_title | escape }}</h2>
+        <button class="cinelin-product__video" type="button" aria-label="{{ section.settings.video_button_label | escape }}">
+          <span class="cinelin-product__play">{{ 'icon-play.svg' | inline_asset_content }}</span>
+        </button>
+      </article>
+    </div>
+
+    <section class="cinelin-product__maker" aria-labelledby="CinelinMaker-{{ section.id }}">
+      <p class="cinelin-page__eyebrow">{{ section.settings.maker_kicker | escape }}</p>
+      <h2 id="CinelinMaker-{{ section.id }}">{{ section.settings.maker_title | escape }}</h2>
+      <p>{{ section.settings.maker_copy | escape }}</p>
+      <a class="cinelin-page__button" href="{{ section.settings.maker_link | default: '/pages/maker' }}">{{ section.settings.maker_link_label | escape }}</a>
+    </section>
+
+    {%- render 'cinelin-footer',
+      footer_label: section.settings.brand_name,
+      footer_note: section.settings.footer_note
+    -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinelin product exhibit",
+  "settings": [
+    { "type": "text", "id": "brand_name", "label": "Brand name", "default": "MILK & ROSE" },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Object study" },
+    { "type": "text", "id": "collection_label", "label": "Fallback collection label", "default": "Small batch collection" },
+    { "type": "textarea", "id": "description_fallback", "label": "Fallback description", "default": "A handmade piece held like a small exhibit: material, sketch, process, and the maker behind it." },
+    { "type": "image_picker", "id": "static_fallback", "label": "Static fallback image" },
+    { "type": "text", "id": "model_button_label", "label": "Model load button label", "default": "Inspect in 3D" },
+    { "type": "text", "id": "studio_kicker", "label": "Studio image kicker", "default": "Studio images" },
+    { "type": "text", "id": "studio_title", "label": "Studio image title", "default": "Clean views for scale and shine." },
+    { "type": "text", "id": "model_kicker", "label": "Model image kicker", "default": "Worn context" },
+    { "type": "text", "id": "model_title", "label": "Model image title", "default": "The piece in motion." },
+    { "type": "text", "id": "sketch_kicker", "label": "Sketch kicker", "default": "Design sketch" },
+    { "type": "text", "id": "sketch_title", "label": "Sketch title", "default": "A small museum label." },
+    { "type": "textarea", "id": "sketch_copy", "label": "Sketch copy", "default": "Placeholder for the hand sketch, material notes, and the first version of the form." },
+    { "type": "text", "id": "video_kicker", "label": "Process video kicker", "default": "Process video" },
+    { "type": "text", "id": "video_title", "label": "Process video title", "default": "From bench to object." },
+    { "type": "text", "id": "video_button_label", "label": "Video button label", "default": "Play maker process video" },
+    { "type": "text", "id": "maker_kicker", "label": "Maker kicker", "default": "Maker" },
+    { "type": "text", "id": "maker_title", "label": "Maker title", "default": "Made by hand, signed by process." },
+    { "type": "textarea", "id": "maker_copy", "label": "Maker copy", "default": "The artisan profile gives the object a human edge: location, method, and the rhythm behind the work." },
+    { "type": "url", "id": "maker_link", "label": "Maker profile link" },
+    { "type": "text", "id": "maker_link_label", "label": "Maker link label", "default": "Meet the maker" },
+    { "type": "text", "id": "footer_note", "label": "Footer note", "default": "Objects made slowly, kept close." }
+  ],
+  "presets": [
+    { "name": "Cinelin product exhibit" }
+  ]
+}
+{% endschema %}

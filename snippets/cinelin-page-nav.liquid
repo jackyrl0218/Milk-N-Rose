@@ -1,0 +1,30 @@
+{%- liquid
+  assign nav_label = nav_label | default: 'Page navigation'
+  assign page_label = page_label | default: ''
+  assign brand_name = brand_name | default: 'Milk & Rose'
+  assign menu_id = menu_id | default: 'CinelinPageMenu'
+-%}
+
+<nav class="cinelin-page__topline" aria-label="{{ nav_label | escape }}">
+  <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="{{ menu_id }}" aria-expanded="false">
+    <span class="visually-hidden">Open menu</span>
+    {{ 'icon-hamburger.svg' | inline_asset_content }}
+  </button>
+  <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}">{{ brand_name | escape }}</a>
+  <div class="cinelin-page__actions">
+    {%- if page_label != blank -%}
+      <span class="cinelin-page__topline-meta">{{ page_label | escape }}</span>
+    {%- endif -%}
+  </div>
+  <div class="cinelin-page__menu-list" id="{{ menu_id }}" data-cinelin-menu>
+    <div class="cinelin-page__menu-nav">
+      <a href="{{ routes.root_url }}">Home</a>
+      <a href="{{ routes.all_products_collection_url }}">Product</a>
+      <a href="/pages/maker">Maker</a>
+      <a href="{{ routes.all_products_collection_url }}">Collection</a>
+      <a href="/pages/about">About</a>
+      <a href="{{ routes.cart_url }}">Cart</a>
+      <a href="/pages/contact">Contact</a>
+    </div>
+  </div>
+</nav>
