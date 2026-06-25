@@ -1,0 +1,15 @@
+{%- liquid
+  assign footer_label = footer_label | default: 'Milk & Rose'
+  assign footer_note = footer_note | default: 'Handmade jewelry arranged as small objects with presence.'
+-%}
+
+<footer class="cinelin-footer" aria-label="Footer">
+  <a class="cinelin-footer__brand" href="{{ routes.root_url }}">{{ footer_label | escape }}</a>
+  <p class="cinelin-footer__note">{{ footer_note | escape }}</p>
+  <nav class="cinelin-footer__links" aria-label="Footer navigation">
+    <a href="{{ routes.all_products_collection_url }}">Collection</a>
+    <a href="/pages/maker">Maker</a>
+    <a href="/pages/contact">Contact</a>
+    <a href="{{ routes.cart_url }}">Cart</a>
+  </nav>
+</footer>
