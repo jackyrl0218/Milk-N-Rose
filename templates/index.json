@@ -124,7 +124,7 @@
       ],
       "settings": {
         "brand_name": "X",
-        "menu_items": "Home\nProduct\nMaker\nCollection\nAbout\nCart\nContact",
+        "menu_items": "Home\nMaker\nCollection\nAbout\nCart\nContact",
         "default_menu_link": "shopify://collections/all",
         "hero_kicker": "New objects",
         "hero_title": "Jewelry in motion",

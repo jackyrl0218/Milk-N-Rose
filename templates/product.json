@@ -4,7 +4,7 @@
       "type": "cinelin-product",
       "settings": {
         "back_link": "",
-        "back_label": "Back to collection",
+        "back_label": "Back",
         "kicker": "Individual object",
         "model_hint": "Drag the object to rotate",
         "gallery_limit": 4,
