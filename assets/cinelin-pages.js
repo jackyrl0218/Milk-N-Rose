@@ -101,10 +101,24 @@ class CinelinPageMenu {
 }
 
 const initCinelinProductModelGrids = (container = document) => {
-  container.querySelectorAll('[data-cinelin-product-grid]').forEach((grid) => {
+  container.querySelectorAll('[data-cinelin-product-grid], [data-cinelin-product-media]').forEach((grid) => {
     if (!grid.cinelinProductModelGrid) {
       grid.cinelinProductModelGrid = new CinelinProductModelGrid(grid);
     }
+  });
+};
+
+const initCinelinProductPages = (container = document) => {
+  container.querySelectorAll('[data-cinelin-product]').forEach((productPage) => {
+    if (productPage.cinelinProductPage) return;
+    productPage.cinelinProductPage = true;
+
+    const thumbs = Array.from(productPage.querySelectorAll('[data-cinelin-product-thumb]'));
+    thumbs.forEach((thumb) => {
+      thumb.addEventListener('click', () => {
+        thumbs.forEach((item) => item.classList.toggle('is-active', item === thumb));
+      });
+    });
   });
 };
 
@@ -118,8 +132,10 @@ const initCinelinPageMenus = (container = document) => {
 
 initCinelinPageMenus();
 initCinelinProductModelGrids();
+initCinelinProductPages();
 
 document.addEventListener('shopify:section:load', (event) => {
   initCinelinPageMenus(event.target);
   initCinelinProductModelGrids(event.target);
+  initCinelinProductPages(event.target);
 });

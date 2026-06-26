@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "entry": {
+      "type": "cinelin-entry",
+      "blocks": {
+        "media_1": {
+          "type": "media",
+          "settings": {}
+        },
+        "media_2": {
+          "type": "media",
+          "settings": {}
+        },
+        "media_3": {
+          "type": "media",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "media_1",
+        "media_2",
+        "media_3"
+      ],
+      "settings": {
+        "frame_live_duration": 3000,
+        "gap_duration": 250,
+        "headline_text": "ELDRA",
+        "sub_copy_text": "",
+        "button_label": "Join",
+        "note_text": "For VIP events, secret sales & birthday gifts."
+      }
+    }
+  },
+  "order": [
+    "entry"
+  ]
+}

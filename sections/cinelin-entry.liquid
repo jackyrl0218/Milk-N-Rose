@@ -3,9 +3,9 @@
 <script src="{{ 'cinelin-entry.js' | asset_url }}" defer="defer"></script>
 
 {%- liquid
-  assign grid_columns = section.settings.grid_columns | default: 4
-  assign grid_rows = section.settings.grid_rows | default: 3
-  assign frame_count = grid_columns | times: grid_rows
+  assign grid_columns = 3
+  assign grid_rows = 3
+  assign frame_count = 9
 -%}
 
 <section
@@ -20,22 +20,44 @@
   <div class="cinelin-entry__wall" aria-hidden="true">
     {%- for frame_index in (1..frame_count) -%}
       {%- liquid
-        assign video_url = blank
-        if section.blocks.size > 0
-          assign block_index = forloop.index0 | modulo: section.blocks.size
-          assign video_url = section.blocks[block_index].settings.video_url
+        assign is_center_frame = false
+        if frame_index == 5
+          assign is_center_frame = true
         endif
       -%}
 
-      <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: {{ forloop.index }};">
-        {%- if video_url != blank -%}
+      <div
+        class="cinelin-entry__frame{% if is_center_frame %} cinelin-entry__frame--center{% endif %}"
+        {% unless is_center_frame %}data-entry-frame{% endunless %}
+        style="--cinelin-frame-index: {{ forloop.index }};"
+      >
+        <span class="cinelin-entry__placeholder"></span>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="cinelin-entry__media-pool" data-entry-media-pool hidden>
+    {%- for block in section.blocks -%}
+      <template data-entry-media-template {{ block.shopify_attributes }}>
+        {%- if block.settings.video_url != blank -%}
           <video class="cinelin-entry__video" muted playsinline preload="metadata" loop>
-            <source src="{{ video_url | escape }}" type="video/mp4">
+            <source src="{{ block.settings.video_url | escape }}" type="video/mp4">
           </video>
+        {%- elsif block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              class: 'cinelin-entry__placeholder-image',
+              loading: 'eager',
+              widths: '480, 720, 960, 1280, 1600',
+              sizes: '(min-width: 750px) 33vw, 50vw',
+              alt: block.settings.image.alt
+          }}
         {%- else -%}
           <span class="cinelin-entry__placeholder"></span>
         {%- endif -%}
-      </div>
+      </template>
     {%- endfor -%}
   </div>
 
@@ -66,7 +88,11 @@
         >
       </div>
 
-      <button class="cinelin-entry__button" type="submit">Join</button>
+      <button class="cinelin-entry__button" type="submit">{{ section.settings.button_label | escape }}</button>
+
+      {%- if section.settings.note_text != blank -%}
+        <p class="cinelin-entry__note">{{ section.settings.note_text | escape }}</p>
+      {%- endif -%}
 
       <p class="cinelin-entry__success" role="status" data-entry-success hidden></p>
     </form>
@@ -75,7 +101,7 @@
       <button class="cinelin-entry__control" type="button" data-entry-mute aria-pressed="false">
         <span data-entry-mute-label>Sound on</span>
       </button>
-      <button class="cinelin-entry__control" type="button" data-entry-skip>skip</button>
+      <button class="cinelin-entry__control" type="button" data-entry-skip>Continue as guest</button>
     </div>
   </div>
 </section>
@@ -86,24 +112,6 @@
   "tag": "section",
   "class": "section-cinelin-entry",
   "settings": [
-    {
-      "type": "range",
-      "id": "grid_columns",
-      "label": "Grid columns",
-      "min": 2,
-      "max": 8,
-      "step": 1,
-      "default": 4
-    },
-    {
-      "type": "range",
-      "id": "grid_rows",
-      "label": "Grid rows",
-      "min": 2,
-      "max": 6,
-      "step": 1,
-      "default": 3
-    },
     {
       "type": "range",
       "id": "frame_live_duration",
@@ -128,25 +136,42 @@
       "type": "text",
       "id": "headline_text",
       "label": "Headline text",
-      "default": "CINELIN"
+      "default": "ELDRA"
     },
     {
       "type": "textarea",
       "id": "sub_copy_text",
       "label": "Sub-copy text",
-      "default": "Handcrafted in small batches. Each piece exists between sculpture and machine."
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Join"
+    },
+    {
+      "type": "text",
+      "id": "note_text",
+      "label": "Note text",
+      "default": "For VIP events, secret sales & birthday gifts."
     }
   ],
   "blocks": [
     {
-      "type": "placeholder_video",
-      "name": "Placeholder video",
+      "type": "media",
+      "name": "Wall media",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
         {
           "type": "text",
           "id": "video_url",
-          "label": "Video URL",
-          "info": "Use an MP4 URL for placeholder TV-wall footage."
+          "label": "MP4 video URL",
+          "info": "Video takes priority when both an image and URL are set."
         }
       ]
     }
@@ -156,13 +181,13 @@
       "name": "Cinelin entry splash",
       "blocks": [
         {
-          "type": "placeholder_video"
+          "type": "media"
         },
         {
-          "type": "placeholder_video"
+          "type": "media"
         },
         {
-          "type": "placeholder_video"
+          "type": "media"
         }
       ]
     }

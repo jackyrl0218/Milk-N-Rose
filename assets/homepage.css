@@ -1287,3 +1287,60 @@ body.homepage-menu-open {
     display: none;
   }
 }
+
+/* Carry the Entry mood into secondary homepage media without darkening the hero. */
+.homepage__video {
+  background: rgb(var(--cinelin-entry-screen-deep));
+  border-color: rgb(var(--cinelin-entry-frame) / 0.62);
+  border-radius: 0.7rem;
+}
+
+.homepage__video::after {
+  background: repeating-linear-gradient(
+    0deg,
+    rgb(var(--cinelin-entry-background) / 0.1) 0 0.1rem,
+    rgb(var(--cinelin-entry-gold) / 0) 0.1rem 0.42rem
+  );
+  content: "";
+  inset: 0;
+  opacity: 0.16;
+  pointer-events: none;
+  position: absolute;
+}
+
+.homepage__video-placeholder {
+  background:
+    linear-gradient(110deg, rgb(var(--cinelin-entry-gold) / 0.1), rgb(var(--cinelin-entry-background) / 0) 36%),
+    radial-gradient(circle at 28% 64%, rgb(var(--cinelin-home-pearl)), rgb(var(--cinelin-home-metal)) 9%, rgb(var(--cinelin-entry-screen)) 24%, rgb(var(--cinelin-entry-background) / 0) 25%),
+    linear-gradient(145deg, rgb(var(--cinelin-entry-screen-deep)), rgb(var(--cinelin-entry-screen)) 52%, rgb(var(--cinelin-entry-background)));
+}
+
+.homepage__featured {
+  border-block-start-color: rgb(var(--cinelin-entry-frame) / 0.34);
+}
+
+.homepage__featured-title {
+  font-family: var(--cinelin-font-heading);
+  font-weight: 400;
+}
+
+.homepage__featured-piece {
+  border-color: rgb(var(--cinelin-entry-frame) / 0.4);
+  border-radius: 0.7rem;
+}
+
+.homepage__featured-placeholder {
+  background:
+    radial-gradient(circle at 50% 46%, rgb(var(--cinelin-entry-screen) / 0.86), rgb(var(--cinelin-entry-screen-deep)) 72%),
+    rgb(var(--cinelin-entry-screen-deep));
+}
+
+.homepage__featured-piece:hover,
+.homepage__featured-piece:focus-visible {
+  border-color: rgb(var(--cinelin-entry-gold) / 0.78);
+}
+
+.homepage__featured-name {
+  font-family: var(--cinelin-font-heading);
+  font-weight: 400;
+}

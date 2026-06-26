@@ -25,6 +25,12 @@
   --cinelin-home-pink: 235 178 188;
   --cinelin-home-gold: 219 183 111;
   --cinelin-home-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --cinelin-entry-background: 5 3 3;
+  --cinelin-entry-screen: 72 9 12;
+  --cinelin-entry-screen-deep: 32 3 5;
+  --cinelin-entry-frame: 102 57 57;
+  --cinelin-entry-gold: 232 211 158;
+  --cinelin-entry-copy: 180 157 158;
   --cinelin-font-body: Consolas, "Courier New", "Nimbus Mono PS", "Courier", monospace;
   --cinelin-font-copy: Consolas, "Courier New", "Nimbus Mono PS", "Courier", monospace;
   --cinelin-font-heading: "Eldra", "Garamond", "Times New Roman", serif;

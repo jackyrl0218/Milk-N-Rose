@@ -489,6 +489,238 @@ html.shopify-design-mode .cinelin-entry {
   }
 }
 
+/* Dark 3x3 TV-wall treatment. The center screen is reserved for entry controls. */
+.cinelin-entry {
+  background: rgb(var(--cinelin-entry-background));
+  color: rgb(var(--cinelin-entry-gold));
+  display: block;
+  padding: 0;
+}
+
+.cinelin-entry::before {
+  display: none;
+}
+
+.cinelin-entry__wall {
+  gap: clamp(0.7rem, 0.9vw, 1.4rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  padding: clamp(1rem, 1.2vw, 1.8rem);
+}
+
+.cinelin-entry__frame {
+  aspect-ratio: auto;
+  background:
+    radial-gradient(circle at 50% 50%, rgb(var(--cinelin-entry-screen) / 0.92), rgb(var(--cinelin-entry-screen-deep)) 78%);
+  border: clamp(0.3rem, 0.35vw, 0.55rem) solid rgb(var(--cinelin-entry-frame) / 0.72);
+  border-radius: clamp(1.2rem, 1.4vw, 2.2rem);
+  box-shadow:
+    inset 0 0 3.8rem rgb(var(--cinelin-entry-background) / 0.42),
+    inset 0 0 0 0.1rem rgb(var(--cinelin-entry-gold) / 0.04);
+  opacity: 1;
+  transform: none;
+}
+
+.cinelin-entry__frame::before {
+  background: repeating-linear-gradient(
+    0deg,
+    rgb(var(--cinelin-entry-background) / 0.16) 0 0.1rem,
+    rgb(var(--cinelin-entry-gold) / 0) 0.1rem 0.38rem
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+
+.cinelin-entry__frame::after {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-entry-gold) / 0.035), rgb(var(--cinelin-entry-background) / 0.12)),
+    radial-gradient(circle at 50% 50%, rgb(var(--cinelin-entry-gold) / 0), rgb(var(--cinelin-entry-background) / 0.36) 90%);
+}
+
+.cinelin-entry__frame--center {
+  grid-column: 2;
+  grid-row: 2;
+  background: rgb(var(--cinelin-entry-screen-deep));
+}
+
+.cinelin-entry__frame--center .cinelin-entry__placeholder,
+.cinelin-entry__placeholder::before,
+.cinelin-entry__placeholder::after {
+  display: none;
+}
+
+.cinelin-entry__frame.is-live {
+  border-color: rgb(var(--cinelin-entry-frame) / 0.92);
+  box-shadow:
+    inset 0 0 1.8rem rgb(var(--cinelin-entry-background) / 0.18),
+    0 0 2.4rem rgb(var(--cinelin-entry-screen) / 0.36);
+  filter: saturate(1.04) contrast(1.04);
+}
+
+.cinelin-entry__video,
+.cinelin-entry__placeholder-image {
+  filter: sepia(0.12) saturate(0.88) contrast(1.06);
+  transform: scale(1.015);
+}
+
+.cinelin-entry__frame.is-live .cinelin-entry__video,
+.cinelin-entry__frame.is-live .cinelin-entry__placeholder-image {
+  filter: sepia(0.08) saturate(0.96) contrast(1.04);
+  transform: scale(1);
+}
+
+.cinelin-entry__placeholder {
+  background: transparent;
+  opacity: 1;
+}
+
+.cinelin-entry__scanlines {
+  mix-blend-mode: screen;
+  opacity: 0.08;
+}
+
+.cinelin-entry__grain {
+  opacity: 0.12;
+}
+
+.cinelin-entry__content {
+  background: rgb(var(--cinelin-entry-screen-deep) / 0.96);
+  border: clamp(0.3rem, 0.35vw, 0.55rem) solid rgb(var(--cinelin-entry-frame) / 0.72);
+  border-radius: clamp(1.2rem, 1.4vw, 2.2rem);
+  box-shadow: inset 0 0 3.8rem rgb(var(--cinelin-entry-background) / 0.38);
+  inline-size: calc((100vw - clamp(4.1rem, 5.1vw, 7.4rem)) / 3);
+  left: 50%;
+  min-height: calc((100svh - clamp(4.1rem, 5.1vw, 7.4rem)) / 3);
+  overflow: visible;
+  padding: clamp(0.8rem, 1.1vw, 1.5rem);
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cinelin-entry__form {
+  align-content: center;
+  gap: clamp(0.8rem, 1vw, 1.4rem);
+  grid-template-columns: 1fr;
+  min-height: 100%;
+  padding: clamp(1rem, 1.8vw, 2.8rem);
+}
+
+.cinelin-entry__headline {
+  color: rgb(var(--cinelin-entry-gold));
+  font-family: var(--cinelin-font-wordmark);
+  font-size: clamp(2.8rem, 4vw, 5.8rem);
+  line-height: 0.8;
+  overflow-wrap: anywhere;
+}
+
+.cinelin-entry__copy,
+.cinelin-entry__note,
+.cinelin-entry__success {
+  color: rgb(var(--cinelin-entry-copy));
+  font-family: var(--cinelin-font-copy);
+  font-size: clamp(0.78rem, 0.82vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: none;
+}
+
+.cinelin-entry__input {
+  background: rgb(var(--cinelin-entry-background) / 0.38);
+  border: 0.1rem solid rgb(var(--cinelin-entry-copy) / 0.42);
+  border-radius: 0.4rem;
+  color: rgb(var(--cinelin-entry-gold));
+  font-family: var(--cinelin-font-copy);
+  font-weight: 400;
+  min-height: clamp(3.6rem, 4vw, 5rem);
+  padding-inline: 1.4rem;
+}
+
+.cinelin-entry__input::placeholder {
+  color: rgb(var(--cinelin-entry-copy) / 0.8);
+}
+
+.cinelin-entry__button {
+  background: rgb(var(--cinelin-entry-gold));
+  border-color: rgb(var(--cinelin-entry-gold));
+  border-radius: 0;
+  color: rgb(var(--cinelin-entry-background));
+  font-family: var(--cinelin-font-copy);
+  font-size: clamp(0.9rem, 0.9vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  min-height: clamp(3.5rem, 3.8vw, 5rem);
+}
+
+.cinelin-entry__button:hover {
+  background: rgb(var(--cinelin-entry-background));
+  color: rgb(var(--cinelin-entry-gold));
+}
+
+.cinelin-entry__controls {
+  justify-content: center;
+  padding: 0 1.3rem clamp(0.8rem, 1vw, 1.4rem);
+}
+
+.cinelin-entry__control {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: rgb(var(--cinelin-entry-copy));
+  font-family: var(--cinelin-font-copy);
+  font-size: clamp(0.72rem, 0.76vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  min-height: auto;
+  padding: 0.3rem 0.5rem;
+}
+
+.cinelin-entry__control:hover {
+  background: transparent;
+  color: rgb(var(--cinelin-entry-gold));
+  transform: none;
+}
+
+.cinelin-entry__control[data-entry-mute] {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-entry {
+    --cinelin-entry-columns: 3;
+    --cinelin-entry-rows: 3;
+  }
+
+  .cinelin-entry__wall {
+    gap: 0.5rem;
+    padding: 0.6rem;
+  }
+
+  .cinelin-entry__frame {
+    border-width: 0.25rem;
+    border-radius: 0.9rem;
+  }
+
+  .cinelin-entry__content {
+    border-width: 0.3rem;
+    inline-size: min(90vw, 38rem);
+    min-height: auto;
+    padding: 0.8rem;
+  }
+
+  .cinelin-entry__form {
+    gap: 0.9rem;
+    min-height: auto;
+    padding: 1.2rem;
+  }
+
+  .cinelin-entry__headline {
+    font-size: clamp(3rem, 12vw, 4.8rem);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .cinelin-entry *,
   .cinelin-entry *::before,

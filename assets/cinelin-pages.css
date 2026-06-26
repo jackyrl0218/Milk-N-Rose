@@ -424,6 +424,7 @@ body.cinelin-page-menu-open {
   overflow: hidden;
   padding: 0;
   perspective: 80rem;
+  position: relative;
 }
 
 .cinelin-card__media:active {
@@ -696,6 +697,419 @@ body.cinelin-page-menu-open {
   .cinelin-card,
   .cinelin-card__model,
   .cinelin-card::after {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Entry-inspired accents: light pages, dark media wells, warm metal details. */
+.cinelin-page {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-entry-gold) / 0.08), rgb(var(--cinelin-home-background) / 0) 24rem),
+    rgb(var(--cinelin-home-background));
+}
+
+.cinelin-page__topline {
+  border-bottom-color: rgb(var(--cinelin-entry-frame) / 0.24);
+}
+
+.cinelin-page__topline-brand,
+.cinelin-page__title,
+.cinelin-story__title {
+  letter-spacing: 0;
+}
+
+.cinelin-page__title {
+  font-family: var(--cinelin-font-heading);
+  font-weight: 400;
+}
+
+.cinelin-page__kicker,
+.cinelin-page__eyebrow,
+.cinelin-page__toolbar,
+.cinelin-page__topline-meta {
+  color: rgb(var(--cinelin-entry-screen) / 0.78);
+}
+
+.cinelin-page__hero {
+  border-block-end-color: rgb(var(--cinelin-entry-frame) / 0.34);
+}
+
+.cinelin-page__hero::before {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgb(var(--cinelin-entry-gold) / 0.16),
+    rgb(var(--cinelin-home-background) / 0) 66%
+  );
+}
+
+.cinelin-story__panel {
+  border-block-start-color: rgb(var(--cinelin-entry-frame) / 0.42);
+}
+
+.cinelin-card {
+  border-color: rgb(var(--cinelin-entry-frame) / 0.46);
+  border-radius: 0.7rem;
+}
+
+.cinelin-card:hover,
+.cinelin-card:focus-within {
+  border-color: rgb(var(--cinelin-entry-gold) / 0.78);
+  box-shadow: 0 1.2rem 3rem rgb(var(--cinelin-entry-background) / 0.08);
+}
+
+.cinelin-card__media {
+  background:
+    radial-gradient(ellipse at 50% 72%, rgb(var(--cinelin-entry-background) / 0.42), rgb(var(--cinelin-entry-screen-deep) / 0) 34%),
+    radial-gradient(circle at 50% 46%, rgb(var(--cinelin-entry-screen) / 0.88), rgb(var(--cinelin-entry-screen-deep)) 78%);
+  border-block-end: 0.1rem solid rgb(var(--cinelin-entry-frame) / 0.42);
+}
+
+.cinelin-card__media::after {
+  background: repeating-linear-gradient(
+    0deg,
+    rgb(var(--cinelin-entry-background) / 0.1) 0 0.1rem,
+    rgb(var(--cinelin-entry-gold) / 0) 0.1rem 0.42rem
+  );
+  content: "";
+  inset: 0;
+  opacity: 0.18;
+  pointer-events: none;
+  position: absolute;
+}
+
+.cinelin-card__ring::after {
+  background: rgb(var(--cinelin-entry-screen-deep));
+}
+
+.cinelin-card__body {
+  background: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-card__title {
+  font-family: var(--cinelin-font-heading);
+  font-size: 1.25rem;
+  font-weight: 400;
+}
+
+.cinelin-page__button {
+  background: rgb(var(--cinelin-entry-screen-deep));
+  border-color: rgb(var(--cinelin-entry-screen-deep));
+  border-radius: 0;
+  color: rgb(var(--cinelin-entry-gold));
+}
+
+.cinelin-page__button:hover,
+.cinelin-page__button:focus-visible {
+  background: rgb(var(--cinelin-entry-gold));
+  color: rgb(var(--cinelin-entry-background));
+}
+
+.cinelin-contact__field {
+  border-color: rgb(var(--cinelin-entry-frame) / 0.4);
+  border-radius: 0.4rem;
+}
+
+.cinelin-contact__field:focus-visible {
+  border-color: rgb(var(--cinelin-entry-gold));
+}
+
+.cinelin-product__back {
+  margin-block: 1.4rem 1rem;
+}
+
+.cinelin-product {
+  display: grid;
+  gap: 1.2rem;
+  padding-block: 1rem 3rem;
+}
+
+.cinelin-product__media,
+.cinelin-product__info {
+  min-width: 0;
+}
+
+.cinelin-product__media {
+  display: grid;
+  gap: 1rem;
+}
+
+.cinelin-product__stage {
+  --cinelin-model-scale: 1.28;
+  --cinelin-tilt-x: -10deg;
+  --cinelin-tilt-y: 0deg;
+  --cinelin-spin: 0deg;
+  background:
+    radial-gradient(ellipse at 50% 78%, rgb(var(--cinelin-entry-background) / 0.52), rgb(var(--cinelin-entry-screen-deep) / 0) 34%),
+    radial-gradient(circle at 50% 46%, rgb(var(--cinelin-entry-screen) / 0.9), rgb(var(--cinelin-entry-screen-deep)) 74%);
+  border: 0.1rem solid rgb(var(--cinelin-entry-frame) / 0.58);
+  border-radius: 0.8rem;
+  display: grid;
+  min-height: clamp(32rem, 70vw, 58rem);
+  overflow: hidden;
+  perspective: 100rem;
+  place-items: center;
+  position: relative;
+}
+
+.cinelin-product__stage::after {
+  background: repeating-linear-gradient(
+    0deg,
+    rgb(var(--cinelin-entry-background) / 0.1) 0 0.1rem,
+    rgb(var(--cinelin-entry-gold) / 0) 0.1rem 0.42rem
+  );
+  content: "";
+  inset: 0;
+  opacity: 0.18;
+  pointer-events: none;
+  position: absolute;
+}
+
+.cinelin-product__model-button {
+  align-items: center;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  cursor: grab;
+  display: flex;
+  font: inherit;
+  inset: 0;
+  justify-content: center;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.cinelin-product__model-button:active {
+  cursor: grabbing;
+}
+
+.cinelin-product__model {
+  min-height: 19rem;
+  width: min(72vw, 42rem);
+}
+
+.cinelin-product__stage.is-pointer-active .cinelin-card__model {
+  transition: none;
+}
+
+.cinelin-product__stage-note {
+  align-self: end;
+  color: rgb(var(--cinelin-entry-gold) / 0.72);
+  font-size: 0.95rem;
+  font-weight: 700;
+  justify-self: center;
+  margin: 0;
+  padding: 0 1rem 1.1rem;
+  position: relative;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.cinelin-product__gallery {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cinelin-product__thumb {
+  appearance: none;
+  background: rgb(var(--cinelin-home-panel));
+  border: 0.1rem solid rgb(var(--cinelin-entry-frame) / 0.42);
+  border-radius: 0.7rem;
+  cursor: pointer;
+  min-height: 13rem;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.cinelin-product__thumb.is-active,
+.cinelin-product__thumb:hover,
+.cinelin-product__thumb:focus-visible {
+  border-color: rgb(var(--cinelin-entry-gold));
+}
+
+.cinelin-product__thumb img,
+.cinelin-product__thumb-fallback {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cinelin-product__thumb-fallback {
+  background:
+    radial-gradient(circle at 50% 48%, rgb(var(--cinelin-entry-gold) / 0.34), rgb(var(--cinelin-entry-screen) / 0) 22%),
+    radial-gradient(circle at 50% 50%, rgb(var(--cinelin-entry-screen) / 0.86), rgb(var(--cinelin-entry-screen-deep)));
+}
+
+.cinelin-product__thumb-fallback--2 {
+  background:
+    linear-gradient(140deg, rgb(var(--cinelin-home-panel) / 0.24), rgb(var(--cinelin-entry-gold) / 0.2), rgb(var(--cinelin-entry-screen) / 0.6)),
+    rgb(var(--cinelin-entry-screen-deep));
+}
+
+.cinelin-product__thumb-fallback--3 {
+  background:
+    repeating-linear-gradient(118deg, rgb(var(--cinelin-entry-gold) / 0.38) 0 0.4rem, rgb(var(--cinelin-entry-screen) / 0.62) 0.4rem 0.9rem),
+    rgb(var(--cinelin-entry-screen-deep));
+}
+
+.cinelin-product__thumb-fallback--4 {
+  background:
+    radial-gradient(circle at 28% 32%, rgb(var(--cinelin-home-pearl) / 0.66), rgb(var(--cinelin-home-pearl) / 0) 18%),
+    radial-gradient(circle at 68% 58%, rgb(var(--cinelin-home-pink) / 0.42), rgb(var(--cinelin-home-pink) / 0) 24%),
+    rgb(var(--cinelin-entry-screen-deep));
+}
+
+.cinelin-product__info {
+  align-content: start;
+  background: rgb(var(--cinelin-home-panel));
+  border: 0.1rem solid rgb(var(--cinelin-entry-frame) / 0.38);
+  border-radius: 0.8rem;
+  display: grid;
+  gap: 1.4rem;
+  padding: 1.4rem;
+}
+
+.cinelin-product__title {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-font-heading);
+  font-size: clamp(4.6rem, 18vw, 8.6rem);
+  font-weight: 400;
+  line-height: 0.88;
+  margin: 0;
+  overflow-wrap: anywhere;
+  text-transform: uppercase;
+}
+
+.cinelin-product__price .price {
+  color: rgb(var(--cinelin-entry-screen));
+  font-family: var(--cinelin-home-font);
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.cinelin-product__description {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1.2rem;
+  line-height: 1.55;
+  margin: 0;
+}
+
+.cinelin-product__form,
+.cinelin-product__buttons {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.cinelin-product__label {
+  color: rgb(var(--cinelin-entry-screen) / 0.82);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cinelin-product__select,
+.cinelin-product__quantity {
+  background: rgb(var(--cinelin-home-panel));
+  border: 0.1rem solid rgb(var(--cinelin-entry-frame) / 0.45);
+  border-radius: 0.4rem;
+  color: rgb(var(--cinelin-home-ink));
+  font: inherit;
+  min-height: 4.4rem;
+  padding: 0.9rem 1rem;
+  width: 100%;
+}
+
+.cinelin-product__submit,
+.cinelin-product .shopify-payment-button__button {
+  min-height: 4.8rem;
+  width: 100%;
+}
+
+.cinelin-product .shopify-payment-button__button {
+  background: rgb(var(--cinelin-entry-gold)) !important;
+  border: 0.1rem solid rgb(var(--cinelin-entry-gold)) !important;
+  border-radius: 0 !important;
+  color: rgb(var(--cinelin-entry-background)) !important;
+  font-family: var(--cinelin-home-font) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+}
+
+.cinelin-product__details {
+  border-block-start: 0.1rem solid rgb(var(--cinelin-entry-frame) / 0.34);
+  display: grid;
+}
+
+.cinelin-product__details details {
+  border-block-end: 0.1rem solid rgb(var(--cinelin-entry-frame) / 0.24);
+  padding-block: 1rem;
+}
+
+.cinelin-product__details summary {
+  color: rgb(var(--cinelin-home-ink));
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cinelin-product__details p {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1.05rem;
+  line-height: 1.5;
+  margin: 0.7rem 0 0;
+}
+
+.cinelin-product__error {
+  color: rgb(var(--cinelin-entry-screen));
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+.cinelin-product__related {
+  padding-block: 1rem 0;
+}
+
+@media screen and (min-width: 750px) {
+  .cinelin-product {
+    gap: 1.4rem;
+    grid-template-columns: minmax(0, 1.15fr) minmax(30rem, 0.85fr);
+  }
+
+  .cinelin-product__gallery {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .cinelin-product__info {
+    padding: 1.8rem;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .cinelin-product {
+    align-items: start;
+    grid-template-columns: minmax(0, 1.2fr) minmax(34rem, 0.8fr);
+  }
+
+  .cinelin-product__info {
+    position: sticky;
+    top: 7.4rem;
+  }
+
+  .cinelin-product__stage {
+    --cinelin-model-scale: 1.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinelin-product__stage,
+  .cinelin-product__model {
     animation: none;
     transition: none;
   }

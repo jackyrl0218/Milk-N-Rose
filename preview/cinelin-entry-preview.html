@@ -3,16 +3,15 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cinelin Entry Splash Preview</title>
+    <title>ELDRA Entry Splash Preview</title>
     <link rel="stylesheet" href="../assets/cinelin-tokens.css">
     <link rel="stylesheet" href="../assets/cinelin-entry.css">
     <script>
       document.cookie = "cinelin_entry_preview_bypass=; Max-Age=0; Path=/; SameSite=Lax";
     </script>
     <style>
-      body {
-        margin: 0;
-      }
+      html { font-size: 62.5%; }
+      body { margin: 0; }
 
       .visually-hidden {
         clip: rect(0 0 0 0);
@@ -22,6 +21,37 @@
         position: absolute;
         white-space: nowrap;
         width: 1px;
+      }
+
+      .entry-preview-media {
+        display: block;
+        height: 100%;
+        width: 100%;
+      }
+
+      .entry-preview-media--1 {
+        background:
+          linear-gradient(90deg, transparent 0 22%, #3d210d 22% 31%, #b77725 31% 39%, transparent 39% 63%, #3d210d 63% 72%, #b77725 72% 80%, transparent 80%),
+          #e8d6b6;
+      }
+
+      .entry-preview-media--2 {
+        background:
+          radial-gradient(circle at 66% 38%, #f1ddae 0 8%, transparent 9%),
+          linear-gradient(138deg, #17100e, #965e49 48%, #170807);
+      }
+
+      .entry-preview-media--3 {
+        background:
+          repeating-linear-gradient(112deg, #f1e9dc 0 12px, #c9a978 12px 20px, #40241d 20px 24px),
+          #efe4d1;
+      }
+
+      .entry-preview-media--4 {
+        background:
+          radial-gradient(circle at 38% 44%, #f0d59a 0 10%, transparent 11%),
+          radial-gradient(circle at 65% 56%, #963f35 0 16%, transparent 17%),
+          #1d0909;
       }
     </style>
     <script src="../assets/cinelin-entry.js" defer></script>
@@ -34,29 +64,25 @@
       data-live-duration="3000"
       data-gap-duration="250"
       data-cookie-name="cinelin_entry_preview_bypass"
-      style="--cinelin-entry-columns: 5; --cinelin-entry-rows: 4; --cinelin-entry-frame-live: 3000ms; --cinelin-entry-gap: 250ms;"
+      style="--cinelin-entry-columns: 3; --cinelin-entry-rows: 3; --cinelin-entry-frame-live: 3000ms; --cinelin-entry-gap: 250ms;"
     >
       <div class="cinelin-entry__wall" aria-hidden="true">
         <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 1;"><span class="cinelin-entry__placeholder"></span></div>
         <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 2;"><span class="cinelin-entry__placeholder"></span></div>
         <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 3;"><span class="cinelin-entry__placeholder"></span></div>
         <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 4;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 5;"><span class="cinelin-entry__placeholder"></span></div>
+        <div class="cinelin-entry__frame cinelin-entry__frame--center" style="--cinelin-frame-index: 5;"><span class="cinelin-entry__placeholder"></span></div>
         <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 6;"><span class="cinelin-entry__placeholder"></span></div>
         <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 7;"><span class="cinelin-entry__placeholder"></span></div>
         <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 8;"><span class="cinelin-entry__placeholder"></span></div>
         <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 9;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 10;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 11;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 12;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 13;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 14;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 15;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 16;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 17;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 18;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 19;"><span class="cinelin-entry__placeholder"></span></div>
-        <div class="cinelin-entry__frame" data-entry-frame style="--cinelin-frame-index: 20;"><span class="cinelin-entry__placeholder"></span></div>
+      </div>
+
+      <div class="cinelin-entry__media-pool" data-entry-media-pool hidden>
+        <template data-entry-media-template><span class="entry-preview-media entry-preview-media--1"></span></template>
+        <template data-entry-media-template><span class="entry-preview-media entry-preview-media--2"></span></template>
+        <template data-entry-media-template><span class="entry-preview-media entry-preview-media--3"></span></template>
+        <template data-entry-media-template><span class="entry-preview-media entry-preview-media--4"></span></template>
       </div>
 
       <div class="cinelin-entry__scanlines" aria-hidden="true"></div>
@@ -64,8 +90,7 @@
 
       <div class="cinelin-entry__content">
         <form class="cinelin-entry__form" data-entry-form>
-          <h2 class="cinelin-entry__headline" id="CinelinEntryHeading-preview">CINELIN</h2>
-          <p class="cinelin-entry__copy">Handcrafted in small batches. Each piece exists between sculpture and machine.</p>
+          <h2 class="cinelin-entry__headline" id="CinelinEntryHeading-preview">ELDRA</h2>
 
           <div class="cinelin-entry__field">
             <label class="visually-hidden" for="CinelinEntryEmail-preview">Email address</label>
@@ -75,13 +100,14 @@
               type="email"
               name="email"
               autocomplete="email"
-              placeholder="Email address"
+              placeholder="Email"
               required
               data-entry-email
             >
           </div>
 
           <button class="cinelin-entry__button" type="submit">Join</button>
+          <p class="cinelin-entry__note">For VIP events, secret sales &amp; birthday gifts.</p>
           <p class="cinelin-entry__success" role="status" data-entry-success hidden></p>
         </form>
 
@@ -89,7 +115,7 @@
           <button class="cinelin-entry__control" type="button" data-entry-mute aria-pressed="false">
             <span data-entry-mute-label>Sound on</span>
           </button>
-          <button class="cinelin-entry__control" type="button" data-entry-skip>skip</button>
+          <button class="cinelin-entry__control" type="button" data-entry-skip>Continue as guest</button>
         </div>
       </div>
     </section>

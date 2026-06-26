@@ -6,6 +6,7 @@
     constructor(root) {
       this.root = root;
       this.frames = Array.from(root.querySelectorAll('[data-entry-frame]'));
+      this.mediaTemplates = Array.from(root.querySelectorAll('[data-entry-media-template]'));
       this.form = root.querySelector('[data-entry-form]');
       this.emailInput = root.querySelector('[data-entry-email]');
       this.success = root.querySelector('[data-entry-success]');
@@ -19,6 +20,7 @@
       this.designMode = Boolean(window.Shopify && window.Shopify.designMode);
       this.timer = null;
       this.currentFrame = null;
+      this.currentMediaIndex = -1;
       this.audioContext = null;
       this.audioReady = false;
       this.muted = this.reducedMotion;
@@ -70,7 +72,16 @@
 
       const availableFrames = this.frames.filter((frame) => frame !== this.currentFrame);
       const nextFrame = availableFrames[Math.floor(Math.random() * availableFrames.length)] || this.frames[0];
+      const availableMediaIndexes = this.mediaTemplates
+        .map((_, index) => index)
+        .filter((index) => index !== this.currentMediaIndex);
+      const nextMediaIndex = availableMediaIndexes.length
+        ? availableMediaIndexes[Math.floor(Math.random() * availableMediaIndexes.length)]
+        : 0;
+
       this.currentFrame = nextFrame;
+      this.currentMediaIndex = nextMediaIndex;
+      this.renderMediaInFrame(nextFrame, nextMediaIndex);
 
       this.timer = window.setTimeout(() => {
         nextFrame.classList.add('is-live');
@@ -93,6 +104,24 @@
         video.pause();
         video.currentTime = 0;
       }
+      this.renderPlaceholder(this.currentFrame);
+    }
+
+    renderMediaInFrame(frame, mediaIndex) {
+      const template = this.mediaTemplates[mediaIndex];
+      if (!template?.content) {
+        this.renderPlaceholder(frame);
+        return;
+      }
+
+      frame.replaceChildren(template.content.cloneNode(true));
+    }
+
+    renderPlaceholder(frame) {
+      if (!frame) return;
+      const placeholder = document.createElement('span');
+      placeholder.className = 'cinelin-entry__placeholder';
+      frame.replaceChildren(placeholder);
     }
 
     playFrameVideo(frame) {
@@ -105,7 +134,8 @@
     }
 
     renderReducedMotionFallback() {
-      this.frames.slice(0, 3).forEach((frame) => {
+      this.frames.slice(0, 3).forEach((frame, index) => {
+        this.renderMediaInFrame(frame, index % Math.max(this.mediaTemplates.length, 1));
         frame.classList.add('is-live');
         const video = frame.querySelector('video');
         if (video) {

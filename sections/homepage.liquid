@@ -118,7 +118,7 @@
                 assign item_label = linked_product.title
               endif
               if item_label == blank
-              assign item_label = 'Milk & Rose piece'
+              assign item_label = 'X piece'
               endif
             -%}
             <article
@@ -144,15 +144,15 @@
             class="homepage__model homepage__model--style-{{ placeholder_index }}"
             style="--homepage-model-index: {{ forloop.index0 }};"
           >
-            <button class="homepage__model-button" type="button" aria-label="Spin Milk &amp; Rose piece 3D model">
+            <button class="homepage__model-button" type="button" aria-label="Spin X piece 3D model">
               <span class="homepage__model-object" aria-hidden="true">
                 <span class="homepage__model-gem"></span>
                 <span class="homepage__model-ring"></span>
                 <span class="homepage__model-stone"></span>
               </span>
             </button>
-            <a class="homepage__model-label" href="{{ routes.all_products_collection_url }}" data-label="Milk &amp; Rose piece">
-              <span class="homepage__model-label-text">Milk &amp; Rose piece</span>
+            <a class="homepage__model-label" href="{{ routes.all_products_collection_url }}" data-label="X piece">
+              <span class="homepage__model-label-text">X piece</span>
             </a>
           </article>
           {%- endfor -%}
@@ -299,7 +299,7 @@
       "type": "text",
       "id": "brand_name",
       "label": "Brand name",
-      "default": "MILK & ROSE"
+      "default": "X"
     },
     {
       "type": "textarea",
@@ -340,7 +340,7 @@
       "type": "text",
       "id": "orbit_label",
       "label": "Orbit accessibility label",
-      "default": "Interactive Milk & Rose product model orbit"
+      "default": "Interactive X product model orbit"
     },
     {
       "type": "checkbox",
@@ -416,7 +416,7 @@
           "type": "text",
           "id": "label",
           "label": "Label",
-          "default": "Milk & Rose piece"
+          "default": "X piece"
         },
         {
           "type": "select",
