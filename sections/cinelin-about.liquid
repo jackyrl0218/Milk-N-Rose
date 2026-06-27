@@ -5,13 +5,27 @@
 <section class="cinelin-page cinelin-page--about" data-cinelin-page>
   <div class="cinelin-page__shell">
     <nav class="cinelin-page__topline" aria-label="Page navigation">
-      <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
-        <span class="visually-hidden">Open menu</span>
-        {{ 'icon-hamburger.svg' | inline_asset_content }}
-      </button>
+      <div class="cinelin-page__left-actions">
+        <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
+          <span class="visually-hidden">Open menu</span>
+          {{ 'icon-hamburger.svg' | inline_asset_content }}
+        </button>
+      </div>
+      <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+        <a href="{{ routes.all_products_collection_url }}">Maker</a>
+        <a href="{{ routes.all_products_collection_url }}">Collection</a>
+        <a href="/pages/about">About</a>
+        <a href="/pages/contact">Contact</a>
+      </nav>
       <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}">X</a>
       <div class="cinelin-page__actions">
-        <span class="cinelin-page__topline-meta">About</span>
+        <a class="cinelin-page__utility-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="cinelin-page__icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+        <a class="cinelin-page__icon-button" href="{{ routes.cart_url }}" aria-label="Cart">
+          {{ 'icon-cart.svg' | inline_asset_content }}
+        </a>
       </div>
       <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
         <div class="cinelin-page__menu-nav">
@@ -19,13 +33,14 @@
           <a href="{{ routes.all_products_collection_url }}">Maker</a>
           <a href="{{ routes.all_products_collection_url }}">Collection</a>
           <a href="/pages/about">About</a>
-          <a href="{{ routes.cart_url }}">Cart</a>
           <a href="/pages/contact">Contact</a>
+          <a href="{{ routes.account_url }}">Sign in</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
         </div>
       </div>
     </nav>
 
-    <header class="cinelin-page__hero">
+    <header class="cinelin-page__hero cinelin-page__retail-hero">
       <div>
         <p class="cinelin-page__kicker">{{ section.settings.kicker | escape }}</p>
         <h1 class="cinelin-page__title">{{ section.settings.title | escape }}</h1>
@@ -36,7 +51,7 @@
       </div>
     </header>
 
-    <div class="cinelin-story">
+    <div class="cinelin-story cinelin-retail-grid">
       <article class="cinelin-story__panel">
         <p class="cinelin-page__eyebrow">{{ section.settings.panel_one_kicker | escape }}</p>
         <h2 class="cinelin-story__title">{{ section.settings.panel_one_title | escape }}</h2>

@@ -5,13 +5,27 @@
 <section class="cinelin-page cinelin-page--collection" data-cinelin-page>
   <div class="cinelin-page__shell">
     <nav class="cinelin-page__topline" aria-label="Page navigation">
-      <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
-        <span class="visually-hidden">Open menu</span>
-        {{ 'icon-hamburger.svg' | inline_asset_content }}
-      </button>
+      <div class="cinelin-page__left-actions">
+        <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
+          <span class="visually-hidden">Open menu</span>
+          {{ 'icon-hamburger.svg' | inline_asset_content }}
+        </button>
+      </div>
+      <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+        <a href="{{ routes.all_products_collection_url }}">Maker</a>
+        <a href="{{ routes.all_products_collection_url }}">Collection</a>
+        <a href="/pages/about">About</a>
+        <a href="/pages/contact">Contact</a>
+      </nav>
       <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}">X</a>
       <div class="cinelin-page__actions">
-        <span class="cinelin-page__topline-meta">Collection</span>
+        <a class="cinelin-page__utility-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="cinelin-page__icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+        <a class="cinelin-page__icon-button" href="{{ routes.cart_url }}" aria-label="Cart">
+          {{ 'icon-cart.svg' | inline_asset_content }}
+        </a>
       </div>
       <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
         <div class="cinelin-page__menu-nav">
@@ -19,81 +33,68 @@
           <a href="{{ routes.all_products_collection_url }}">Maker</a>
           <a href="{{ routes.all_products_collection_url }}">Collection</a>
           <a href="/pages/about">About</a>
-          <a href="{{ routes.cart_url }}">Cart</a>
           <a href="/pages/contact">Contact</a>
+          <a href="{{ routes.account_url }}">Sign in</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
         </div>
       </div>
     </nav>
 
-    <header class="cinelin-page__hero">
-      <div>
+    <header class="cinelin-collection-hero">
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 2400 | image_tag: class: 'cinelin-collection-hero__image', loading: 'eager', alt: section.settings.hero_alt }}
+      {%- elsif collection.image != blank -%}
+        {{ collection.image | image_url: width: 2400 | image_tag: class: 'cinelin-collection-hero__image', loading: 'eager', alt: collection.title }}
+      {%- else -%}
+        <img class="cinelin-collection-hero__image" src="{{ 'cinelin-collection-hero.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}" loading="eager">
+      {%- endif -%}
+      <div class="cinelin-collection-hero__content">
         <p class="cinelin-page__kicker">{{ section.settings.kicker | escape }}</p>
-        <h1 class="cinelin-page__title">
+        <h1 class="cinelin-collection-hero__title">
           {%- if collection.title != blank -%}
             {{ collection.title | escape }}
           {%- else -%}
             {{ section.settings.title | escape }}
           {%- endif -%}
         </h1>
-      </div>
-      <div>
-        <p class="cinelin-page__intro">{{ section.settings.intro | escape }}</p>
-        <p class="cinelin-page__copy">
-          {%- if collection.description != blank -%}
-            {{ collection.description | strip_html }}
-          {%- else -%}
-            {{ section.settings.copy | escape }}
-          {%- endif -%}
-        </p>
+        <a class="cinelin-collection-hero__link" href="#CollectionProducts-{{ section.id }}">{{ section.settings.hero_link_label | escape }}</a>
       </div>
     </header>
 
-    <div class="cinelin-story">
-      <div class="cinelin-story__panel">
-        <p class="cinelin-page__eyebrow">{{ section.settings.story_kicker | escape }}</p>
-        <h2 class="cinelin-story__title">{{ section.settings.story_title | escape }}</h2>
-      </div>
-      <p class="cinelin-page__copy">{{ section.settings.story_copy | escape }}</p>
+    <div class="cinelin-collection-intro">
+      <h2 id="CollectionProducts-{{ section.id }}">{{ section.settings.grid_heading | escape }}</h2>
+      <p>
+        {%- if collection.description != blank -%}
+          {{ collection.description | strip_html }}
+        {%- else -%}
+          {{ section.settings.copy | escape }}
+        {%- endif -%}
+      </p>
     </div>
 
-    <div class="cinelin-page__toolbar">
-      <span>{{ section.settings.grid_label | escape }}</span>
-      <span>4 per row</span>
-    </div>
-
-    <div class="cinelin-page__grid" aria-label="{{ section.settings.grid_label | escape }}" data-cinelin-product-grid>
+    <div class="cinelin-collection-grid" aria-label="{{ section.settings.grid_label | escape }}">
       {%- paginate collection.products by section.settings.products_per_page -%}
         {%- if collection.products.size > 0 -%}
           {%- for product in collection.products -%}
-            <article class="cinelin-card" data-cinelin-model-card>
-              <button class="cinelin-card__media" type="button" aria-label="Spin {{ product.title | escape }} 3D model" data-cinelin-model-button>
-                <span class="cinelin-card__model">
-                  <span class="cinelin-card__gem"></span>
-                  <span class="cinelin-card__ring"></span>
-                  <span class="cinelin-card__stone"></span>
-                  <span class="cinelin-card__shadow"></span>
-                </span>
-              </button>
-              <a class="cinelin-card__body" href="{{ product.url }}">
-                <span class="cinelin-card__title">{{ product.title | escape }}</span>
-                <span class="cinelin-card__price">{{ product.price | money }}</span>
+            <article class="cinelin-collection-card">
+              <a href="{{ product.url }}">
+                {%- if product.featured_image != blank -%}
+                  {{ product.featured_image | image_url: width: 900 | image_tag: class: 'cinelin-collection-card__image', loading: 'lazy', alt: product.title }}
+                {%- else -%}
+                  <span class="cinelin-collection-card__media cinelin-collection-card__media--pearl"></span>
+                {%- endif -%}
+                <span class="cinelin-collection-card__title">{{ product.title | escape }}</span>
+                <span class="cinelin-collection-card__price">{{ product.price | money }}</span>
               </a>
             </article>
           {%- endfor -%}
         {%- else -%}
           {%- for index in (1..8) -%}
-            <article class="cinelin-card" data-cinelin-model-card>
-              <button class="cinelin-card__media" type="button" aria-label="Spin collection piece {{ index }} 3D model" data-cinelin-model-button>
-                <span class="cinelin-card__model">
-                  <span class="cinelin-card__gem"></span>
-                  <span class="cinelin-card__ring"></span>
-                  <span class="cinelin-card__stone"></span>
-                  <span class="cinelin-card__shadow"></span>
-                </span>
-              </button>
-              <a class="cinelin-card__body" href="{{ routes.all_products_collection_url }}">
-                <span class="cinelin-card__title">Collection piece {{ index }}</span>
-                <span class="cinelin-card__price">Coming soon</span>
+            <article class="cinelin-collection-card">
+              <a href="{{ routes.all_products_collection_url }}">
+                <span class="cinelin-collection-card__media cinelin-collection-card__media--{% cycle 'pearl', 'green', 'rose', 'gold', 'silver' %}"></span>
+                <span class="cinelin-collection-card__title">Collection piece {{ index }}</span>
+                <span class="cinelin-collection-card__price">Coming soon</span>
               </a>
             </article>
           {%- endfor -%}
@@ -117,37 +118,36 @@
       "type": "text",
       "id": "title",
       "label": "Fallback title",
-      "default": "Objects in orbit"
-    },
-    {
-      "type": "text",
-      "id": "intro",
-      "label": "Intro",
-      "default": "A quiet room for pieces with presence."
+      "default": "Browse our latest pieces"
     },
     {
       "type": "textarea",
       "id": "copy",
       "label": "Fallback copy",
-      "default": "Handmade jewelry arranged as a visual story. Each piece is meant to feel considered, collectible, and easy to explore."
+      "default": "Handmade jewelry arranged in a clean catalog rhythm. The hero carries the mood, and the product area stays simple."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
     },
     {
       "type": "text",
-      "id": "story_kicker",
-      "label": "Story kicker",
-      "default": "Between-collection navigation"
+      "id": "hero_alt",
+      "label": "Hero image alt text",
+      "default": "Abstract illustrated landscape for the X collection"
     },
     {
       "type": "text",
-      "id": "story_title",
-      "label": "Story title",
-      "default": "Move through material, mood, and form."
+      "id": "hero_link_label",
+      "label": "Hero link label",
+      "default": "Shop all"
     },
     {
-      "type": "textarea",
-      "id": "story_copy",
-      "label": "Story copy",
-      "default": "The collection page keeps the shop simple while still feeling like a gallery. Product cards stay calm, readable, and image-led."
+      "type": "text",
+      "id": "grid_heading",
+      "label": "Grid heading",
+      "default": "Products"
     },
     {
       "type": "text",

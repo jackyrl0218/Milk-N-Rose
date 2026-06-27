@@ -16,59 +16,64 @@
     <section class="cinelin-page cinelin-page--collection" data-cinelin-page>
       <div class="cinelin-page__shell">
         <nav class="cinelin-page__topline" aria-label="Page navigation">
-          <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-preview" aria-expanded="false">
-            <span class="visually-hidden">Open menu</span>
-            <svg viewBox="0 0 18 16" aria-hidden="true"><path fill="currentColor" d="M1 3h16v2H1zm0 4h16v2H1zm0 4h16v2H1z"/></svg>
-          </button>
+          <div class="cinelin-page__left-actions">
+            <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-preview" aria-expanded="false">
+              <span class="visually-hidden">Open menu</span>
+              <svg viewBox="0 0 18 16" aria-hidden="true"><path fill="currentColor" d="M1 3h16v2H1zm0 4h16v2H1zm0 4h16v2H1z"/></svg>
+            </button>
+          </div>
+          <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+            <a href="about-preview.html">Maker</a>
+            <a href="collection-preview.html">Collection</a>
+            <a href="about-preview.html">About</a>
+            <a href="contact-preview.html">Contact</a>
+          </nav>
           <a class="cinelin-page__topline-brand" href="homepage-preview.html">X</a>
           <div class="cinelin-page__actions">
-            <span class="cinelin-page__topline-meta">Collection</span>
+            <a class="cinelin-page__utility-link" href="collection-preview.html">Shop</a>
+            <a class="cinelin-page__icon-button" href="sign-in-preview.html" aria-label="Account">
+              <svg viewBox="0 0 18 19" aria-hidden="true"><path fill="currentColor" d="M9 .5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 10c5.7 0 8.5 1.6 8.5 7.5v.5H.5V18c0-5.9 2.8-7.5 8.5-7.5Z"/></svg>
+            </a>
+            <a class="cinelin-page__icon-button" href="cart-preview.html" aria-label="Cart">
+              <svg class="icon-cart" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20.5 6.5a4.75 4.75 0 0 0-4.75 4.75v.56h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.77-11.6h-3.16v-.57A4.75 4.75 0 0 0 20.5 6.5Z"/></svg>
+            </a>
           </div>
           <div class="cinelin-page__menu-list" id="CinelinPageMenu-preview" data-cinelin-menu>
             <div class="cinelin-page__menu-nav">
               <a href="homepage-preview.html">Home</a>
-              <a href="#">Maker</a>
+              <a href="about-preview.html">Maker</a>
               <a href="collection-preview.html">Collection</a>
               <a href="about-preview.html">About</a>
-              <a href="#">Cart</a>
               <a href="contact-preview.html">Contact</a>
+              <a href="sign-in-preview.html">Sign in</a>
+              <a href="cart-preview.html">Cart</a>
             </div>
           </div>
         </nav>
 
-        <header class="cinelin-page__hero">
-          <div>
+        <header class="cinelin-collection-hero">
+          <img class="cinelin-collection-hero__image" src="../assets/cinelin-collection-hero.jpg" alt="Abstract illustrated landscape for the X collection">
+          <div class="cinelin-collection-hero__content">
             <p class="cinelin-page__kicker">Collection</p>
-            <h1 class="cinelin-page__title">Objects in orbit</h1>
-          </div>
-          <div>
-            <p class="cinelin-page__intro">A quiet room for pieces with presence.</p>
-            <p class="cinelin-page__copy">Handmade jewelry arranged as a visual story. Each piece is meant to feel considered, collectible, and easy to explore.</p>
+            <h1 class="cinelin-collection-hero__title">Browse our latest pieces</h1>
+            <a class="cinelin-collection-hero__link" href="#CollectionProducts-preview">Shop all</a>
           </div>
         </header>
 
-        <div class="cinelin-story">
-          <div class="cinelin-story__panel">
-            <p class="cinelin-page__eyebrow">Between-collection navigation</p>
-            <h2 class="cinelin-story__title">Move through material, mood, and form.</h2>
-          </div>
-          <p class="cinelin-page__copy">The collection page keeps the shop simple while still feeling like a gallery. Product cards stay calm, readable, and image-led.</p>
+        <div class="cinelin-collection-intro">
+          <h2 id="CollectionProducts-preview">Products</h2>
+          <p>Handmade jewelry arranged in a clean catalog rhythm. The hero carries the mood, and the product area stays simple.</p>
         </div>
 
-        <div class="cinelin-page__toolbar">
-          <span>Collection products</span>
-          <span>4 per row</span>
-        </div>
-
-        <div class="cinelin-page__grid" aria-label="Collection products" data-cinelin-product-grid>
-          <article class="cinelin-card" data-cinelin-model-card><button class="cinelin-card__media" type="button" aria-label="Spin Pearl loop 3D model" data-cinelin-model-button><span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span></button><a class="cinelin-card__body" href="product-preview.html"><span class="cinelin-card__title">Pearl loop</span><span class="cinelin-card__price">$88</span></a></article>
-          <article class="cinelin-card" data-cinelin-model-card><button class="cinelin-card__media" type="button" aria-label="Spin Green drop 3D model" data-cinelin-model-button><span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span></button><a class="cinelin-card__body" href="product-preview.html"><span class="cinelin-card__title">Green drop</span><span class="cinelin-card__price">$92</span></a></article>
-          <article class="cinelin-card" data-cinelin-model-card><button class="cinelin-card__media" type="button" aria-label="Spin Rose charm 3D model" data-cinelin-model-button><span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span></button><a class="cinelin-card__body" href="product-preview.html"><span class="cinelin-card__title">Rose charm</span><span class="cinelin-card__price">$76</span></a></article>
-          <article class="cinelin-card" data-cinelin-model-card><button class="cinelin-card__media" type="button" aria-label="Spin Gold orbit 3D model" data-cinelin-model-button><span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span></button><a class="cinelin-card__body" href="product-preview.html"><span class="cinelin-card__title">Gold orbit</span><span class="cinelin-card__price">$104</span></a></article>
-          <article class="cinelin-card" data-cinelin-model-card><button class="cinelin-card__media" type="button" aria-label="Spin Silver charm 3D model" data-cinelin-model-button><span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span></button><a class="cinelin-card__body" href="product-preview.html"><span class="cinelin-card__title">Silver charm</span><span class="cinelin-card__price">$84</span></a></article>
-          <article class="cinelin-card" data-cinelin-model-card><button class="cinelin-card__media" type="button" aria-label="Spin Tiny pearl 3D model" data-cinelin-model-button><span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span></button><a class="cinelin-card__body" href="product-preview.html"><span class="cinelin-card__title">Tiny pearl</span><span class="cinelin-card__price">$64</span></a></article>
-          <article class="cinelin-card" data-cinelin-model-card><button class="cinelin-card__media" type="button" aria-label="Spin Mint ring 3D model" data-cinelin-model-button><span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span></button><a class="cinelin-card__body" href="product-preview.html"><span class="cinelin-card__title">Mint ring</span><span class="cinelin-card__price">$98</span></a></article>
-          <article class="cinelin-card" data-cinelin-model-card><button class="cinelin-card__media" type="button" aria-label="Spin Oval gold 3D model" data-cinelin-model-button><span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span></button><a class="cinelin-card__body" href="product-preview.html"><span class="cinelin-card__title">Oval gold</span><span class="cinelin-card__price">$118</span></a></article>
+        <div class="cinelin-collection-grid" aria-label="Collection products">
+          <article class="cinelin-collection-card"><a href="product-preview.html"><span class="cinelin-collection-card__media cinelin-collection-card__media--pearl"></span><span class="cinelin-collection-card__title">Pearl loop</span><span class="cinelin-collection-card__price">$88</span></a></article>
+          <article class="cinelin-collection-card"><a href="product-preview.html"><span class="cinelin-collection-card__media cinelin-collection-card__media--green"></span><span class="cinelin-collection-card__title">Green drop</span><span class="cinelin-collection-card__price">$92</span></a></article>
+          <article class="cinelin-collection-card"><a href="product-preview.html"><span class="cinelin-collection-card__media cinelin-collection-card__media--rose"></span><span class="cinelin-collection-card__title">Rose charm</span><span class="cinelin-collection-card__price">$76</span></a></article>
+          <article class="cinelin-collection-card"><a href="product-preview.html"><span class="cinelin-collection-card__media cinelin-collection-card__media--gold"></span><span class="cinelin-collection-card__title">Gold orbit</span><span class="cinelin-collection-card__price">$104</span></a></article>
+          <article class="cinelin-collection-card"><a href="product-preview.html"><span class="cinelin-collection-card__media cinelin-collection-card__media--silver"></span><span class="cinelin-collection-card__title">Silver charm</span><span class="cinelin-collection-card__price">$84</span></a></article>
+          <article class="cinelin-collection-card"><a href="product-preview.html"><span class="cinelin-collection-card__media cinelin-collection-card__media--pearl"></span><span class="cinelin-collection-card__title">Tiny pearl</span><span class="cinelin-collection-card__price">$64</span></a></article>
+          <article class="cinelin-collection-card"><a href="product-preview.html"><span class="cinelin-collection-card__media cinelin-collection-card__media--green"></span><span class="cinelin-collection-card__title">Mint ring</span><span class="cinelin-collection-card__price">$98</span></a></article>
+          <article class="cinelin-collection-card"><a href="product-preview.html"><span class="cinelin-collection-card__media cinelin-collection-card__media--gold"></span><span class="cinelin-collection-card__title">Oval gold</span><span class="cinelin-collection-card__price">$118</span></a></article>
         </div>
       </div>
     </section>

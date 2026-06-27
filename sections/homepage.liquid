@@ -68,6 +68,8 @@
                 assign item_link = '/pages/about'
               elsif normalized_item_text == 'cart'
                 assign item_link = routes.cart_url
+              elsif normalized_item_text == 'sign in'
+                assign item_link = routes.account_url
               elsif normalized_item_text == 'contact'
                 assign item_link = '/pages/contact'
               endif
@@ -93,7 +95,9 @@
     </div>
 
     <div class="homepage__hero-copy">
-      <p class="homepage__hero-kicker">{{ section.settings.hero_kicker | escape }}</p>
+      {%- if section.settings.hero_kicker != blank -%}
+        <p class="homepage__hero-kicker">{{ section.settings.hero_kicker | escape }}</p>
+      {%- endif -%}
       <h1 class="homepage__hero-title">{{ section.settings.hero_title | escape }}</h1>
       <p class="homepage__hero-text">{{ section.settings.hero_copy | escape }}</p>
       <a class="homepage__hero-link" href="{{ routes.all_products_collection_url }}">{{ section.settings.hero_link_label | escape }}</a>
@@ -304,19 +308,19 @@
       "type": "textarea",
       "id": "menu_items",
       "label": "Menu items",
-      "default": "Home\nMaker\nCollection\nAbout\nCart\nContact"
+      "default": "Home\nMaker\nCollection\nAbout\nContact\nSign in\nCart"
     },
     {
       "type": "text",
       "id": "hero_kicker",
       "label": "Hero kicker",
-      "default": "New objects"
+      "default": ""
     },
     {
       "type": "text",
       "id": "hero_title",
       "label": "Hero title",
-      "default": "Jewelry in motion"
+      "default": "New available"
     },
     {
       "type": "textarea",

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>X About Preview</title>
+    <title>X Cart Preview</title>
     <link rel="stylesheet" href="../assets/cinelin-tokens.css">
     <link rel="stylesheet" href="../assets/cinelin-pages.css">
     <script src="../assets/cinelin-pages.js" defer></script>
@@ -13,7 +13,7 @@
     </style>
   </head>
   <body>
-    <section class="cinelin-page cinelin-page--about" data-cinelin-page>
+    <section class="cinelin-page cinelin-page--cart" data-cinelin-page>
       <div class="cinelin-page__shell">
         <nav class="cinelin-page__topline" aria-label="Page navigation">
           <div class="cinelin-page__left-actions">
@@ -53,26 +53,37 @@
 
         <header class="cinelin-page__hero cinelin-page__retail-hero">
           <div>
-            <p class="cinelin-page__kicker">About / Brand story</p>
-            <h1 class="cinelin-page__title">X</h1>
+            <p class="cinelin-page__kicker">Shopping bag</p>
+            <h1 class="cinelin-page__title">Cart</h1>
           </div>
           <div>
-            <p class="cinelin-page__intro">Jewelry made slowly, with a little tension between softness and shine.</p>
-            <p class="cinelin-page__copy">This page is a placeholder for the brand story while the final voice, photography, and maker details are still being prepared.</p>
+            <p class="cinelin-page__intro">A clear checkout step that keeps the product in focus.</p>
+            <p class="cinelin-page__copy">This is a layout draft. Shopify can connect the live cart line items and checkout behavior later.</p>
           </div>
         </header>
 
-        <div class="cinelin-story cinelin-retail-grid">
-          <article class="cinelin-story__panel">
-            <p class="cinelin-page__eyebrow">Material</p>
-            <h2 class="cinelin-story__title">Small objects, close attention.</h2>
-            <p class="cinelin-page__copy">The design system leaves room for real photos and final materials later. For now, the layout locks the mood: dark, minimal, crafted.</p>
+        <div class="cinelin-cart">
+          <article class="cinelin-cart__item">
+            <div class="cinelin-cart__media" aria-hidden="true"></div>
+            <div>
+              <p class="cinelin-page__eyebrow">Pearl loop</p>
+              <h2 class="cinelin-cart__title">$88</h2>
+              <p class="cinelin-cart__copy">Light gold quartz / One size</p>
+              <div class="cinelin-cart__line"><span>Quantity</span><span>1</span></div>
+              <div class="cinelin-cart__line"><span>Remove</span><span>Update</span></div>
+            </div>
           </article>
-          <article class="cinelin-story__panel">
-            <p class="cinelin-page__eyebrow">Feeling</p>
-            <h2 class="cinelin-story__title">Simple to use. Hard to forget.</h2>
-            <p class="cinelin-page__copy">The page keeps the brand premium without becoming loud: clear words, strong spacing, and a gallery-like rhythm.</p>
-          </article>
+
+          <aside class="cinelin-cart__summary" aria-label="Order summary">
+            <p class="cinelin-page__eyebrow">Summary</p>
+            <div class="cinelin-cart__line"><span>Subtotal</span><span>$88</span></div>
+            <div class="cinelin-cart__line"><span>Shipping</span><span>Calculated at checkout</span></div>
+            <div class="cinelin-cart__line"><span>Total</span><span>$88</span></div>
+            <div class="cinelin-cart__actions">
+              <button class="cinelin-page__button cinelin-cart__checkout" type="button">Checkout</button>
+              <a class="cinelin-page__button cinelin-page__button--secondary" href="collection-preview.html">Continue shopping</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>

@@ -24,13 +24,27 @@
 <section class="cinelin-page cinelin-page--product" data-cinelin-page>
   <div class="cinelin-page__shell">
     <nav class="cinelin-page__topline" aria-label="Page navigation">
-      <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
-        <span class="visually-hidden">Open menu</span>
-        {{ 'icon-hamburger.svg' | inline_asset_content }}
-      </button>
+      <div class="cinelin-page__left-actions">
+        <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
+          <span class="visually-hidden">Open menu</span>
+          {{ 'icon-hamburger.svg' | inline_asset_content }}
+        </button>
+      </div>
+      <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+        <a href="{{ routes.all_products_collection_url }}">Maker</a>
+        <a href="{{ routes.all_products_collection_url }}">Collection</a>
+        <a href="/pages/about">About</a>
+        <a href="/pages/contact">Contact</a>
+      </nav>
       <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}">X</a>
       <div class="cinelin-page__actions">
-        <span class="cinelin-page__topline-meta">Product</span>
+        <a class="cinelin-page__utility-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="cinelin-page__icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+        <a class="cinelin-page__icon-button" href="{{ routes.cart_url }}" aria-label="Cart">
+          {{ 'icon-cart.svg' | inline_asset_content }}
+        </a>
       </div>
       <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
         <div class="cinelin-page__menu-nav">
@@ -38,8 +52,9 @@
           <a href="{{ routes.all_products_collection_url }}">Maker</a>
           <a href="{{ routes.all_products_collection_url }}">Collection</a>
           <a href="/pages/about">About</a>
-          <a href="{{ routes.cart_url }}">Cart</a>
           <a href="/pages/contact">Contact</a>
+          <a href="{{ routes.account_url }}">Sign in</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
         </div>
       </div>
     </nav>
@@ -97,6 +112,20 @@
 
         <div class="cinelin-product__price" id="price-{{ section.id }}" role="status">
           {%- render 'price', product: product, use_variant: true, show_badges: true -%}
+        </div>
+
+        <div class="cinelin-product__options" aria-label="Product selections">
+          <div class="cinelin-product__option-row">
+            <span class="cinelin-product__option-label">{{ section.settings.color_label | escape }}</span>
+            <span class="cinelin-product__option-value">
+              <span class="cinelin-product__swatch" aria-hidden="true"></span>
+              {{ section.settings.color_value | escape }}
+            </span>
+          </div>
+          <div class="cinelin-product__option-row">
+            <span class="cinelin-product__option-label">{{ section.settings.size_label | escape }}</span>
+            <span class="cinelin-product__option-value">{{ section.settings.size_value | escape }}</span>
+          </div>
         </div>
 
         {%- if product.description != blank -%}
@@ -158,7 +187,7 @@
               >
                 <span>
                   {%- if current_variant.available -%}
-                    Add to cart
+                    Add to bag
                   {%- else -%}
                     Sold out
                   {%- endif -%}
@@ -275,6 +304,30 @@
       "max": 8,
       "step": 1,
       "default": 4
+    },
+    {
+      "type": "text",
+      "id": "color_label",
+      "label": "Color label",
+      "default": "Color"
+    },
+    {
+      "type": "text",
+      "id": "color_value",
+      "label": "Color value",
+      "default": "Light gold quartz"
+    },
+    {
+      "type": "text",
+      "id": "size_label",
+      "label": "Size label",
+      "default": "Size"
+    },
+    {
+      "type": "text",
+      "id": "size_value",
+      "label": "Size value",
+      "default": "One size"
     },
     {
       "type": "textarea",

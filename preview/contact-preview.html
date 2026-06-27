@@ -16,27 +16,42 @@
     <section class="cinelin-page cinelin-page--contact" data-cinelin-page>
       <div class="cinelin-page__shell">
         <nav class="cinelin-page__topline" aria-label="Page navigation">
-          <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-preview" aria-expanded="false">
-            <span class="visually-hidden">Open menu</span>
-            <svg viewBox="0 0 18 16" aria-hidden="true"><path fill="currentColor" d="M1 3h16v2H1zm0 4h16v2H1zm0 4h16v2H1z"/></svg>
-          </button>
+          <div class="cinelin-page__left-actions">
+            <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-preview" aria-expanded="false">
+              <span class="visually-hidden">Open menu</span>
+              <svg viewBox="0 0 18 16" aria-hidden="true"><path fill="currentColor" d="M1 3h16v2H1zm0 4h16v2H1zm0 4h16v2H1z"/></svg>
+            </button>
+          </div>
+          <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+            <a href="about-preview.html">Maker</a>
+            <a href="collection-preview.html">Collection</a>
+            <a href="about-preview.html">About</a>
+            <a href="contact-preview.html">Contact</a>
+          </nav>
           <a class="cinelin-page__topline-brand" href="homepage-preview.html">X</a>
           <div class="cinelin-page__actions">
-            <span class="cinelin-page__topline-meta">Contact</span>
+            <a class="cinelin-page__utility-link" href="collection-preview.html">Shop</a>
+            <a class="cinelin-page__icon-button" href="sign-in-preview.html" aria-label="Account">
+              <svg viewBox="0 0 18 19" aria-hidden="true"><path fill="currentColor" d="M9 .5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 10c5.7 0 8.5 1.6 8.5 7.5v.5H.5V18c0-5.9 2.8-7.5 8.5-7.5Z"/></svg>
+            </a>
+            <a class="cinelin-page__icon-button" href="cart-preview.html" aria-label="Cart">
+              <svg class="icon-cart" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20.5 6.5a4.75 4.75 0 0 0-4.75 4.75v.56h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.77-11.6h-3.16v-.57A4.75 4.75 0 0 0 20.5 6.5Z"/></svg>
+            </a>
           </div>
           <div class="cinelin-page__menu-list" id="CinelinPageMenu-preview" data-cinelin-menu>
             <div class="cinelin-page__menu-nav">
               <a href="homepage-preview.html">Home</a>
-              <a href="#">Maker</a>
+              <a href="about-preview.html">Maker</a>
               <a href="collection-preview.html">Collection</a>
               <a href="about-preview.html">About</a>
-              <a href="#">Cart</a>
               <a href="contact-preview.html">Contact</a>
+              <a href="sign-in-preview.html">Sign in</a>
+              <a href="cart-preview.html">Cart</a>
             </div>
           </div>
         </nav>
 
-        <header class="cinelin-page__hero">
+        <header class="cinelin-page__hero cinelin-page__retail-hero">
           <div>
             <p class="cinelin-page__kicker">Contact</p>
             <h1 class="cinelin-page__title">Say hello</h1>
@@ -47,11 +62,16 @@
           </div>
         </header>
 
-        <div class="cinelin-contact">
-          <div>
+        <div class="cinelin-contact cinelin-contact--retail">
+          <div class="cinelin-contact__aside">
             <p class="cinelin-page__eyebrow">Studio</p>
             <h2 class="cinelin-story__title">We answer with care.</h2>
             <p class="cinelin-page__copy">The form keeps the same calm, high-end styling as the rest of the site, with clear fields and strong focus states.</p>
+            <div class="cinelin-contact__links" aria-label="Contact details">
+              <a href="mailto:studio@example.com"><span>Email</span><span>studio@example.com</span></a>
+              <a href="cart-preview.html"><span>Customer care</span><span>Orders and sizing</span></a>
+              <a href="collection-preview.html"><span>Studio notes</span><span>Custom requests</span></a>
+            </div>
           </div>
           <form class="cinelin-contact__form">
             <div class="cinelin-contact__row">
