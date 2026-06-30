@@ -100,6 +100,78 @@ class CinelinPageMenu {
   }
 }
 
+class CinelinPreviewCartDrawer {
+  constructor(page) {
+    this.page = page;
+    this.toggle = page.querySelector('.cinelin-page__actions a[href$="cart-preview.html"]');
+    if (!this.toggle || page.querySelector('[data-cinelin-preview-cart-drawer]')) return;
+
+    this.toggle.setAttribute('role', 'button');
+    this.toggle.setAttribute('aria-haspopup', 'dialog');
+    this.toggle.setAttribute('aria-expanded', 'false');
+
+    this.drawer = document.createElement('aside');
+    this.drawer.className = 'cinelin-preview-cart';
+    this.drawer.setAttribute('data-cinelin-preview-cart-drawer', '');
+    this.drawer.setAttribute('aria-label', 'Bag');
+    this.drawer.setAttribute('aria-hidden', 'true');
+    this.drawer.innerHTML = `
+      <div class="cinelin-preview-cart__panel" role="dialog" aria-modal="true" aria-labelledby="CinelinPreviewCartTitle">
+        <header class="cinelin-preview-cart__header">
+          <h2 id="CinelinPreviewCartTitle">Bag</h2>
+          <button class="cinelin-preview-cart__close" type="button" aria-label="Close bag" data-cinelin-preview-cart-close>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 4 12 12M16 4 4 16" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          </button>
+        </header>
+        <p class="cinelin-preview-cart__promo">Spend $15.00 more and get free shipping</p>
+        <article class="cinelin-preview-cart__item">
+          <div class="cinelin-preview-cart__model" aria-hidden="true">
+            <span class="cinelin-card__model"><span class="cinelin-card__gem"></span><span class="cinelin-card__ring"></span><span class="cinelin-card__stone"></span><span class="cinelin-card__shadow"></span></span>
+          </div>
+          <div class="cinelin-preview-cart__copy">
+            <h3>Pearl loop</h3>
+            <p>$88</p>
+            <p>Gold / One size</p>
+            <div class="cinelin-preview-cart__quantity"><button type="button" aria-label="Decrease quantity">-</button><span>1</span><button type="button" aria-label="Increase quantity">+</button></div>
+            <a href="cart-preview.html">Remove</a>
+          </div>
+        </article>
+        <div class="cinelin-preview-cart__trust"><span><strong>Trusted by 1m</strong><small>customers</small></span><span><strong>Secure payments</strong><small>protected checkout</small></span><span><strong>Easy returns</strong><small>simple support</small></span></div>
+        <div class="cinelin-preview-cart__summary"><div><span>Sub total</span><span>$88.00</span></div><div><span>Total</span><strong>$88.00</strong></div><a href="cart-preview.html">Checkout</a></div>
+      </div>
+    `;
+    page.append(this.drawer);
+    this.closeButton = this.drawer.querySelector('[data-cinelin-preview-cart-close]');
+
+    this.toggle.addEventListener('click', (event) => {
+      event.preventDefault();
+      this.setOpen(!this.page.classList.contains('is-cart-open'));
+    });
+    this.closeButton?.addEventListener('click', () => this.setOpen(false));
+    this.drawer.addEventListener('click', (event) => {
+      if (event.target === this.drawer) this.setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && this.page.classList.contains('is-cart-open')) this.setOpen(false);
+    });
+  }
+
+  setOpen(isOpen) {
+    this.page.classList.toggle('is-cart-open', isOpen);
+    this.toggle.setAttribute('aria-expanded', String(isOpen));
+    this.drawer.setAttribute('aria-hidden', String(!isOpen));
+    document.documentElement.classList.toggle('cinelin-preview-cart-open', isOpen);
+    document.body.classList.toggle('cinelin-preview-cart-open', isOpen);
+
+    if (isOpen) {
+      this.page.cinelinPageMenu?.setOpen(false);
+      this.closeButton?.focus();
+    } else if (document.activeElement && this.drawer.contains(document.activeElement)) {
+      this.toggle.focus();
+    }
+  }
+}
+
 const initCinelinProductModelGrids = (container = document) => {
   container.querySelectorAll('[data-cinelin-product-grid], [data-cinelin-product-media]').forEach((grid) => {
     if (!grid.cinelinProductModelGrid) {
@@ -126,6 +198,9 @@ const initCinelinPageMenus = (container = document) => {
   container.querySelectorAll('[data-cinelin-page]').forEach((page) => {
     if (!page.cinelinPageMenu) {
       page.cinelinPageMenu = new CinelinPageMenu(page);
+    }
+    if (!page.cinelinPreviewCartDrawer) {
+      page.cinelinPreviewCartDrawer = new CinelinPreviewCartDrawer(page);
     }
   });
 };

@@ -28,14 +28,17 @@
 <cart-items class="gradient color-{{ section.settings.color_scheme }} isolate{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width">
     <div class="title-wrapper-with-link">
-      <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
+      <h1 class="title title--primary">Bag</h1>
       <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
         {{- 'general.continue_shopping' | t -}}
       </a>
     </div>
+    {%- if cart != empty -%}
+      <p class="cinelin-cart-delivery">You now have free delivery</p>
+    {%- endif -%}
 
     <div class="cart__warnings">
-      <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
+      <h1 class="cart__empty-text">Your bag is empty</h1>
       <a href="{{ routes.all_products_collection_url }}" class="button">
         {{ 'general.continue_shopping' | t }}
       </a>
@@ -87,10 +90,21 @@
                     {% endif %}
                   >
                     <td class="cart-item__media">
-                      {% if item.image %}
-                        {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
-                        <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
-                        <div class="cart-item__image-container gradient {% if item.parent_relationship.parent == null %}global-media-settings{% endif %}">
+                      <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
+                      <div class="cart-item__image-container gradient {% if item.parent_relationship.parent == null %}global-media-settings{% endif %}">
+                        <div
+                          class="cinelin-cart-model cinelin-cart-model--{% cycle 'one', 'two', 'three', 'four' %}"
+                          aria-label="{{ item.product.title | escape }} 3D model preview"
+                          role="img"
+                        >
+                          <span class="cinelin-cart-model__object" aria-hidden="true">
+                            <span class="cinelin-cart-model__gem"></span>
+                            <span class="cinelin-cart-model__ring"></span>
+                            <span class="cinelin-cart-model__stone"></span>
+                            <span class="cinelin-cart-model__shadow"></span>
+                          </span>
+                        </div>
+                        {% if item.image %}
                           <img
                             src="{{ item.image | image_url: width: 300 }}"
                             class="cart-item__image {% if item.parent_relationship.parent != null %}global-media-settings{% endif %}"
@@ -99,8 +113,8 @@
                             width="150"
                             height="{{ 150 | divided_by: item.image.aspect_ratio | ceil }}"
                           >
-                        </div>
-                      {% endif %}
+                        {% endif %}
+                      </div>
                     </td>
 
                     <td class="cart-item__details">

@@ -51,9 +51,9 @@
           <a class="homepage__icon-button" href="sign-in-preview.html" aria-label="Account">
             <svg viewBox="0 0 18 19" aria-hidden="true"><path fill="currentColor" d="M9 .5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 10c5.7 0 8.5 1.6 8.5 7.5v.5H.5V18c0-5.9 2.8-7.5 8.5-7.5Z"/></svg>
           </a>
-          <a class="homepage__icon-button" href="cart-preview.html" aria-label="Cart">
+          <button class="homepage__icon-button" type="button" aria-label="Open bag" data-homepage-cart-toggle aria-controls="HomepageCartDrawer-preview" aria-expanded="false">
             <svg class="icon-cart" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20.5 6.5a4.75 4.75 0 0 0-4.75 4.75v.56h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.77-11.6h-3.16v-.57A4.75 4.75 0 0 0 20.5 6.5Z"/></svg>
-          </a>
+          </button>
         </div>
       </header>
 
@@ -118,6 +118,44 @@
           <a class="homepage__featured-piece homepage__featured-piece--style-3" href="product-preview.html"><span class="homepage__featured-media"><span class="homepage__featured-placeholder"><span class="homepage__featured-placeholder-ring"></span><span class="homepage__featured-placeholder-stone"></span></span></span><span class="homepage__featured-copy"><span class="homepage__featured-index">03</span><span class="homepage__featured-name">Golden orbit</span><span class="homepage__featured-price">Explore</span></span></a>
         </div>
       </section>
+
+      <aside class="homepage__cart-drawer" id="HomepageCartDrawer-preview" data-homepage-cart-drawer aria-label="Bag" aria-hidden="true">
+        <div class="homepage__cart-panel" role="dialog" aria-modal="true" aria-labelledby="HomepageCartTitle-preview">
+          <header class="homepage__cart-header">
+            <h2 id="HomepageCartTitle-preview">Bag</h2>
+            <button class="homepage__cart-close" type="button" data-homepage-cart-close aria-label="Close bag">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m4 4 12 12M16 4 4 16" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            </button>
+          </header>
+          <p class="homepage__cart-promo">Spend $15.00 more and get free shipping</p>
+          <article class="homepage__cart-item">
+            <div class="homepage__cart-model" aria-hidden="true">
+              <span class="homepage__model-object"><span class="homepage__model-gem"></span><span class="homepage__model-ring"></span><span class="homepage__model-stone"></span></span>
+            </div>
+            <div class="homepage__cart-copy">
+              <h3>Pearl loop</h3>
+              <p>$88</p>
+              <p>Gold / One size</p>
+              <div class="homepage__cart-controls">
+                <button type="button" aria-label="Decrease quantity">-</button>
+                <span>1</span>
+                <button type="button" aria-label="Increase quantity">+</button>
+              </div>
+              <a href="cart-preview.html">Remove</a>
+            </div>
+          </article>
+          <div class="homepage__cart-trust" aria-label="Order promises">
+            <span><strong>Trusted by 1m</strong><small>customers</small></span>
+            <span><strong>Secure payments</strong><small>protected checkout</small></span>
+            <span><strong>Easy returns</strong><small>simple support</small></span>
+          </div>
+          <div class="homepage__cart-summary">
+            <div><span>Sub total</span><span>$88.00</span></div>
+            <div><span>Total</span><strong>$88.00</strong></div>
+            <a href="cart-preview.html">Checkout</a>
+          </div>
+        </div>
+      </aside>
     </section>
 
     <script src="../assets/homepage.js"></script>

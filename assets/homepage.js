@@ -5,6 +5,9 @@ class HomepageOrbit {
     this.orbit = section.querySelector('[data-homepage-orbit]');
     this.menuToggle = section.querySelector('[data-homepage-menu-toggle]');
     this.menu = section.querySelector('[data-homepage-menu]');
+    this.cartToggle = section.querySelector('[data-homepage-cart-toggle]');
+    this.cartDrawer = section.querySelector('[data-homepage-cart-drawer]');
+    this.cartClose = section.querySelector('[data-homepage-cart-close]');
     this.canvas = section.querySelector('[data-homepage-particles]');
     this.prevButton = section.querySelector('[data-homepage-prev]');
     this.nextButton = section.querySelector('[data-homepage-next]');
@@ -42,9 +45,22 @@ class HomepageOrbit {
       this.setMenuOpen(!this.stage.classList.contains('is-menu-open'));
     });
 
+    this.cartToggle?.addEventListener('click', () => {
+      this.setCartOpen(!this.section.classList.contains('is-cart-open'));
+    });
+
+    this.cartClose?.addEventListener('click', () => this.setCartOpen(false));
+
+    this.cartDrawer?.addEventListener('click', (event) => {
+      if (event.target === this.cartDrawer) this.setCartOpen(false);
+    });
+
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && this.stage.classList.contains('is-menu-open')) {
         this.setMenuOpen(false);
+      }
+      if (event.key === 'Escape' && this.section.classList.contains('is-cart-open')) {
+        this.setCartOpen(false);
       }
     });
 
@@ -83,6 +99,21 @@ class HomepageOrbit {
       this.menu?.querySelector('a, button')?.focus();
     } else if (document.activeElement && this.menu?.contains(document.activeElement)) {
       this.menuToggle?.focus();
+    }
+  }
+
+  setCartOpen(isOpen) {
+    this.section.classList.toggle('is-cart-open', isOpen);
+    this.cartToggle?.setAttribute('aria-expanded', String(isOpen));
+    this.cartDrawer?.setAttribute('aria-hidden', String(!isOpen));
+    document.documentElement.classList.toggle('homepage-cart-open', isOpen);
+    document.body.classList.toggle('homepage-cart-open', isOpen);
+
+    if (isOpen) {
+      this.setMenuOpen(false);
+      this.cartDrawer?.querySelector('[data-homepage-cart-close]')?.focus();
+    } else if (document.activeElement && this.cartDrawer?.contains(document.activeElement)) {
+      this.cartToggle?.focus();
     }
   }
 

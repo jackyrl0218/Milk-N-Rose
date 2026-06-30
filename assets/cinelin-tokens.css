@@ -24,15 +24,20 @@
   --cinelin-home-green: 88 177 149;
   --cinelin-home-pink: 235 178 188;
   --cinelin-home-gold: 219 183 111;
-  --cinelin-home-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --cinelin-unified-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --cinelin-home-font: var(--cinelin-unified-font);
+  --font-body-family: var(--cinelin-unified-font);
+  --font-body-style: normal;
+  --font-heading-family: var(--cinelin-unified-font);
+  --font-heading-style: normal;
   --cinelin-entry-background: 5 3 3;
   --cinelin-entry-screen: 72 9 12;
   --cinelin-entry-screen-deep: 32 3 5;
   --cinelin-entry-frame: 102 57 57;
   --cinelin-entry-gold: 232 211 158;
   --cinelin-entry-copy: 180 157 158;
-  --cinelin-font-body: Consolas, "Courier New", "Nimbus Mono PS", "Courier", monospace;
-  --cinelin-font-copy: Consolas, "Courier New", "Nimbus Mono PS", "Courier", monospace;
-  --cinelin-font-heading: "Eldra", "Garamond", "Times New Roman", serif;
-  --cinelin-font-wordmark: "Ketsiyo Regular", Didot, "Bodoni 72", "Bodoni 72 Smallcaps", Georgia, serif;
+  --cinelin-font-body: var(--cinelin-unified-font);
+  --cinelin-font-copy: var(--cinelin-unified-font);
+  --cinelin-font-heading: var(--cinelin-unified-font);
+  --cinelin-font-wordmark: var(--cinelin-unified-font);
 }

@@ -24,14 +24,14 @@
       class="drawer__inner gradient color-{{ settings.cart_color_scheme }}"
       role="dialog"
       aria-modal="true"
-      aria-label="{{ 'sections.cart.title' | t }}"
+      aria-label="Bag"
       tabindex="-1"
     >
       {%- if cart == empty -%}
         <div class="drawer__inner-empty">
           <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
             <div class="cart-drawer__empty-content">
-              <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
+              <h2 class="cart__empty-text">Your bag is empty</h2>
               <button
                 class="drawer__close"
                 type="button"
@@ -62,7 +62,7 @@
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        <h2 class="drawer__heading">Bag</h2>
         <button
           class="drawer__close"
           type="button"
@@ -131,9 +131,20 @@
                           role="cell"
                           headers="CartDrawer-ColumnProductImage"
                         >
+                          <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
+                          <div
+                            class="cinelin-cart-model cinelin-cart-model--{% cycle 'drawer-one', 'drawer-two', 'drawer-three', 'drawer-four' %}"
+                            aria-label="{{ item.product.title | escape }} 3D model preview"
+                            role="img"
+                          >
+                            <span class="cinelin-cart-model__object" aria-hidden="true">
+                              <span class="cinelin-cart-model__gem"></span>
+                              <span class="cinelin-cart-model__ring"></span>
+                              <span class="cinelin-cart-model__stone"></span>
+                              <span class="cinelin-cart-model__shadow"></span>
+                            </span>
+                          </div>
                           {% if item.image %}
-                            {% comment %} Leave empty space due to a:empty CSS display: none rule {% endcomment %}
-                            <a href="{{ item.url }}" class="cart-item__link" tabindex="-1" aria-hidden="true"> </a>
                             <img
                               class="cart-item__image"
                               src="{{ item.image | image_url: width: 300 }}"
@@ -475,6 +486,20 @@
         </form>
       </cart-drawer-items>
       <div class="drawer__footer">
+        <div class="cart-drawer__trust" aria-label="Order promises">
+          <span>
+            <strong>Trusted by 1m</strong>
+            <small>customers</small>
+          </span>
+          <span>
+            <strong>Secure payments</strong>
+            <small>protected checkout</small>
+          </span>
+          <span>
+            <strong>Easy returns</strong>
+            <small>simple support</small>
+          </span>
+        </div>
         {%- if settings.show_cart_note -%}
           <details id="Details-CartDrawer">
             <summary>
