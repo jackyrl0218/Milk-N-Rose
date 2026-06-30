@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Milk & Rose Cart Preview</title>
+    <link rel="stylesheet" href="../assets/cinelin-tokens.css">
+    <link rel="stylesheet" href="../assets/cinelin-pages.css">
+    <link rel="stylesheet" href="../assets/cinelin-cart.css">
+    <script src="../assets/cinelin-pages.js" defer></script>
+    <style>
+      html { font-size: 62.5%; }
+      body { margin: 0; }
+    </style>
+  </head>
+  <body class="template-cart">
+    <section class="cinelin-page cinelin-cart" data-cinelin-page>
+      <nav class="cinelin-page__topline" aria-label="Cart navigation">
+        <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-preview" aria-expanded="false">
+          <span class="visually-hidden">Open menu</span>
+          <svg viewBox="0 0 18 16" aria-hidden="true"><path fill="currentColor" d="M1 3h16v2H1zm0 4h16v2H1zm0 4h16v2H1z"/></svg>
+        </button>
+        <a class="cinelin-page__topline-brand" href="homepage-preview.html">Milk &amp; Rose</a>
+        <div class="cinelin-page__actions">
+          <span class="cinelin-page__topline-meta">Cart</span>
+        </div>
+        <div class="cinelin-page__menu-list" id="CinelinPageMenu-preview" data-cinelin-menu>
+          <div class="cinelin-page__menu-nav">
+            <a href="homepage-preview.html">Home</a>
+            <a href="#">Product</a>
+            <a href="#">Maker</a>
+            <a href="collection-preview.html">Collection</a>
+            <a href="about-preview.html">About</a>
+            <a href="cart-preview.html">Cart</a>
+            <a href="contact-preview.html">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="cinelin-cart__shell">
+        <header class="cinelin-cart__hero">
+          <div>
+            <p class="cinelin-page__kicker">Cart</p>
+            <h1>Held objects</h1>
+          </div>
+          <div>
+            <p class="cinelin-cart__intro">A final look before the handoff.</p>
+            <p class="cinelin-cart__copy">Review the pieces, adjust quantities, then continue through Shopify's native checkout.</p>
+          </div>
+        </header>
+
+        <form class="cinelin-cart__form">
+          <div class="cinelin-cart__items" aria-label="Cart line items">
+            <article class="cinelin-cart__item">
+              <a class="cinelin-cart__media" href="#" aria-label="Pearl loop">
+                <span aria-hidden="true"></span>
+              </a>
+              <div class="cinelin-cart__details">
+                <a class="cinelin-cart__title" href="#">Pearl loop</a>
+                <p class="cinelin-cart__variant">Material: Silver / Stone: Pearl</p>
+                <a class="cinelin-cart__remove" href="#">Remove</a>
+              </div>
+              <div class="cinelin-cart__quantity">
+                <label class="visually-hidden" for="PreviewQuantity-1">Quantity for Pearl loop</label>
+                <input id="PreviewQuantity-1" class="cinelin-cart__quantity-input" type="number" value="1" min="0">
+              </div>
+              <div class="cinelin-cart__line-price">
+                <strong>$88</strong>
+              </div>
+            </article>
+
+            <article class="cinelin-cart__item">
+              <a class="cinelin-cart__media" href="#" aria-label="Green drop">
+                <span aria-hidden="true"></span>
+              </a>
+              <div class="cinelin-cart__details">
+                <a class="cinelin-cart__title" href="#">Green drop</a>
+                <p class="cinelin-cart__variant">Material: Silver / Stone: Green glass</p>
+                <a class="cinelin-cart__remove" href="#">Remove</a>
+              </div>
+              <div class="cinelin-cart__quantity">
+                <label class="visually-hidden" for="PreviewQuantity-2">Quantity for Green drop</label>
+                <input id="PreviewQuantity-2" class="cinelin-cart__quantity-input" type="number" value="1" min="0">
+              </div>
+              <div class="cinelin-cart__line-price">
+                <strong>$92</strong>
+              </div>
+            </article>
+          </div>
+
+          <aside class="cinelin-cart__summary" aria-label="Cart summary">
+            <p class="cinelin-page__eyebrow">Summary</p>
+            <div class="cinelin-cart__subtotal">
+              <span>Subtotal</span>
+              <strong>$180 USD</strong>
+            </div>
+            <p class="cinelin-cart__checkout-note">Checkout is handled by Shopify. Standard plans do not support fully custom checkout UI.</p>
+            <button class="cinelin-cart__update" type="button">Update cart</button>
+            <button class="cinelin-cart__checkout" type="button">Checkout</button>
+          </aside>
+        </form>
+
+        <footer class="cinelin-footer" aria-label="Footer">
+          <a class="cinelin-footer__brand" href="homepage-preview.html">MILK &amp; ROSE</a>
+          <p class="cinelin-footer__note">Objects made slowly, kept close.</p>
+          <nav class="cinelin-footer__links" aria-label="Footer navigation">
+            <a href="collection-preview.html">Collection</a>
+            <a href="#">Maker</a>
+            <a href="contact-preview.html">Contact</a>
+            <a href="cart-preview.html">Cart</a>
+          </nav>
+        </footer>
+      </div>
+    </section>
+  </body>
+</html>
