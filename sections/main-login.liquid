@@ -14,10 +14,6 @@
   }
 {%- endstyle -%}
 
-{%- if section.settings.enable_shop_login_button == false -%}
-  {%- assign hide_shop_login_button = true -%}
-{%- endif -%}
-
 <div class="customer login section-{{ section.id }}-padding">
   <h1 id="recover" tabindex="-1">
     {{ 'customer.recover_password.title' | t }}
@@ -68,10 +64,13 @@
     {%- endform -%}
   </div>
 
-  <h1 id="login" tabindex="-1">
-    {{ 'customer.login_page.title' | t }}
-  </h1>
-  <div>
+  <div class="cinelin-login__header">
+    <p class="cinelin-login__kicker">Account</p>
+    <h1 id="login" tabindex="-1">
+      Log In
+    </h1>
+  </div>
+  <div class="cinelin-login__panel">
     {%- if recover_success == true -%}
       <h3 class="form__message" tabindex="-1" autofocus>
         <span class="svg-wrapper">
@@ -92,18 +91,6 @@
         {{ form.errors | default_errors }}
       {%- endif -%}
 
-      {%- if shop.features.login_with_shop_classic_customer_accounts? -%}
-        <section name="sign-in-with-shop-provider">
-          {{ shop | login_button: hide_button: hide_shop_login_button }}
-
-          {%- unless hide_shop_login_button -%}
-            <p>
-              {{ 'customer.login_page.alternate_provider_separator' | t }}
-            </p>
-          {%- endunless -%}
-        </section>
-      {%- endif -%}
-
       <div class="field">
         <input
           type="email"
@@ -115,10 +102,10 @@
           {% if form.errors contains 'form' %}
             aria-invalid="true"
           {% endif %}
-          placeholder="{{ 'customer.login_page.email' | t }}"
+          placeholder="E-Mail"
         >
         <label for="CustomerEmail">
-          {{ 'customer.login_page.email' | t }}
+          * {{ 'customer.login_page.email' | t }}
         </label>
       </div>
 
@@ -133,7 +120,7 @@
             {% if form.errors contains 'form' %}
               aria-invalid="true"
             {% endif %}
-            placeholder="{{ 'customer.login_page.password' | t }}"
+            placeholder="minimum 6 characters"
           >
           <label for="CustomerPassword">
             {{ 'customer.login_page.password' | t }}
@@ -149,7 +136,11 @@
         {{ 'customer.login_page.sign_in' | t }}
       </button>
 
-      <a href="{{ routes.account_register_url }}">
+      <div class="cinelin-login__divider" aria-hidden="true">
+        <span>Or</span>
+      </div>
+
+      <a class="cinelin-login__create" href="{{ routes.account_register_url }}">
         {{ 'customer.login_page.create_account' | t }}
       </a>
     {%- endform -%}
@@ -173,12 +164,6 @@
 {
   "name": "t:sections.main-login.name",
   "settings": [
-    {
-      "type": "checkbox",
-      "id": "enable_shop_login_button",
-      "label": "t:sections.main-login.shop_login_button.enable",
-      "default": true
-    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"

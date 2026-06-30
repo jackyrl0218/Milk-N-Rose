@@ -1703,6 +1703,360 @@ body.cinelin-page-menu-open {
   background: rgb(var(--cinelin-home-background));
 }
 
+.cinelin-page--about .cinelin-page__shell {
+  max-width: none;
+  padding: 5.2rem 0 0;
+}
+
+.cinelin-page--contact .cinelin-page__shell {
+  max-width: none;
+  padding: 5.2rem 0 0;
+}
+
+.cinelin-about-layout {
+  background: rgb(var(--cinelin-home-panel));
+  color: rgb(var(--cinelin-home-ink));
+  display: grid;
+  min-height: calc(100svh - 5.2rem);
+}
+
+.cinelin-about-layout__left {
+  display: grid;
+  grid-template-rows: 1fr auto;
+  min-height: 100%;
+  padding: clamp(2rem, 4vw, 5.6rem) clamp(1.6rem, 3vw, 3.2rem);
+}
+
+.cinelin-about-layout__intro {
+  align-content: start;
+  display: grid;
+  gap: clamp(2rem, 4vw, 4.8rem);
+}
+
+.cinelin-about-layout__thumb {
+  aspect-ratio: 4 / 5.25;
+  background: rgb(var(--cinelin-home-surface));
+  min-height: 0;
+  overflow: hidden;
+}
+
+.cinelin-about-layout__thumb img,
+.cinelin-about-layout__right img,
+.cinelin-about-film__media img,
+.cinelin-about-film__media video {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cinelin-about-layout__copy {
+  align-self: start;
+  max-width: 40rem;
+}
+
+.cinelin-about-layout__kicker {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin: 0 0 1.4rem;
+  text-transform: uppercase;
+}
+
+.cinelin-about-layout h1 {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(2.9rem, 5.2vw, 5.8rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 0.94;
+  margin: 0;
+}
+
+.cinelin-about-layout__copy p,
+.cinelin-about-film__copy p {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: clamp(1.3rem, 1.3vw, 1.6rem);
+  line-height: 1.35;
+  margin: 1.8rem 0 0;
+}
+
+.cinelin-about-layout__link {
+  align-items: center;
+  color: rgb(var(--cinelin-home-ink));
+  display: inline-flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+  gap: 0.8rem;
+  margin-top: 2.8rem;
+  text-decoration: none;
+}
+
+.cinelin-about-layout__link span {
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.cinelin-about-layout__details {
+  display: grid;
+  margin: clamp(3rem, 6vw, 7rem) 0 0;
+}
+
+.cinelin-about-layout__details div {
+  border-top: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: minmax(8rem, 0.7fr) minmax(0, 1.3fr);
+  padding: 1.35rem 0;
+}
+
+.cinelin-about-layout__details div:last-child {
+  border-bottom: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+}
+
+.cinelin-about-layout__details dt {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.cinelin-about-layout__details dd {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.cinelin-about-layout__right {
+  background:
+    radial-gradient(ellipse at 50% 78%, rgb(var(--cinelin-home-shadow) / 0.22), transparent 28%),
+    linear-gradient(135deg, rgb(var(--cinelin-home-gold)), rgb(var(--cinelin-home-sale)));
+  min-height: calc(100svh - 5.2rem);
+  overflow: hidden;
+  position: relative;
+}
+
+.cinelin-about-layout__right img {
+  filter: saturate(0.9) contrast(1.03);
+  mix-blend-mode: multiply;
+  opacity: 0.72;
+}
+
+.cinelin-about-layout__right span {
+  bottom: 2rem;
+  color: rgb(var(--cinelin-home-panel));
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  position: absolute;
+  right: 2rem;
+  text-transform: uppercase;
+}
+
+.cinelin-about-film {
+  background: rgb(var(--cinelin-home-ink));
+  color: rgb(var(--cinelin-home-panel));
+  display: grid;
+  gap: 0;
+  min-height: 100svh;
+}
+
+.cinelin-about-film__media {
+  background:
+    radial-gradient(circle at 48% 50%, rgb(var(--cinelin-home-panel) / 0.12), transparent 30%),
+    linear-gradient(135deg, rgb(var(--cinelin-entry-frame)), rgb(var(--cinelin-entry-screen)));
+  min-height: calc(100svh - 5.2rem);
+  overflow: hidden;
+  position: relative;
+}
+
+.cinelin-about-film__media img {
+  filter: grayscale(0.18) contrast(1.08);
+  opacity: 0.72;
+}
+
+.cinelin-about-film__play {
+  align-items: center;
+  border: 0.1rem solid rgb(var(--cinelin-home-panel) / 0.45);
+  border-radius: 50%;
+  color: rgb(var(--cinelin-home-panel));
+  display: flex;
+  font-size: 1.1rem;
+  font-weight: 700;
+  height: clamp(7.6rem, 14vw, 12rem);
+  justify-content: center;
+  left: 50%;
+  letter-spacing: 0.16em;
+  position: absolute;
+  text-transform: uppercase;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: clamp(7.6rem, 14vw, 12rem);
+}
+
+.cinelin-about-film__copy {
+  align-content: center;
+  display: grid;
+  padding: clamp(3rem, 8vw, 9rem) clamp(1.8rem, 4vw, 5rem);
+}
+
+.cinelin-about-film__copy .cinelin-about-layout__kicker {
+  color: rgb(var(--cinelin-home-panel) / 0.58);
+}
+
+.cinelin-about-film__copy h2 {
+  color: rgb(var(--cinelin-home-panel));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(3.8rem, 8vw, 9rem);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 0.92;
+  margin: 0;
+  max-width: 10ch;
+}
+
+.cinelin-about-film__copy p {
+  color: rgb(var(--cinelin-home-panel) / 0.7);
+  max-width: 48rem;
+}
+
+.cinelin-contact-layout {
+  background: rgb(var(--cinelin-home-panel));
+  color: rgb(var(--cinelin-home-ink));
+  display: grid;
+  min-height: calc(100svh - 5.2rem);
+}
+
+.cinelin-contact-layout__content,
+.cinelin-contact-layout__form-wrap {
+  display: grid;
+  padding: clamp(2rem, 4vw, 5.6rem) clamp(1.6rem, 3vw, 3.2rem);
+}
+
+.cinelin-contact-layout__content {
+  grid-template-rows: 1fr auto;
+}
+
+.cinelin-contact-layout__intro {
+  align-self: start;
+  max-width: 56rem;
+}
+
+.cinelin-contact-layout__kicker {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin: 0 0 1.4rem;
+  text-transform: uppercase;
+}
+
+.cinelin-contact-layout h1,
+.cinelin-contact-layout h2 {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-weight: 500;
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.cinelin-contact-layout h1 {
+  font-size: clamp(4.2rem, 9vw, 10.6rem);
+  line-height: 0.9;
+}
+
+.cinelin-contact-layout h2 {
+  font-size: clamp(2.8rem, 5vw, 5.6rem);
+  line-height: 0.94;
+}
+
+.cinelin-contact-layout__intro p {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: clamp(1.4rem, 1.5vw, 1.8rem);
+  line-height: 1.35;
+  margin: 2rem 0 0;
+  max-width: 45rem;
+}
+
+.cinelin-contact-layout__details {
+  display: grid;
+  margin-top: clamp(3rem, 6vw, 7rem);
+}
+
+.cinelin-contact-layout__details a {
+  align-items: center;
+  border-top: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  color: inherit;
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: minmax(8rem, 0.72fr) minmax(0, 1.28fr);
+  min-height: 5.4rem;
+  text-decoration: none;
+}
+
+.cinelin-contact-layout__details a:last-child {
+  border-bottom: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+}
+
+.cinelin-contact-layout__details span:first-child {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1.15rem;
+}
+
+.cinelin-contact-layout__details span:last-child {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.cinelin-contact-layout__visual {
+  background:
+    radial-gradient(ellipse at 50% 78%, rgb(var(--cinelin-home-shadow) / 0.16), transparent 28%),
+    linear-gradient(145deg, rgb(var(--cinelin-home-blue)), rgb(var(--cinelin-home-pink)));
+  min-height: calc(100svh - 5.2rem);
+  overflow: hidden;
+}
+
+.cinelin-contact-layout__visual img {
+  display: block;
+  filter: saturate(0.86) contrast(1.03);
+  height: 100%;
+  mix-blend-mode: multiply;
+  object-fit: cover;
+  opacity: 0.74;
+  width: 100%;
+}
+
+.cinelin-contact-layout__form-wrap {
+  align-content: center;
+  background: rgb(var(--cinelin-home-background));
+  border-top: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.1);
+  gap: clamp(2rem, 4vw, 3.6rem);
+}
+
+.cinelin-contact-layout__form .cinelin-contact__field {
+  background: rgb(var(--cinelin-home-panel));
+  border-color: rgb(var(--cinelin-home-ink) / 0.22);
+  border-radius: 0;
+  font-size: clamp(1.6rem, 2vw, 2.2rem);
+  min-height: 6rem;
+}
+
+.cinelin-contact-layout__form textarea.cinelin-contact__field {
+  min-height: 15rem;
+}
+
+.cinelin-contact-layout__form .cinelin-page__button {
+  border-radius: 1.3rem;
+  font-size: 1.35rem;
+  letter-spacing: 0.18em;
+  min-height: 6.4rem;
+  text-transform: uppercase;
+}
+
 .cinelin-retail-grid,
 .cinelin-contact--retail,
 .cinelin-auth,
@@ -1791,16 +2145,22 @@ body.cinelin-page-menu-open {
   gap: 1rem;
 }
 
-.cinelin-auth__title,
-.cinelin-cart__title {
+.cinelin-auth__title {
   font-size: clamp(2.6rem, 8vw, 5.2rem);
   line-height: 0.98;
   margin: 0;
   text-transform: uppercase;
 }
 
+.cinelin-cart__title {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 0.98;
+  margin: 0;
+  text-transform: uppercase;
+}
+
 .cinelin-cart__item {
-  grid-template-columns: 9rem minmax(0, 1fr);
+  grid-template-columns: 7.2rem minmax(0, 1fr);
 }
 
 .cinelin-cart__media {
@@ -1814,7 +2174,49 @@ body.cinelin-page-menu-open {
 
 .cinelin-cart__copy {
   color: rgb(var(--cinelin-home-muted));
+  font-size: 1.2rem;
   margin: 0.5rem 0 0;
+}
+
+.cinelin-page--cart .cinelin-page__retail-hero {
+  min-height: clamp(18rem, 28vw, 30rem);
+  padding-block-start: clamp(3rem, 5vw, 5.8rem);
+}
+
+.cinelin-page--cart .cinelin-page__title {
+  font-size: clamp(2.8rem, 7vw, 4.8rem);
+}
+
+.cinelin-page--cart .cinelin-page__intro {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+}
+
+.cinelin-page--cart .cinelin-page__eyebrow,
+.cinelin-page--cart .cinelin-cart__line {
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+}
+
+.cinelin-page--cart .cinelin-cart__line {
+  min-height: 3.4rem;
+}
+
+.cinelin-page--cart .cinelin-cart__summary,
+.cinelin-page--cart .cinelin-cart__item {
+  gap: 0.9rem;
+  padding-block: clamp(1.8rem, 3vw, 3rem);
+}
+
+.cinelin-page--cart .cinelin-cart__actions {
+  gap: 0.7rem;
+}
+
+.cinelin-page--cart .cinelin-page__button,
+.cinelin-page--cart .cinelin-cart__checkout {
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  min-height: 3.8rem;
+  padding-inline: 1.2rem;
 }
 
 .cinelin-auth--login {
@@ -1891,6 +2293,39 @@ body.cinelin-page-menu-open {
 }
 
 @media screen and (min-width: 750px) {
+  .cinelin-about-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(36rem, 0.95fr);
+  }
+
+  .cinelin-about-layout__intro {
+    grid-template-columns: minmax(18rem, 0.88fr) minmax(22rem, 1fr);
+  }
+
+  .cinelin-about-layout__right {
+    min-height: calc(100svh - 5.2rem);
+  }
+
+  .cinelin-about-film {
+    grid-template-columns: minmax(0, 1.15fr) minmax(32rem, 0.85fr);
+  }
+
+  .cinelin-about-film__media {
+    min-height: 100svh;
+  }
+
+  .cinelin-contact-layout {
+    grid-template-columns: minmax(0, 0.94fr) minmax(30rem, 0.72fr) minmax(34rem, 0.84fr);
+  }
+
+  .cinelin-contact-layout__visual {
+    min-height: calc(100svh - 5.2rem);
+  }
+
+  .cinelin-contact-layout__form-wrap {
+    border-left: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.1);
+    border-top: 0;
+  }
+
   .cinelin-retail-grid,
   .cinelin-contact--retail,
   .cinelin-auth,
@@ -1937,6 +2372,28 @@ body.cinelin-page-menu-open {
 
   .cinelin-auth__service .cinelin-auth__row:last-child {
     border-inline-end: 0;
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .cinelin-about-layout {
+    grid-template-columns: minmax(0, 1.08fr) minmax(42rem, 0.92fr);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-about-layout__details div {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-about-layout__right span {
+    left: 1.8rem;
+    right: auto;
+  }
+
+  .cinelin-contact-layout__details a {
+    grid-template-columns: 1fr;
+    padding-block: 1.2rem;
   }
 }
 

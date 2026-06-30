@@ -329,6 +329,180 @@
 }
 
 /* Login */
+.customer.login {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  max-width: min(100%, 122rem);
+  min-height: 72vh;
+  padding-left: clamp(2rem, 5vw, 7.2rem);
+  padding-right: clamp(2rem, 5vw, 7.2rem);
+  position: relative;
+  text-align: left;
+}
+
+.customer.login::before {
+  background:
+    radial-gradient(circle at 7% 34%, rgb(var(--cinelin-home-blue) / 0.22) 0 0.14rem, transparent 0.18rem),
+    radial-gradient(circle at 56% 18%, rgb(var(--cinelin-home-blue) / 0.2) 0 0.12rem, transparent 0.16rem),
+    radial-gradient(circle at 88% 61%, rgb(var(--cinelin-home-blue) / 0.2) 0 0.16rem, transparent 0.2rem);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.cinelin-login__header,
+.cinelin-login__panel,
+.customer.login > div:last-child {
+  position: relative;
+}
+
+.cinelin-login__header {
+  display: grid;
+  gap: clamp(2.4rem, 5vw, 5.6rem);
+  margin-bottom: clamp(2.4rem, 4vw, 4.2rem);
+}
+
+.cinelin-login__kicker {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: clamp(1.2rem, 1.4vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  line-height: 1.2;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.customer.login .cinelin-login__header h1 {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(6rem, 14vw, 14rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.84;
+  margin: 0;
+  text-align: center;
+}
+
+.cinelin-login__panel {
+  max-width: 100rem;
+}
+
+.cinelin-login__create {
+  align-items: center;
+  border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.16);
+  border-radius: 1.3rem;
+  color: rgb(var(--cinelin-home-ink));
+  display: inline-flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: 0.22em;
+  min-height: 4.8rem;
+  min-width: 13rem;
+  padding: 0 2.4rem;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.customer.login form {
+  margin-top: 0;
+}
+
+.customer.login .field {
+  display: grid;
+  margin: 1.6rem 0 0;
+}
+
+.customer.login .field label {
+  color: rgb(var(--cinelin-home-muted));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(1.2rem, 1.35vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  order: -1;
+  position: static;
+  text-transform: uppercase;
+  transform: none;
+}
+
+.customer.login .field::after,
+.customer.login .field::before {
+  display: none;
+}
+
+.customer.login .field input {
+  border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.22);
+  box-shadow: none;
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(2rem, 3vw, 3rem);
+  height: auto;
+  letter-spacing: 0;
+  margin-top: 1rem;
+  min-height: 6.4rem;
+  padding: 1.5rem 1.8rem;
+}
+
+.customer.login .field input::placeholder {
+  color: rgb(var(--cinelin-home-muted) / 0.72);
+  opacity: 1;
+}
+
+.customer.login .field input:focus {
+  border-color: rgb(var(--cinelin-home-ink));
+  box-shadow: 0 0 0 0.2rem rgb(var(--cinelin-color-focus) / 0.55);
+  outline: 0;
+}
+
+.customer.login button,
+.cinelin-login__create {
+  border-radius: 1.3rem;
+  min-height: 6.4rem;
+  width: 100%;
+}
+
+.customer.login button {
+  background: rgb(var(--cinelin-home-ink));
+  color: rgb(var(--cinelin-home-panel));
+  font-family: var(--cinelin-home-font);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin: 2.8rem 0 1.2rem;
+  text-transform: uppercase;
+}
+
+.cinelin-login__divider {
+  align-items: center;
+  color: rgb(var(--cinelin-home-ink));
+  display: grid;
+  font-size: 1.6rem;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  letter-spacing: 0.12em;
+  margin: 3.2rem 0 2.8rem;
+  text-transform: uppercase;
+}
+
+.cinelin-login__divider::before,
+.cinelin-login__divider::after {
+  background: rgb(var(--cinelin-home-ink) / 0.16);
+  content: '';
+  height: 0.1rem;
+}
+
+.cinelin-login__create {
+  background: rgb(var(--cinelin-home-panel));
+  max-width: none;
+}
+
+.cinelin-login__create:hover,
+.cinelin-login__create:focus-visible {
+  border-color: rgb(var(--cinelin-home-ink));
+}
+
 .login a {
   display: block;
   margin: 0 auto;
@@ -342,6 +516,21 @@
 
 .login .field + a {
   margin-top: 1rem;
+}
+
+.login .cinelin-login__create {
+  display: inline-flex;
+  margin: 0;
+  width: auto;
+}
+
+.login .cinelin-login__create {
+  width: 100%;
+}
+
+.customer.login button::before,
+.customer.login button::after {
+  display: none;
 }
 
 .login p {
@@ -376,6 +565,11 @@
   display: none;
 }
 
+#recover:target ~ .cinelin-login__header,
+#recover:target ~ .cinelin-login__panel {
+  display: none;
+}
+
 #recover,
 #login {
   scroll-margin-top: 20rem;
@@ -383,6 +577,169 @@
 
 #recover {
   margin-bottom: 0;
+}
+
+@media screen and (min-width: 750px) {
+  .cinelin-login__panel {
+    margin-left: clamp(0rem, 7vw, 9rem);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .customer.login .cinelin-login__header h1 {
+    text-align: left;
+  }
+
+}
+
+/* Register */
+.customer.register.cinelin-register {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  max-width: min(100%, 122rem);
+  min-height: 72vh;
+  padding-left: clamp(2rem, 5vw, 7.2rem);
+  padding-right: clamp(2rem, 5vw, 7.2rem);
+  position: relative;
+  text-align: left;
+}
+
+.customer.register.cinelin-register::before {
+  background:
+    radial-gradient(circle at 8% 32%, rgb(var(--cinelin-home-blue) / 0.22) 0 0.14rem, transparent 0.18rem),
+    radial-gradient(circle at 55% 15%, rgb(var(--cinelin-home-blue) / 0.2) 0 0.12rem, transparent 0.16rem),
+    radial-gradient(circle at 86% 66%, rgb(var(--cinelin-home-blue) / 0.2) 0 0.16rem, transparent 0.2rem);
+  content: '';
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.cinelin-register__header,
+.customer.register.cinelin-register form {
+  position: relative;
+}
+
+.cinelin-register__header {
+  display: grid;
+  gap: clamp(2.4rem, 5vw, 5.6rem);
+  margin-bottom: clamp(2.4rem, 4vw, 4.2rem);
+}
+
+.cinelin-register__kicker {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: clamp(1.2rem, 1.4vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  line-height: 1.2;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.customer.register.cinelin-register h1 {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(5.4rem, 12vw, 12rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.88;
+  margin: 0;
+  text-align: center;
+}
+
+.customer.register.cinelin-register form {
+  display: grid;
+  gap: 1.6rem;
+  margin-top: 0;
+  max-width: 100rem;
+}
+
+.customer.register.cinelin-register .field {
+  display: grid;
+  margin: 0;
+}
+
+.customer.register.cinelin-register .field label {
+  color: rgb(var(--cinelin-home-muted));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(1.2rem, 1.35vw, 1.6rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  order: -1;
+  position: static;
+  text-transform: uppercase;
+  transform: none;
+}
+
+.customer.register.cinelin-register .field::after,
+.customer.register.cinelin-register .field::before {
+  display: none;
+}
+
+.customer.register.cinelin-register .field input {
+  border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.22);
+  box-shadow: none;
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-size: clamp(2rem, 3vw, 3rem);
+  height: auto;
+  letter-spacing: 0;
+  margin-top: 1rem;
+  min-height: 6.4rem;
+  padding: 1.5rem 1.8rem;
+}
+
+.customer.register.cinelin-register .field input::placeholder {
+  color: rgb(var(--cinelin-home-muted) / 0.72);
+  opacity: 1;
+}
+
+.customer.register.cinelin-register .field input:focus {
+  border-color: rgb(var(--cinelin-home-ink));
+  box-shadow: 0 0 0 0.2rem rgb(var(--cinelin-color-focus) / 0.55);
+  outline: 0;
+}
+
+.customer.register.cinelin-register button {
+  background: rgb(var(--cinelin-home-ink));
+  border-radius: 1.3rem;
+  color: rgb(var(--cinelin-home-panel));
+  font-family: var(--cinelin-home-font);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  margin: 1.2rem 0 0;
+  min-height: 6.4rem;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.customer.register.cinelin-register button::before,
+.customer.register.cinelin-register button::after {
+  display: none;
+}
+
+.cinelin-register__login {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: 1.4rem;
+  font-weight: 700;
+  justify-self: center;
+  letter-spacing: 0.12em;
+  margin-top: 1rem;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 750px) {
+  .customer.register.cinelin-register form {
+    margin-left: clamp(0rem, 7vw, 9rem);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .customer.register.cinelin-register h1 {
+    text-align: left;
+  }
 }
 
 .activate button[name='decline'],

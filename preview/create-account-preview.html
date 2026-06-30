@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>X Sign In Preview</title>
+    <title>X Create Account Preview</title>
     <link rel="stylesheet" href="../assets/cinelin-tokens.css">
     <link rel="stylesheet" href="../assets/cinelin-pages.css">
     <script src="../assets/cinelin-pages.js" defer></script>
@@ -37,31 +37,15 @@
         text-transform: uppercase;
       }
       .cinelin-auth-preview h1 {
-        font-size: clamp(6rem, 14vw, 14rem);
+        font-size: clamp(5.4rem, 12vw, 12rem);
         font-weight: 400;
         letter-spacing: 0;
-        line-height: 0.84;
+        line-height: 0.88;
         margin: 0 0 clamp(2.4rem, 4vw, 4.2rem);
         text-align: center;
       }
       .cinelin-auth-preview__panel {
         max-width: 100rem;
-      }
-      .cinelin-auth-preview__create {
-        align-items: center;
-        border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.16);
-        border-radius: 1.3rem;
-        color: rgb(var(--cinelin-home-ink));
-        display: inline-flex;
-        font-size: 1.2rem;
-        font-weight: 700;
-        justify-content: center;
-        letter-spacing: 0.22em;
-        min-height: 4.8rem;
-        min-width: 13rem;
-        padding: 0 2.4rem;
-        text-decoration: none;
-        text-transform: uppercase;
       }
       .cinelin-auth-preview form {
         display: grid;
@@ -100,33 +84,14 @@
         min-height: 6.4rem;
         text-transform: uppercase;
       }
-      .cinelin-auth-preview__helper {
-        color: rgb(var(--cinelin-home-muted));
-        font-size: 1.2rem;
+      .cinelin-auth-preview__login {
+        color: rgb(var(--cinelin-home-ink));
+        font-size: 1.4rem;
         font-weight: 700;
-        justify-self: start;
-        text-transform: uppercase;
-      }
-      .cinelin-auth-preview__divider {
-        align-items: center;
-        display: grid;
-        font-size: 1.6rem;
-        gap: 2rem;
-        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        justify-self: center;
         letter-spacing: 0.12em;
-        margin: 1.6rem 0 1.2rem;
+        margin-top: 1rem;
         text-transform: uppercase;
-      }
-      .cinelin-auth-preview__divider::before,
-      .cinelin-auth-preview__divider::after {
-        background: rgb(var(--cinelin-home-ink) / 0.16);
-        content: "";
-        height: 0.1rem;
-      }
-      .cinelin-auth-preview__create {
-        background: rgb(var(--cinelin-home-panel));
-        min-height: 6.4rem;
-        width: 100%;
       }
       @media (min-width: 750px) {
         .cinelin-auth-preview__panel { margin-left: clamp(0rem, 7vw, 9rem); }
@@ -177,21 +142,27 @@
 
         <main class="cinelin-auth-preview">
           <p class="cinelin-auth-preview__kicker">Account</p>
-          <h1>Log In</h1>
+          <h1>Create Account</h1>
           <div class="cinelin-auth-preview__panel">
             <form>
+              <label>
+                First name
+                <input type="text" placeholder="First name" autocomplete="given-name">
+              </label>
+              <label>
+                Last name
+                <input type="text" placeholder="Last name" autocomplete="family-name">
+              </label>
               <label>
                 * Email address
                 <input type="email" placeholder="E-Mail" autocomplete="email">
               </label>
               <label>
-                Password
-                <input type="password" placeholder="minimum 6 characters" autocomplete="current-password">
+                * Password
+                <input type="password" placeholder="minimum 6 characters" autocomplete="new-password">
               </label>
-              <a class="cinelin-auth-preview__helper" href="#">Forgot your password?</a>
-              <button type="button">Log in</button>
-              <div class="cinelin-auth-preview__divider" aria-hidden="true"><span>Or</span></div>
-              <a class="cinelin-auth-preview__create" id="create-account" href="create-account-preview.html">Create account</a>
+              <button type="button">Create account</button>
+              <a class="cinelin-auth-preview__login" href="sign-in-preview.html">Log in</a>
             </form>
           </div>
         </main>

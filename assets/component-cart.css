@@ -196,6 +196,26 @@ cart-items {
   text-align: center;
 }
 
+.template-cart .title--primary {
+  font-size: clamp(2.8rem, 7vw, 4.8rem);
+  line-height: 0.95;
+}
+
+.template-cart .cart__footer {
+  font-size: 1.3rem;
+}
+
+.template-cart .cart__checkout-button {
+  font-size: 1.2rem;
+  letter-spacing: 0.08em;
+  min-height: 4rem;
+  text-transform: uppercase;
+}
+
+.template-cart .cart__ctas > * + * {
+  margin-top: 0.7rem;
+}
+
 @media screen and (min-width: 750px) {
   .cart-note {
     max-width: 35rem;

@@ -40,29 +40,104 @@
       </div>
     </nav>
 
-    <header class="cinelin-page__hero cinelin-page__retail-hero">
-      <div>
-        <p class="cinelin-page__kicker">{{ section.settings.kicker | escape }}</p>
-        <h1 class="cinelin-page__title">{{ section.settings.title | escape }}</h1>
+    <header class="cinelin-about-layout">
+      <div class="cinelin-about-layout__left">
+        <div class="cinelin-about-layout__intro">
+          <div class="cinelin-about-layout__thumb">
+            {%- if section.settings.thumbnail_image != blank -%}
+              {{
+                section.settings.thumbnail_image
+                | image_url: width: 900
+                | image_tag:
+                  loading: 'eager',
+                  widths: '320, 480, 640, 900',
+                  sizes: '(min-width: 990px) 24vw, 44vw',
+                  alt: section.settings.thumbnail_alt
+              }}
+            {%- else -%}
+              <img src="{{ 'cinelin-collection-hero.jpg' | asset_url }}" alt="{{ section.settings.thumbnail_alt | escape }}" loading="eager">
+            {%- endif -%}
+          </div>
+          <div class="cinelin-about-layout__copy">
+            <p class="cinelin-about-layout__kicker">{{ section.settings.kicker | escape }}</p>
+            <h1>{{ section.settings.title | escape }}</h1>
+            <p>{{ section.settings.copy | escape }}</p>
+            <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="cinelin-about-layout__link">
+              {{ section.settings.cta_label | escape }}
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <dl class="cinelin-about-layout__details">
+          <div>
+            <dt>{{ section.settings.detail_one_label | escape }}</dt>
+            <dd>{{ section.settings.detail_one_text | escape }}</dd>
+          </div>
+          <div>
+            <dt>{{ section.settings.detail_two_label | escape }}</dt>
+            <dd>{{ section.settings.detail_two_text | newline_to_br }}</dd>
+          </div>
+          <div>
+            <dt>{{ section.settings.detail_three_label | escape }}</dt>
+            <dd>{{ section.settings.detail_three_text | escape }}</dd>
+          </div>
+        </dl>
       </div>
-      <div>
-        <p class="cinelin-page__intro">{{ section.settings.intro | escape }}</p>
-        <p class="cinelin-page__copy">{{ section.settings.copy | escape }}</p>
+
+      <div class="cinelin-about-layout__right" aria-label="{{ section.settings.hero_alt | escape }}">
+        {%- if section.settings.hero_image != blank -%}
+          {{
+            section.settings.hero_image
+            | image_url: width: 1800
+            | image_tag:
+              loading: 'eager',
+              widths: '640, 900, 1200, 1500, 1800',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              alt: section.settings.hero_alt
+          }}
+        {%- else -%}
+          <img src="{{ 'cinelin-collection-hero.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}" loading="eager">
+        {%- endif -%}
+        <span>{{ section.settings.scroll_hint | escape }}</span>
       </div>
     </header>
 
-    <div class="cinelin-story cinelin-retail-grid">
-      <article class="cinelin-story__panel">
-        <p class="cinelin-page__eyebrow">{{ section.settings.panel_one_kicker | escape }}</p>
-        <h2 class="cinelin-story__title">{{ section.settings.panel_one_title | escape }}</h2>
-        <p class="cinelin-page__copy">{{ section.settings.panel_one_copy | escape }}</p>
-      </article>
-      <article class="cinelin-story__panel">
-        <p class="cinelin-page__eyebrow">{{ section.settings.panel_two_kicker | escape }}</p>
-        <h2 class="cinelin-story__title">{{ section.settings.panel_two_title | escape }}</h2>
-        <p class="cinelin-page__copy">{{ section.settings.panel_two_copy | escape }}</p>
-      </article>
-    </div>
+    <section class="cinelin-about-film" aria-labelledby="CinelinAboutFilm-{{ section.id }}">
+      <div class="cinelin-about-film__media">
+        {%- if section.settings.brand_video != blank -%}
+          {{
+            section.settings.brand_video
+            | video_tag:
+              image_size: '1600x',
+              autoplay: true,
+              loop: true,
+              muted: true,
+              controls: true,
+              playsinline: true
+          }}
+        {%- elsif section.settings.film_image != blank -%}
+          {{
+            section.settings.film_image
+            | image_url: width: 1800
+            | image_tag:
+              loading: 'lazy',
+              widths: '640, 900, 1200, 1500, 1800',
+              sizes: '(min-width: 990px) 58vw, 100vw',
+              alt: section.settings.film_alt
+          }}
+          <span class="cinelin-about-film__play" aria-hidden="true">Play</span>
+        {%- else -%}
+          <img src="{{ 'cinelin-collection-hero.png' | asset_url }}" alt="{{ section.settings.film_alt | escape }}" loading="lazy">
+          <span class="cinelin-about-film__play" aria-hidden="true">Play</span>
+        {%- endif -%}
+      </div>
+      <div class="cinelin-about-film__copy">
+        <p class="cinelin-about-layout__kicker">{{ section.settings.film_kicker | escape }}</p>
+        <h2 id="CinelinAboutFilm-{{ section.id }}">{{ section.settings.film_title | escape }}</h2>
+        <p>{{ section.settings.film_copy | escape }}</p>
+      </div>
+    </section>
   </div>
 </section>
 
@@ -74,61 +149,132 @@
       "type": "text",
       "id": "kicker",
       "label": "Kicker",
-      "default": "About / Brand story"
+      "default": "Brand story"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "X"
-    },
-    {
-      "type": "text",
-      "id": "intro",
-      "label": "Intro",
-      "default": "Jewelry made slowly, with a little tension between softness and shine."
+      "default": "We believe jewelry should feel intimate before it feels precious."
     },
     {
       "type": "textarea",
       "id": "copy",
       "label": "Copy",
-      "default": "This page is a placeholder for the brand story while the final voice, photography, and maker details are still being prepared."
+      "default": "Every piece starts as a small study in contrast: soft curves, bright edges, quiet detail, and a finish made to live close to the skin."
     },
     {
       "type": "text",
-      "id": "panel_one_kicker",
-      "label": "First panel kicker",
-      "default": "Material"
+      "id": "cta_label",
+      "label": "Link label",
+      "default": "Explore the collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_image",
+      "label": "Intro image"
     },
     {
       "type": "text",
-      "id": "panel_one_title",
-      "label": "First panel title",
-      "default": "Small objects, close attention."
+      "id": "thumbnail_alt",
+      "label": "Intro image alt text",
+      "default": "Soft editorial jewelry detail"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Large right image"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Large right image alt text",
+      "default": "Editorial model image for the Cinelin brand"
+    },
+    {
+      "type": "text",
+      "id": "scroll_hint",
+      "label": "Scroll hint",
+      "default": "Scroll for the story"
+    },
+    {
+      "type": "text",
+      "id": "detail_one_label",
+      "label": "First detail label",
+      "default": "Services"
+    },
+    {
+      "type": "text",
+      "id": "detail_one_text",
+      "label": "First detail text",
+      "default": "Handmade jewelry / Small-batch drops / Custom moments"
+    },
+    {
+      "type": "text",
+      "id": "detail_two_label",
+      "label": "Second detail label",
+      "default": "Studio"
     },
     {
       "type": "textarea",
-      "id": "panel_one_copy",
-      "label": "First panel copy",
-      "default": "The design system leaves room for real photos and final materials later. For now, the layout locks the mood: dark, minimal, crafted."
+      "id": "detail_two_text",
+      "label": "Second detail text",
+      "default": "Slow fabrication\nSoft polish\nMade with care"
     },
     {
       "type": "text",
-      "id": "panel_two_kicker",
-      "label": "Second panel kicker",
-      "default": "Feeling"
+      "id": "detail_three_label",
+      "label": "Third detail label",
+      "default": "Materials"
     },
     {
       "type": "text",
-      "id": "panel_two_title",
-      "label": "Second panel title",
-      "default": "Simple to use. Hard to forget."
+      "id": "detail_three_text",
+      "label": "Third detail text",
+      "default": "Sterling silver / Gold tones / Found textures"
+    },
+    {
+      "type": "header",
+      "content": "Brand film"
+    },
+    {
+      "type": "video",
+      "id": "brand_video",
+      "label": "Brand video"
+    },
+    {
+      "type": "image_picker",
+      "id": "film_image",
+      "label": "Fallback film image"
+    },
+    {
+      "type": "text",
+      "id": "film_alt",
+      "label": "Film image alt text",
+      "default": "Brand film preview"
+    },
+    {
+      "type": "text",
+      "id": "film_kicker",
+      "label": "Film kicker",
+      "default": "The brand"
+    },
+    {
+      "type": "text",
+      "id": "film_title",
+      "label": "Film title",
+      "default": "A quiet ritual of making, polishing, and choosing what stays."
     },
     {
       "type": "textarea",
-      "id": "panel_two_copy",
-      "label": "Second panel copy",
-      "default": "The page keeps the brand premium without becoming loud: clear words, strong spacing, and a gallery-like rhythm."
+      "id": "film_copy",
+      "label": "Film copy",
+      "default": "Use this space for a short brand video, studio footage, or a poetic material story. Until final assets arrive, the page behaves like a film still so the rhythm and mood are already locked."
     }
   ],
   "presets": [

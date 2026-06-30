@@ -14,10 +14,13 @@
   }
 {%- endstyle -%}
 
-<div class="customer register section-{{ section.id }}-padding">
-  <h1>
-    {{ 'customer.register.title' | t }}
-  </h1>
+<div class="customer register cinelin-register section-{{ section.id }}-padding">
+  <div class="cinelin-register__header">
+    <p class="cinelin-register__kicker">Account</p>
+    <h1>
+      Create Account
+    </h1>
+  </div>
   {%- form 'create_customer', novalidate: 'novalidate' -%}
     {%- if form.errors -%}
       <h2 class="form__message" tabindex="-1" autofocus>
@@ -50,7 +53,7 @@
           value="{{ form.first_name }}"
         {% endif %}
         autocomplete="given-name"
-        placeholder="{{ 'customer.register.first_name' | t }}"
+        placeholder="First name"
       >
       <label for="RegisterForm-FirstName">
         {{ 'customer.register.first_name' | t }}
@@ -65,7 +68,7 @@
           value="{{ form.last_name }}"
         {% endif %}
         autocomplete="family-name"
-        placeholder="{{ 'customer.register.last_name' | t }}"
+        placeholder="Last name"
       >
       <label for="RegisterForm-LastName">
         {{ 'customer.register.last_name' | t }}
@@ -87,10 +90,10 @@
           aria-invalid="true"
           aria-describedby="RegisterForm-email-error"
         {% endif %}
-        placeholder="{{ 'customer.register.email' | t }}"
+        placeholder="E-Mail"
       >
       <label for="RegisterForm-email">
-        {{ 'customer.register.email' | t }}
+        * {{ 'customer.register.email' | t }}
       </label>
     </div>
     {%- if form.errors contains 'email' -%}
@@ -112,10 +115,10 @@
           aria-invalid="true"
           aria-describedby="RegisterForm-password-error"
         {% endif %}
-        placeholder="{{ 'customer.register.password' | t }}"
+        placeholder="minimum 6 characters"
       >
       <label for="RegisterForm-password">
-        {{ 'customer.register.password' | t }}
+        * {{ 'customer.register.password' | t }}
       </label>
     </div>
     {%- if form.errors contains 'password' -%}
@@ -130,6 +133,9 @@
     <button>
       {{ 'customer.register.submit' | t }}
     </button>
+    <a class="cinelin-register__login" href="{{ routes.account_login_url }}">
+      {{ 'customer.login_page.sign_in' | t }}
+    </a>
   {%- endform -%}
 </div>
 
