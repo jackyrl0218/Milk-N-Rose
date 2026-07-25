@@ -27,14 +27,12 @@
     </button>
 
     <nav class="homepage__topnav" aria-label="Primary navigation">
-      <a href="{{ default_menu_link }}">Maker</a>
       <a href="{{ routes.all_products_collection_url }}">Collection</a>
       <a href="/pages/about">About</a>
-      <a href="/pages/contact">Contact</a>
     </nav>
 
     <a class="homepage__brand" href="{{ routes.root_url }}" aria-label="{{ section.settings.brand_name | escape }}">
-      {{ section.settings.brand_name | escape }}
+      <img src="{{ 'cow _1.png' | asset_url }}" alt="{{ section.settings.brand_name | escape }}" loading="eager">
     </a>
 
     <div class="homepage__actions">
@@ -62,6 +60,8 @@
               assign normalized_item_text = item_text | downcase
               if normalized_item_text == 'home'
                 assign item_link = routes.root_url
+              elsif normalized_item_text == 'maker'
+                assign item_link = '/pages/about#maker'
               elsif normalized_item_text == 'collection'
                 assign item_link = routes.all_products_collection_url
               elsif normalized_item_text == 'about'
@@ -71,7 +71,7 @@
               elsif normalized_item_text == 'sign in'
                 assign item_link = routes.account_url
               elsif normalized_item_text == 'contact'
-                assign item_link = '/pages/contact'
+                assign item_link = '/pages/about#contact'
               endif
             -%}
             <a
@@ -302,13 +302,13 @@
       "type": "text",
       "id": "brand_name",
       "label": "Brand name",
-      "default": "X"
+      "default": "Milk N Rose"
     },
     {
       "type": "textarea",
       "id": "menu_items",
       "label": "Menu items",
-      "default": "Home\nMaker\nCollection\nAbout\nContact\nCart"
+      "default": "Home\nCollection\nAbout\nCart"
     },
     {
       "type": "text",
@@ -440,7 +440,7 @@
             },
             {
               "value": "style-4",
-              "label": "Gold pendant"
+              "label": "Silver pendant"
             }
           ],
           "default": "style-1"
@@ -493,7 +493,7 @@
             },
             {
               "value": "style-3",
-              "label": "Gold"
+              "label": "Silver"
             }
           ],
           "default": "style-1"
@@ -529,7 +529,7 @@
         {
           "type": "model_item",
           "settings": {
-            "label": "Gold piece",
+            "label": "Silver piece",
             "model_style": "style-4"
           }
         }

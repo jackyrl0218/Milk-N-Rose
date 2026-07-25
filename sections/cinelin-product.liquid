@@ -31,12 +31,12 @@
         </button>
       </div>
       <nav class="cinelin-page__topnav" aria-label="Primary navigation">
-        <a href="{{ routes.all_products_collection_url }}">Maker</a>
         <a href="{{ routes.all_products_collection_url }}">Collection</a>
         <a href="/pages/about">About</a>
-        <a href="/pages/contact">Contact</a>
       </nav>
-      <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}">X</a>
+      <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}" aria-label="Milk N Rose">
+        <img src="{{ 'cow _1.png' | asset_url }}" alt="Milk N Rose" loading="eager">
+      </a>
       <div class="cinelin-page__actions">
         <a class="cinelin-page__utility-link" href="{{ routes.all_products_collection_url }}">Shop</a>
         <a class="cinelin-page__icon-button" href="{{ routes.account_url }}" aria-label="Account">
@@ -49,10 +49,8 @@
       <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
         <div class="cinelin-page__menu-nav">
           <a href="{{ routes.root_url }}">Home</a>
-          <a href="{{ routes.all_products_collection_url }}">Maker</a>
           <a href="{{ routes.all_products_collection_url }}">Collection</a>
           <a href="/pages/about">About</a>
-          <a href="/pages/contact">Contact</a>
           <a href="{{ routes.cart_url }}">Cart</a>
         </div>
       </div>
@@ -314,7 +312,7 @@
       "type": "text",
       "id": "color_value",
       "label": "Color value",
-      "default": "Light gold quartz"
+      "default": "Sterling silver rose"
     },
     {
       "type": "text",

@@ -35,7 +35,7 @@
           "settings": {
             "product": "",
             "link": "shopify://collections/all",
-            "label": "Gold piece",
+            "label": "Silver piece",
             "model_style": "style-4"
           }
         },
@@ -71,7 +71,7 @@
           "settings": {
             "product": "",
             "link": "shopify://collections/all",
-            "label": "Oval gold",
+            "label": "Oval silver",
             "model_style": "style-4"
           }
         },
@@ -103,7 +103,7 @@
             "product": "",
             "image": "",
             "link": "shopify://collections/all",
-            "title": "Golden orbit",
+            "title": "Silver orbit",
             "price": "Explore",
             "placeholder_style": "style-3"
           }
@@ -123,8 +123,8 @@
         "featured_3"
       ],
       "settings": {
-        "brand_name": "X",
-        "menu_items": "Home\nMaker\nCollection\nAbout\nCart\nContact",
+        "brand_name": "Milk N Rose",
+        "menu_items": "Home\nCollection\nAbout\nCart",
         "default_menu_link": "shopify://collections/all",
         "hero_kicker": "",
         "hero_title": "New available",

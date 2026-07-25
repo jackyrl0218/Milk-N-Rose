@@ -196,15 +196,25 @@ body.cinelin-page-menu-open {
 }
 
 .cinelin-page__topline-brand {
+  align-items: center;
+  display: inline-flex;
   font-size: 1.7rem;
   font-weight: 700;
   inset-inline-start: 50%;
+  justify-content: center;
   line-height: 0.96;
   position: absolute;
   text-align: center;
   top: 50%;
   transform: translate(-50%, -50%);
   white-space: nowrap;
+}
+
+.cinelin-page__topline-brand img {
+  display: block;
+  height: clamp(3.4rem, 5vw, 4.8rem);
+  object-fit: contain;
+  width: auto;
 }
 
 .cinelin-page__topline-meta {
@@ -1867,6 +1877,7 @@ body.cinelin-page-menu-open {
   display: grid;
   gap: 0;
   min-height: 100svh;
+  scroll-margin-top: 5.2rem;
 }
 
 .cinelin-about-film__media {
@@ -1881,6 +1892,15 @@ body.cinelin-page-menu-open {
 .cinelin-about-film__media img {
   filter: grayscale(0.18) contrast(1.08);
   opacity: 0.72;
+}
+
+.cinelin-about-film__blank {
+  background:
+    radial-gradient(circle at 42% 44%, rgb(var(--cinelin-home-green) / 0.34), transparent 28%),
+    radial-gradient(circle at 72% 66%, rgb(var(--cinelin-home-blue) / 0.2), transparent 34%),
+    linear-gradient(135deg, rgb(var(--cinelin-entry-screen-deep)), rgb(var(--cinelin-entry-screen)));
+  height: 100%;
+  min-height: inherit;
 }
 
 .cinelin-about-film__play {
@@ -1928,11 +1948,125 @@ body.cinelin-page-menu-open {
   max-width: 48rem;
 }
 
+.cinelin-about-values {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-home-surface)), rgb(var(--cinelin-home-background))),
+    rgb(var(--cinelin-home-background));
+  color: rgb(var(--cinelin-home-ink));
+  display: grid;
+  gap: clamp(2.8rem, 5vw, 6rem);
+  padding: clamp(3.2rem, 7vw, 8rem) clamp(1.6rem, 4vw, 5rem);
+}
+
+.cinelin-about-values__intro {
+  max-width: 74rem;
+}
+
+.cinelin-about-values__intro h2,
+.cinelin-about-process__heading h3 {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 0.94;
+  margin: 0;
+}
+
+.cinelin-about-values__intro h2 {
+  font-size: clamp(4rem, 9vw, 9.4rem);
+  max-width: 11ch;
+}
+
+.cinelin-about-values__intro p {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: clamp(1.4rem, 1.5vw, 1.8rem);
+  line-height: 1.45;
+  margin: 2rem 0 0;
+  max-width: 62rem;
+}
+
+.cinelin-about-values__statement {
+  border-block: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  display: grid;
+}
+
+.cinelin-about-values__statement span {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: clamp(2.2rem, 4vw, 4.8rem);
+  font-weight: 500;
+  line-height: 1;
+  padding-block: 1.4rem;
+}
+
+.cinelin-about-values__statement span + span {
+  border-block-start: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+}
+
+.cinelin-about-process {
+  display: grid;
+  gap: 2rem;
+}
+
+.cinelin-about-process__heading h3 {
+  font-size: clamp(2.8rem, 5vw, 5.8rem);
+}
+
+.cinelin-about-process__steps,
+.cinelin-about-pillars {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cinelin-about-process__steps li,
+.cinelin-about-pillars article {
+  background: rgb(var(--cinelin-home-panel) / 0.72);
+  border-block-start: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+  padding: 1.6rem 0;
+}
+
+.cinelin-about-process__steps li:last-child,
+.cinelin-about-pillars article:last-child {
+  border-block-end: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+}
+
+.cinelin-about-process__steps span,
+.cinelin-about-pillars span {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cinelin-about-process__steps strong,
+.cinelin-about-pillars h3 {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: clamp(1.7rem, 2vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.cinelin-about-process__steps p,
+.cinelin-about-pillars p {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1.2rem;
+  line-height: 1.45;
+  margin: 0;
+  max-width: 42rem;
+}
+
 .cinelin-contact-layout {
   background: rgb(var(--cinelin-home-panel));
   color: rgb(var(--cinelin-home-ink));
   display: grid;
   min-height: calc(100svh - 5.2rem);
+  scroll-margin-top: 5.2rem;
 }
 
 .cinelin-contact-layout__content,
@@ -1976,6 +2110,11 @@ body.cinelin-page-menu-open {
 .cinelin-contact-layout h2 {
   font-size: clamp(2.8rem, 5vw, 5.6rem);
   line-height: 0.94;
+}
+
+.cinelin-contact-layout__intro h2 {
+  font-size: clamp(4.2rem, 9vw, 10.6rem);
+  line-height: 0.9;
 }
 
 .cinelin-contact-layout__intro p {
@@ -2399,6 +2538,50 @@ body.cinelin-page-menu-open {
 
   .cinelin-about-film__media {
     min-height: 100svh;
+  }
+
+  .cinelin-about-values__statement {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cinelin-about-values__statement span {
+    min-height: 12rem;
+    padding: 1.6rem;
+  }
+
+  .cinelin-about-values__statement span + span {
+    border-block-start: 0;
+    border-inline-start: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  }
+
+  .cinelin-about-process {
+    grid-template-columns: minmax(20rem, 0.45fr) minmax(0, 1fr);
+  }
+
+  .cinelin-about-process__steps,
+  .cinelin-about-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cinelin-about-process__steps li,
+  .cinelin-about-pillars article {
+    border-inline-start: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+    padding: 1.8rem;
+  }
+
+  .cinelin-about-process__steps li:nth-child(-n + 2),
+  .cinelin-about-pillars article:nth-child(-n + 2) {
+    border-block-start: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  }
+
+  .cinelin-about-process__steps li:nth-child(2n),
+  .cinelin-about-pillars article:nth-child(2n) {
+    border-inline-end: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  }
+
+  .cinelin-about-process__steps li:nth-last-child(-n + 2),
+  .cinelin-about-pillars article:nth-last-child(-n + 2) {
+    border-block-end: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
   }
 
   .cinelin-contact-layout {
@@ -3457,4 +3640,2000 @@ body.cinelin-page-menu-open {
   justify-content: center;
   min-height: 5.6rem;
   text-decoration: none;
+}
+
+/* Milk N Rose About redesign: light editorial direction from the new mockups. */
+.cinelin-page--about {
+  background: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-page__shell {
+  background: rgb(var(--cinelin-home-panel));
+  max-width: none;
+  padding: 0 0 5.6rem;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-page__topline {
+  background: rgb(var(--cinelin-home-panel) / 0.9);
+  border-bottom: 0;
+  inset-inline: 0;
+  min-height: 5.2rem;
+  padding: 1rem clamp(1.2rem, 3vw, 3.2rem);
+  position: sticky;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-page__topnav,
+.cinelin-page--about .cinelin-page__utility-link {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-page__topline-brand img {
+  height: 2.8rem;
+}
+
+.cinelin-page--about .cinelin-about-layout {
+  background:
+    radial-gradient(circle at 28% 34%, rgb(var(--cinelin-home-green) / 0.28), transparent 18rem),
+    radial-gradient(circle at 64% 23%, rgb(var(--cinelin-home-blue) / 0.18), transparent 22rem),
+    rgb(var(--cinelin-about-blank));
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100svh - 5.2rem);
+  overflow: hidden;
+  padding: clamp(3rem, 7vw, 7.6rem) clamp(1.6rem, 6vw, 8rem) clamp(8rem, 11vw, 12rem);
+  position: relative;
+}
+
+.cinelin-page--about .cinelin-about-layout::after {
+  background: rgb(var(--cinelin-home-panel));
+  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+  bottom: -3.8rem;
+  content: "";
+  height: 7.4rem;
+  left: -8%;
+  position: absolute;
+  width: 116%;
+  z-index: 1;
+}
+
+.cinelin-page--about .cinelin-about-layout__left {
+  display: grid;
+  align-content: center;
+  gap: clamp(2rem, 4vw, 4rem);
+  min-height: 0;
+  padding: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.cinelin-page--about .cinelin-about-layout__intro {
+  align-items: center;
+  gap: clamp(2rem, 5vw, 6rem);
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  justify-items: center;
+  margin-inline: auto;
+  max-width: 132rem;
+  text-align: left;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__thumb {
+  aspect-ratio: 4 / 3;
+  background: transparent;
+  border-radius: 1.2rem;
+  inline-size: min(42rem, 100%);
+  min-height: 0;
+  order: 1;
+}
+
+.cinelin-page--about .cinelin-about-layout__thumb img {
+  border-radius: 0.8rem;
+  filter: saturate(0.92) contrast(1.02);
+  object-fit: cover;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy {
+  max-width: 64rem;
+  order: 2;
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker,
+.cinelin-page--about .cinelin-contact-layout__kicker {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.8rem;
+}
+
+.cinelin-page--about .cinelin-about-layout h1 {
+  font-size: clamp(3.8rem, 8vw, 9.6rem);
+  line-height: 0.92;
+  margin-inline: 0;
+  max-width: 12ch;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy p {
+  font-size: clamp(1.25rem, 1.45vw, 1.8rem);
+  line-height: 1.5;
+  margin-inline: 0;
+  max-width: 54rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__link {
+  background: rgb(var(--cinelin-home-blue));
+  border-radius: 0.2rem;
+  color: rgb(var(--cinelin-home-panel));
+  font-size: clamp(0.9rem, 1vw, 1.1rem);
+  justify-content: center;
+  margin-top: 2rem;
+  min-height: 3.6rem;
+  padding: 0.5rem 1.2rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  gap: 0.35rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0 auto;
+  max-width: 132rem;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div {
+  background: rgb(var(--cinelin-home-panel) / 0.64);
+  border: 0;
+  min-height: clamp(10rem, 13vw, 15rem);
+  padding: clamp(1.2rem, 2vw, 2rem);
+}
+
+.cinelin-page--about .cinelin-about-layout__details dt {
+  font-size: clamp(0.82rem, 0.9vw, 1rem);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dd {
+  font-size: clamp(1rem, 1.2vw, 1.35rem);
+  font-weight: 500;
+}
+
+.cinelin-page--about .cinelin-about-layout__right {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-about-film,
+.cinelin-page--about .cinelin-about-values,
+.cinelin-page--about .cinelin-contact-layout {
+  margin-top: 0;
+  min-height: 0;
+}
+
+.cinelin-page--about .cinelin-about-film {
+  background: rgb(var(--cinelin-about-media));
+  color: rgb(var(--cinelin-home-panel));
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100svh;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+}
+
+.cinelin-page--about .cinelin-about-film::before {
+  background: rgb(var(--cinelin-home-panel));
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  content: "";
+  height: 5.8rem;
+  left: -8%;
+  position: absolute;
+  top: -3.5rem;
+  width: 116%;
+  z-index: 2;
+}
+
+.cinelin-page--about .cinelin-about-film__media {
+  background: transparent;
+  min-height: clamp(30rem, 52vw, 60rem);
+}
+
+.cinelin-page--about .cinelin-about-film__blank {
+  background:
+    radial-gradient(circle at 50% 50%, rgb(var(--cinelin-home-panel) / 0.98) 0 1.9rem, transparent 2rem),
+    linear-gradient(90deg, transparent calc(50% - 0.4rem), rgb(var(--cinelin-home-blue)) calc(50% - 0.4rem) calc(50% + 0.4rem), transparent calc(50% + 0.4rem)),
+    rgb(var(--cinelin-about-media));
+  position: relative;
+}
+
+.cinelin-page--about .cinelin-about-film__blank::after {
+  border-block: 1.15rem solid transparent;
+  border-inline-start: 1.55rem solid rgb(var(--cinelin-about-media));
+  content: "";
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-38%, -50%);
+}
+
+.cinelin-page--about .cinelin-about-film__copy,
+.cinelin-page--about .cinelin-about-values,
+.cinelin-page--about .cinelin-contact-layout__content,
+.cinelin-page--about .cinelin-contact-layout__form-wrap {
+  padding: clamp(3.2rem, 7vw, 8rem) clamp(1.6rem, 6vw, 8rem);
+}
+
+.cinelin-page--about .cinelin-about-film__copy {
+  background: rgb(var(--cinelin-home-panel));
+  color: rgb(var(--cinelin-home-ink));
+  text-align: center;
+}
+
+.cinelin-page--about .cinelin-about-film__copy .cinelin-about-layout__kicker,
+.cinelin-page--about .cinelin-about-film__copy h2,
+.cinelin-page--about .cinelin-about-film__copy p {
+  color: rgb(var(--cinelin-home-ink));
+  margin-inline: auto;
+}
+
+.cinelin-page--about .cinelin-about-film__copy h2,
+.cinelin-page--about .cinelin-about-values__intro h2,
+.cinelin-page--about .cinelin-contact-layout__intro h2 {
+  font-size: clamp(3.2rem, 6.5vw, 7.8rem);
+  line-height: 0.94;
+  max-width: 14ch;
+}
+
+.cinelin-page--about .cinelin-about-values {
+  background: rgb(var(--cinelin-home-panel));
+  gap: clamp(2.4rem, 5vw, 5.6rem);
+  min-height: 100svh;
+}
+
+.cinelin-page--about .cinelin-about-values__intro {
+  margin-inline: auto;
+  max-width: 76rem;
+  text-align: center;
+}
+
+.cinelin-page--about .cinelin-about-values__intro p {
+  font-size: clamp(1.2rem, 1.45vw, 1.7rem);
+  line-height: 1.55;
+  margin-inline: auto;
+}
+
+.cinelin-page--about .cinelin-about-values__statement,
+.cinelin-page--about .cinelin-about-process__steps,
+.cinelin-page--about .cinelin-about-pillars {
+  border: 0;
+  gap: clamp(0.8rem, 1.4vw, 1.6rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-inline: auto;
+  max-width: 132rem;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-values__statement span,
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article {
+  background: rgb(var(--cinelin-about-blank));
+  border: 0;
+  min-height: clamp(12rem, 15vw, 18rem);
+  padding: clamp(1.2rem, 2vw, 2.2rem);
+}
+
+.cinelin-page--about .cinelin-about-values__statement span {
+  align-items: center;
+  display: flex;
+  font-size: clamp(1.7rem, 3vw, 3.8rem);
+}
+
+.cinelin-page--about .cinelin-about-process {
+  gap: clamp(1.6rem, 3vw, 3.2rem);
+  grid-template-columns: 1fr;
+  margin-inline: auto;
+  max-width: 132rem;
+  text-align: center;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-process__heading h3 {
+  font-size: clamp(2.8rem, 5vw, 5.8rem);
+  margin-inline: auto;
+  max-width: 16ch;
+}
+
+.cinelin-page--about .cinelin-about-process__steps {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-pillars {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cinelin-page--about .cinelin-about-process__steps p,
+.cinelin-page--about .cinelin-about-pillars p {
+  font-size: clamp(1rem, 1.1vw, 1.25rem);
+}
+
+.cinelin-page--about .cinelin-contact-layout {
+  background: rgb(var(--cinelin-home-panel));
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1fr;
+  min-height: 100svh;
+}
+
+.cinelin-page--about .cinelin-contact-layout__content,
+.cinelin-page--about .cinelin-contact-layout__form-wrap {
+  padding-inline: clamp(1.6rem, 6vw, 8rem);
+}
+
+.cinelin-page--about .cinelin-contact-layout__details,
+.cinelin-page--about .cinelin-contact-layout__form {
+  margin-inline: auto;
+  max-width: 86rem;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-contact-layout__intro {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.cinelin-page--about .cinelin-contact-layout__visual {
+  background: rgb(var(--cinelin-about-blank));
+  min-height: clamp(30rem, 48vw, 58rem);
+  order: -1;
+}
+
+.cinelin-page--about .cinelin-contact-layout__visual img {
+  mix-blend-mode: normal;
+  opacity: 0.92;
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-page--about .cinelin-page__shell {
+    padding-inline: 0;
+  }
+
+  .cinelin-page--about .cinelin-about-layout {
+    padding-block-start: 3.2rem;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__intro {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__copy {
+    order: 1;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__thumb {
+    order: 2;
+  }
+
+  .cinelin-page--about .cinelin-about-layout h1,
+  .cinelin-page--about .cinelin-about-layout__copy p {
+    margin-inline: auto;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details,
+  .cinelin-page--about .cinelin-about-values__statement,
+  .cinelin-page--about .cinelin-about-process__steps,
+  .cinelin-page--about .cinelin-about-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details div,
+  .cinelin-page--about .cinelin-about-values__statement span,
+  .cinelin-page--about .cinelin-about-process__steps li,
+  .cinelin-page--about .cinelin-about-pillars article {
+    min-height: 0;
+  }
+}
+
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .cinelin-page--about .cinelin-about-layout__intro,
+  .cinelin-page--about .cinelin-about-layout__details,
+  .cinelin-page--about .cinelin-about-values__statement,
+  .cinelin-page--about .cinelin-about-process__steps,
+  .cinelin-page--about .cinelin-about-pillars {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* About page direction inspired by Odd Ritual: stark editorial rhythm, blank media blocks, scroll movement. */
+.cinelin-page--about {
+  --about-paper: var(--cinelin-about-paper);
+  --about-ink: var(--cinelin-home-ink);
+  --about-line: var(--cinelin-home-ink);
+  --about-blank: var(--cinelin-about-blank);
+  --about-media: var(--cinelin-about-media);
+  background: rgb(var(--about-paper));
+  color: rgb(var(--about-ink));
+}
+
+.cinelin-page--about [data-about-reveal] {
+  opacity: 0;
+  transform: translateY(4.2rem);
+  transition:
+    opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 720ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cinelin-page--about [data-about-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(var(--about-parallax, 0));
+}
+
+.cinelin-page--about [data-about-float].is-visible {
+  transition:
+    opacity 720ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 120ms linear;
+}
+
+.cinelin-page--about .cinelin-page__shell {
+  background: rgb(var(--about-paper));
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-page__topline {
+  background: rgb(var(--about-paper) / 0.9);
+  border-bottom: 0.1rem solid rgb(var(--about-line) / 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  min-height: 5.8rem;
+  padding-inline: clamp(1.4rem, 3vw, 4rem);
+  z-index: 50;
+}
+
+.cinelin-page--about .cinelin-page__topline-brand img {
+  height: clamp(3rem, 4vw, 4.2rem);
+}
+
+.cinelin-page--about .cinelin-about-layout,
+.cinelin-page--about .cinelin-about-film,
+.cinelin-page--about .cinelin-about-values,
+.cinelin-page--about .cinelin-contact-layout {
+  background: rgb(var(--about-paper));
+  border-bottom: 0.1rem solid rgb(var(--about-line) / 0.12);
+  color: rgb(var(--about-ink));
+  margin: 0;
+  min-height: auto;
+  padding: clamp(6rem, 10vw, 12rem) clamp(1.6rem, 4vw, 5.6rem);
+}
+
+.cinelin-page--about .cinelin-about-layout {
+  padding-top: clamp(8rem, 12vw, 14rem);
+}
+
+.cinelin-page--about .cinelin-about-layout::after,
+.cinelin-page--about .cinelin-about-film::before {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__left {
+  align-content: start;
+  gap: clamp(5rem, 8vw, 10rem);
+  max-width: 150rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__intro {
+  align-items: start;
+  display: grid;
+  gap: clamp(2.4rem, 5vw, 8rem);
+  grid-template-columns: minmax(22rem, 0.42fr) minmax(0, 0.58fr);
+  max-width: none;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy {
+  align-self: start;
+  display: grid;
+  max-width: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker,
+.cinelin-page--about .cinelin-contact-layout__kicker {
+  color: rgb(var(--about-ink) / 0.72);
+  font-size: clamp(0.85rem, 0.85vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 clamp(1rem, 1.6vw, 1.8rem);
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker::before,
+.cinelin-page--about .cinelin-contact-layout__kicker::before {
+  content: "[ ";
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker::after,
+.cinelin-page--about .cinelin-contact-layout__kicker::after {
+  content: " ]";
+}
+
+.cinelin-page--about .cinelin-about-layout h1 {
+  font-size: clamp(4.2rem, 10vw, 14rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+  margin: 0;
+  max-width: 9.8ch;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy p {
+  color: rgb(var(--about-ink) / 0.72);
+  font-size: clamp(1.25rem, 1.45vw, 1.9rem);
+  line-height: 1.45;
+  margin-top: clamp(2rem, 3vw, 4rem);
+  max-width: 54rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__link {
+  align-self: start;
+  background: transparent;
+  border: 0.1rem solid rgb(var(--about-line));
+  border-radius: 0;
+  color: rgb(var(--about-ink));
+  font-size: clamp(0.82rem, 0.9vw, 1rem);
+  justify-self: start;
+  margin-top: clamp(2rem, 3vw, 3.2rem);
+  min-height: 3.8rem;
+  padding-inline: 1.4rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__thumb {
+  aspect-ratio: 4 / 5;
+  background: rgb(var(--about-blank));
+  border-radius: 0;
+  inline-size: 100%;
+  max-width: 44rem;
+  min-height: clamp(28rem, 44vw, 62rem);
+  overflow: hidden;
+}
+
+.cinelin-page--about .cinelin-about-layout__right {
+  display: block;
+  inset: auto;
+  margin: clamp(5rem, 8vw, 10rem) auto 0;
+  max-width: 150rem;
+  min-height: clamp(34rem, 44vw, 70rem);
+  position: relative;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__right span {
+  bottom: 2rem;
+  color: rgb(var(--about-ink) / 0.66);
+  right: 2rem;
+}
+
+.cinelin-about-blank-image,
+.cinelin-page--about .cinelin-about-film__blank {
+  background:
+    linear-gradient(135deg, rgb(var(--about-blank)), rgb(var(--cinelin-home-panel))),
+    rgb(var(--about-blank));
+  height: 100%;
+  min-height: inherit;
+  position: relative;
+  width: 100%;
+}
+
+.cinelin-about-blank-image::before,
+.cinelin-page--about .cinelin-about-film__blank::before {
+  border: 0.1rem solid rgb(var(--about-line) / 0.16);
+  content: "";
+  inset: clamp(1.2rem, 2vw, 2.8rem);
+  position: absolute;
+}
+
+.cinelin-about-blank-image::after {
+  background:
+    linear-gradient(90deg, rgb(var(--about-line) / 0.18), rgb(var(--about-line) / 0.18)) 50% 50% / 28% 0.1rem no-repeat,
+    linear-gradient(0deg, rgb(var(--about-line) / 0.18), rgb(var(--about-line) / 0.18)) 50% 50% / 0.1rem 28% no-repeat;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  align-items: start;
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 150rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div {
+  background: transparent;
+  border: 0;
+  border-top: 0.1rem solid rgb(var(--about-line));
+  min-height: 0;
+  padding: clamp(1.2rem, 2vw, 2rem) clamp(1rem, 2vw, 2.4rem) 0 0;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dt {
+  color: rgb(var(--about-ink) / 0.54);
+  font-size: clamp(0.78rem, 0.8vw, 0.95rem);
+  letter-spacing: 0.12em;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dd {
+  color: rgb(var(--about-ink));
+  font-size: clamp(1.05rem, 1.3vw, 1.6rem);
+  line-height: 1.35;
+}
+
+.cinelin-page--about .cinelin-about-film {
+  display: grid;
+  gap: clamp(3rem, 6vw, 8rem);
+  grid-template-columns: minmax(0, 0.58fr) minmax(0, 0.42fr);
+}
+
+.cinelin-page--about .cinelin-about-film__media {
+  background: transparent;
+  min-height: clamp(36rem, 54vw, 78rem);
+}
+
+.cinelin-page--about .cinelin-about-film__blank {
+  background:
+    radial-gradient(circle at 50% 50%, rgb(var(--about-paper)) 0 3.4rem, transparent 3.5rem),
+    linear-gradient(90deg, transparent calc(50% - 0.45rem), rgb(var(--about-media)) calc(50% - 0.45rem) calc(50% + 0.45rem), transparent calc(50% + 0.45rem)),
+    rgb(var(--about-media));
+}
+
+.cinelin-page--about .cinelin-about-film__blank::after {
+  border-block: 1.4rem solid transparent;
+  border-inline-start: 1.9rem solid rgb(var(--about-media));
+  content: "";
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-38%, -50%);
+}
+
+.cinelin-page--about .cinelin-about-film__copy {
+  align-content: center;
+  background: transparent;
+  padding: 0;
+  position: sticky;
+  text-align: left;
+  top: 8rem;
+}
+
+.cinelin-page--about .cinelin-about-film__copy h2,
+.cinelin-page--about .cinelin-about-values__intro h2,
+.cinelin-page--about .cinelin-contact-layout__intro h2 {
+  color: rgb(var(--about-ink));
+  font-size: clamp(3.2rem, 7vw, 10rem);
+  letter-spacing: -0.02em;
+  line-height: 0.9;
+  margin: 0;
+  max-width: 9.6ch;
+}
+
+.cinelin-page--about .cinelin-about-film__copy p,
+.cinelin-page--about .cinelin-about-values__intro p,
+.cinelin-page--about .cinelin-contact-layout__intro p {
+  color: rgb(var(--about-ink) / 0.68);
+  font-size: clamp(1.15rem, 1.25vw, 1.65rem);
+  line-height: 1.5;
+  margin-top: clamp(1.6rem, 2.4vw, 3rem);
+  max-width: 54rem;
+}
+
+.cinelin-page--about .cinelin-about-values {
+  display: grid;
+  gap: clamp(5rem, 8vw, 10rem);
+}
+
+.cinelin-page--about .cinelin-about-values__intro {
+  margin: 0 auto;
+  max-width: 150rem;
+  text-align: left;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-values__statement {
+  align-items: start;
+  display: grid;
+  gap: clamp(1.4rem, 2vw, 2.4rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 150rem;
+}
+
+.cinelin-page--about .cinelin-about-values__statement span {
+  align-items: end;
+  background: rgb(var(--about-blank));
+  display: flex;
+  font-size: clamp(2rem, 3.5vw, 5rem);
+  letter-spacing: -0.02em;
+  line-height: 0.95;
+  min-height: clamp(24rem, 26vw, 38rem);
+  padding: clamp(1.2rem, 2vw, 2.4rem);
+}
+
+.cinelin-page--about .cinelin-about-process,
+.cinelin-page--about .cinelin-about-pillars {
+  max-width: 150rem;
+}
+
+.cinelin-page--about .cinelin-about-process {
+  display: grid;
+  gap: clamp(2rem, 4vw, 6rem);
+  grid-template-columns: minmax(22rem, 0.28fr) minmax(0, 0.72fr);
+  margin: 0 auto;
+  text-align: left;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-process__heading h3 {
+  font-size: clamp(2.8rem, 4.2vw, 6rem);
+  line-height: 0.92;
+  margin: 0;
+}
+
+.cinelin-page--about .cinelin-about-process__steps,
+.cinelin-page--about .cinelin-about-pillars {
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article {
+  background: transparent;
+  border: 0;
+  border-top: 0.1rem solid rgb(var(--about-line));
+  min-height: clamp(18rem, 18vw, 28rem);
+  padding: clamp(1.4rem, 2vw, 2.6rem) clamp(1.2rem, 2vw, 2rem) clamp(2rem, 3vw, 4rem) 0;
+}
+
+.cinelin-page--about .cinelin-about-process__steps strong,
+.cinelin-page--about .cinelin-about-pillars h3 {
+  font-size: clamp(1.5rem, 1.8vw, 2.6rem);
+  line-height: 1;
+}
+
+.cinelin-page--about .cinelin-about-process__steps p,
+.cinelin-page--about .cinelin-about-pillars p {
+  color: rgb(var(--about-ink) / 0.62);
+  font-size: clamp(1rem, 1.08vw, 1.35rem);
+  line-height: 1.45;
+}
+
+.cinelin-page--about .cinelin-contact-layout {
+  display: grid;
+  gap: clamp(3rem, 6vw, 8rem);
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+}
+
+.cinelin-page--about .cinelin-contact-layout__visual {
+  background: rgb(var(--about-blank));
+  min-height: clamp(36rem, 50vw, 76rem);
+  order: 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout__visual img {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-contact-layout__visual::before {
+  border: 0.1rem solid rgb(var(--about-line) / 0.16);
+  content: "";
+  inset: clamp(1.2rem, 2vw, 2.8rem);
+  position: absolute;
+}
+
+.cinelin-page--about .cinelin-contact-layout__content,
+.cinelin-page--about .cinelin-contact-layout__form-wrap {
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout__content {
+  align-content: start;
+  order: -1;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form-wrap {
+  grid-column: 2;
+}
+
+.cinelin-page--about .cinelin-contact-layout__intro {
+  margin: 0;
+  max-width: 58rem;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-contact-layout__details,
+.cinelin-page--about .cinelin-contact-layout__form {
+  margin: 0;
+  max-width: 68rem;
+}
+
+@media screen and (max-width: 989px) {
+  .cinelin-page--about .cinelin-about-layout__intro,
+  .cinelin-page--about .cinelin-about-film,
+  .cinelin-page--about .cinelin-about-process,
+  .cinelin-page--about .cinelin-contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__right {
+    min-height: clamp(28rem, 74vw, 58rem);
+  }
+
+  .cinelin-page--about .cinelin-about-film__copy {
+    position: static;
+  }
+
+  .cinelin-page--about .cinelin-contact-layout__form-wrap {
+    grid-column: auto;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-page--about .cinelin-about-layout,
+  .cinelin-page--about .cinelin-about-film,
+  .cinelin-page--about .cinelin-about-values,
+  .cinelin-page--about .cinelin-contact-layout {
+    padding-inline: 1.4rem;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details,
+  .cinelin-page--about .cinelin-about-values__statement,
+  .cinelin-page--about .cinelin-about-process__steps,
+  .cinelin-page--about .cinelin-about-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__thumb,
+  .cinelin-page--about .cinelin-about-layout__right,
+  .cinelin-page--about .cinelin-about-film__media,
+  .cinelin-page--about .cinelin-contact-layout__visual {
+    min-height: clamp(24rem, 90vw, 42rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinelin-page--about [data-about-reveal],
+  .cinelin-page--about [data-about-reveal].is-visible,
+  .cinelin-page--about [data-about-float].is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* About contact refinement: no framed media block, palette-led contact and message area. */
+.cinelin-page--about .cinelin-contact-layout {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-green) / 0.88) 0%, rgb(var(--cinelin-home-pink) / 0.72) 48%, rgb(var(--cinelin-home-blue) / 0.68) 100%),
+    rgb(var(--about-paper));
+  border-bottom: 0;
+  gap: clamp(3rem, 7vw, 9rem);
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+  min-height: auto;
+  overflow: hidden;
+  padding: clamp(6rem, 10vw, 12rem) clamp(1.6rem, 5vw, 6.4rem);
+  position: relative;
+}
+
+.cinelin-page--about .cinelin-contact-layout::before {
+  background: rgb(var(--about-paper) / 0.78);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.cinelin-page--about .cinelin-contact-layout__visual {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-contact-layout__content,
+.cinelin-page--about .cinelin-contact-layout__form-wrap {
+  background: transparent;
+  border: 0;
+  grid-column: auto;
+  order: initial;
+  padding: 0;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.cinelin-page--about .cinelin-contact-layout__content {
+  align-content: start;
+  display: grid;
+  gap: clamp(2.4rem, 4vw, 4rem);
+}
+
+.cinelin-page--about .cinelin-contact-layout__intro {
+  margin: 0;
+  max-width: 52rem;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-contact-layout__intro h2,
+.cinelin-page--about .cinelin-contact-layout__form-wrap h2 {
+  color: rgb(var(--about-ink));
+  font-size: clamp(3rem, 5vw, 6.8rem);
+  letter-spacing: 0;
+  line-height: 0.94;
+  margin: 0;
+  max-width: 10ch;
+}
+
+.cinelin-page--about .cinelin-contact-layout__intro p {
+  color: rgb(var(--about-ink) / 0.7);
+  font-size: clamp(1.15rem, 1.25vw, 1.55rem);
+  line-height: 1.55;
+}
+
+.cinelin-page--about .cinelin-contact-layout__details {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  max-width: 52rem;
+}
+
+.cinelin-page--about .cinelin-contact-layout__details a {
+  background: transparent;
+  border: 0;
+  color: rgb(var(--about-ink));
+  min-height: auto;
+  padding: 0;
+  text-decoration: none;
+}
+
+.cinelin-page--about .cinelin-contact-layout__details a:hover,
+.cinelin-page--about .cinelin-contact-layout__details a:focus-visible {
+  color: rgb(var(--cinelin-home-blue));
+}
+
+.cinelin-page--about .cinelin-contact-layout__form-wrap {
+  align-content: start;
+  display: grid;
+  gap: clamp(2rem, 3vw, 3.2rem);
+}
+
+.cinelin-page--about .cinelin-contact-layout__form {
+  display: grid;
+  gap: 1.4rem;
+  margin: 0;
+  max-width: 72rem;
+  position: relative;
+  width: 100%;
+  z-index: 2;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field {
+  background: rgb(var(--about-paper) / 0.48);
+  border: 0;
+  color: rgb(var(--about-ink));
+  font-size: clamp(1.25rem, 1.4vw, 1.7rem);
+  min-height: 4.8rem;
+  padding: 0.8rem 1rem;
+  pointer-events: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form textarea.cinelin-contact__field {
+  min-height: 10rem;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:hover,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:focus,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:focus-visible {
+  background: rgb(var(--about-paper) / 0.7);
+  outline: 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-page__button {
+  background: rgb(var(--cinelin-home-blue));
+  border: 0;
+  border-radius: 0;
+  color: rgb(var(--about-paper));
+  justify-self: start;
+  min-height: 4.6rem;
+  padding: 0.9rem 1.8rem;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-page__button:hover,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-page__button:focus-visible {
+  background: rgb(var(--cinelin-home-pink));
+  color: rgb(var(--about-ink));
+}
+
+@media screen and (max-width: 989px) {
+  .cinelin-page--about .cinelin-contact-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Full About palette pass: mint, teal, and blue across the entire page. */
+.cinelin-page--about {
+  --about-paper: var(--cinelin-home-green);
+  --about-blank: var(--cinelin-home-pink);
+  --about-media: var(--cinelin-home-blue);
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-home-green)) 0%, rgb(var(--cinelin-home-pink) / 0.56) 52%, rgb(var(--cinelin-home-blue) / 0.42) 100%);
+}
+
+.cinelin-page--about .cinelin-page__shell {
+  background: transparent;
+}
+
+.cinelin-page--about .cinelin-page__topline {
+  background: rgb(var(--cinelin-home-green) / 0.86);
+  border-bottom: 0;
+}
+
+.cinelin-page--about .cinelin-about-layout {
+  background:
+    radial-gradient(circle at 18% 20%, rgb(var(--cinelin-home-panel) / 0.54), transparent 20rem),
+    linear-gradient(135deg, rgb(var(--cinelin-home-green)) 0%, rgb(var(--cinelin-home-pink) / 0.78) 58%, rgb(var(--cinelin-home-blue) / 0.54) 100%);
+  border-bottom: 0;
+}
+
+.cinelin-page--about .cinelin-about-film {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-blue) / 0.9), rgb(var(--cinelin-home-pink) / 0.62)),
+    rgb(var(--cinelin-home-blue));
+  border-bottom: 0;
+}
+
+.cinelin-page--about .cinelin-about-values {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-home-green) / 0.96), rgb(var(--cinelin-home-pink) / 0.48));
+  border-bottom: 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-green) / 0.9) 0%, rgb(var(--cinelin-home-pink) / 0.78) 46%, rgb(var(--cinelin-home-blue) / 0.66) 100%);
+}
+
+.cinelin-page--about .cinelin-contact-layout::before {
+  background: rgb(var(--cinelin-home-panel) / 0.26);
+}
+
+.cinelin-page--about .cinelin-about-layout__link {
+  background: rgb(var(--cinelin-home-blue));
+  border: 0;
+  color: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-about-layout__link:hover,
+.cinelin-page--about .cinelin-about-layout__link:focus-visible {
+  background: rgb(var(--cinelin-home-pink));
+  color: rgb(var(--about-ink));
+}
+
+.cinelin-page--about .cinelin-about-blank-image,
+.cinelin-page--about .cinelin-about-film__blank {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-green) / 0.94), rgb(var(--cinelin-home-pink) / 0.88) 54%, rgb(var(--cinelin-home-blue) / 0.72)),
+    rgb(var(--cinelin-home-pink));
+}
+
+.cinelin-page--about .cinelin-about-blank-image::before,
+.cinelin-page--about .cinelin-about-film__blank::before,
+.cinelin-page--about .cinelin-about-blank-image::after {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.cinelin-page--about .cinelin-about-layout__details div,
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article {
+  background: rgb(var(--cinelin-home-panel) / 0.28);
+  border: 0;
+  padding: clamp(1.4rem, 2vw, 2.4rem);
+}
+
+.cinelin-page--about .cinelin-about-values__statement span {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-green) / 0.86), rgb(var(--cinelin-home-pink) / 0.74));
+  border: 0;
+}
+
+.cinelin-page--about .cinelin-about-values__statement span:nth-child(2) {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-pink) / 0.88), rgb(var(--cinelin-home-blue) / 0.52));
+}
+
+.cinelin-page--about .cinelin-about-values__statement span:nth-child(3) {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-blue) / 0.64), rgb(var(--cinelin-home-green) / 0.82));
+}
+
+.cinelin-page--about .cinelin-contact-layout__details a,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field {
+  background: rgb(var(--cinelin-home-panel) / 0.34);
+  border: 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:hover,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:focus,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:focus-visible {
+  background: rgb(var(--cinelin-home-panel) / 0.54);
+}
+
+/* About white pass: keep white dominant, with blue fading softly into white. */
+.cinelin-page--about {
+  --about-paper: var(--cinelin-home-panel);
+  background: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-page__shell {
+  background: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-page__topline {
+  background: rgb(var(--cinelin-home-panel) / 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.cinelin-page--about .cinelin-about-layout {
+  background:
+    radial-gradient(circle at 74% 14%, rgb(var(--cinelin-home-blue) / 0.42), transparent 28rem),
+    linear-gradient(180deg, rgb(var(--cinelin-home-blue) / 0.22) 0%, rgb(var(--cinelin-home-panel)) 48%, rgb(var(--cinelin-home-panel)) 100%);
+}
+
+.cinelin-page--about .cinelin-about-film {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-home-panel)) 0%, rgb(var(--cinelin-home-blue) / 0.32) 50%, rgb(var(--cinelin-home-panel)) 100%);
+}
+
+.cinelin-page--about .cinelin-about-values {
+  background:
+    radial-gradient(circle at 15% 20%, rgb(var(--cinelin-home-green) / 0.38), transparent 24rem),
+    linear-gradient(180deg, rgb(var(--cinelin-home-panel)) 0%, rgb(var(--cinelin-home-pink) / 0.18) 46%, rgb(var(--cinelin-home-panel)) 100%);
+}
+
+.cinelin-page--about .cinelin-contact-layout {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-panel)) 0%, rgb(var(--cinelin-home-blue) / 0.24) 48%, rgb(var(--cinelin-home-panel)) 100%);
+}
+
+.cinelin-page--about .cinelin-contact-layout::before {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-about-blank-image,
+.cinelin-page--about .cinelin-about-film__blank {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-panel)) 0%, rgb(var(--cinelin-home-blue) / 0.22) 52%, rgb(var(--cinelin-home-panel)) 100%),
+    rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-about-layout__details div,
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article,
+.cinelin-page--about .cinelin-about-values__statement span {
+  background: rgb(var(--cinelin-home-panel) / 0.62);
+}
+
+.cinelin-page--about .cinelin-about-values__statement span:nth-child(2) {
+  background: linear-gradient(135deg, rgb(var(--cinelin-home-panel)), rgb(var(--cinelin-home-pink) / 0.28));
+}
+
+.cinelin-page--about .cinelin-about-values__statement span:nth-child(3) {
+  background: linear-gradient(135deg, rgb(var(--cinelin-home-panel)), rgb(var(--cinelin-home-blue) / 0.26));
+}
+
+.cinelin-page--about .cinelin-contact-layout__details a {
+  background: transparent;
+  border: 0;
+  border-bottom: 0.1rem solid rgb(var(--about-ink) / 0.18);
+  padding: 1.1rem 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field {
+  background:
+    linear-gradient(rgb(var(--cinelin-home-blue)), rgb(var(--cinelin-home-blue))) 0 100% / 0 0.14rem no-repeat,
+    linear-gradient(rgb(var(--about-ink) / 0.22), rgb(var(--about-ink) / 0.22)) 0 100% / 100% 0.1rem no-repeat;
+  padding: 0.8rem 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:hover,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:focus,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field:focus-visible {
+  background:
+    linear-gradient(rgb(var(--cinelin-home-blue)), rgb(var(--cinelin-home-blue))) 0 100% / 100% 0.14rem no-repeat,
+    linear-gradient(rgb(var(--about-ink) / 0.22), rgb(var(--about-ink) / 0.22)) 0 100% / 100% 0.1rem no-repeat;
+}
+
+/* About story layout: sparse white editorial composition. */
+.cinelin-page--about {
+  background: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-about-layout,
+.cinelin-page--about .cinelin-about-film,
+.cinelin-page--about .cinelin-about-values,
+.cinelin-page--about .cinelin-contact-layout {
+  background: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-about-layout {
+  min-height: calc(100svh - 5.8rem);
+  padding: clamp(7rem, 12vw, 16rem) clamp(1.8rem, 4.5vw, 7rem);
+}
+
+.cinelin-page--about .cinelin-about-layout__left {
+  gap: clamp(5rem, 8vw, 9rem);
+  margin: 0;
+  max-width: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__intro {
+  display: block;
+}
+
+.cinelin-page--about .cinelin-about-layout__thumb,
+.cinelin-page--about .cinelin-about-layout__right {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy {
+  display: grid;
+  gap: clamp(3rem, 5vw, 6rem);
+  grid-template-columns: minmax(18rem, 0.38fr) minmax(0, 0.62fr);
+  max-width: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy > .cinelin-about-layout__kicker {
+  grid-column: 1;
+  justify-self: start;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker,
+.cinelin-page--about .cinelin-contact-layout__kicker {
+  color: rgb(var(--about-ink));
+  font-size: clamp(1rem, 1.05vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 0;
+}
+
+.cinelin-page--about .cinelin-about-layout h1 {
+  color: rgb(var(--about-ink));
+  font-size: clamp(4.6rem, 5.7vw, 10.8rem);
+  font-weight: 900;
+  grid-column: 2;
+  letter-spacing: 0;
+  line-height: 0.95;
+  max-width: 15ch;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy p {
+  color: rgb(var(--cinelin-home-muted) / 0.78);
+  font-size: clamp(1.45rem, 1.4vw, 2rem);
+  grid-column: 2;
+  line-height: 1.32;
+  margin: 0;
+  max-width: 62rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__link {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  gap: clamp(3rem, 5vw, 7rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-left: 38%;
+  max-width: 96rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div:first-child {
+  grid-column: 1 / -1;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dt {
+  color: rgb(var(--about-ink));
+  font-size: clamp(0.95rem, 0.9vw, 1.15rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  margin-bottom: 1rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dd {
+  color: rgb(var(--cinelin-home-muted) / 0.78);
+  font-size: clamp(1.3rem, 1.25vw, 1.8rem);
+  line-height: 1.35;
+}
+
+.cinelin-page--about .cinelin-about-film {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-home-panel)) 0%, rgb(var(--cinelin-home-blue) / 0.16) 100%);
+}
+
+.cinelin-page--about .cinelin-about-values {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-home-panel)) 0%, rgb(var(--cinelin-home-green) / 0.2) 100%);
+}
+
+.cinelin-page--about .cinelin-about-values__statement span,
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article {
+  background: transparent;
+  border: 0;
+}
+
+@media screen and (max-width: 989px) {
+  .cinelin-page--about .cinelin-about-layout__copy {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout h1,
+  .cinelin-page--about .cinelin-about-layout__copy p {
+    grid-column: 1;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-page--about .cinelin-about-layout {
+    min-height: auto;
+    padding-block: 6rem;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stronger story alignment: left label, right-aligned content column. */
+.cinelin-page--about .cinelin-about-layout {
+  padding-inline: clamp(0.8rem, 1vw, 1.6rem) clamp(1.8rem, 4.5vw, 7rem);
+}
+
+.cinelin-page--about .cinelin-about-layout__left {
+  margin: 0;
+  max-width: none;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy {
+  column-gap: clamp(3rem, 5vw, 7rem);
+  grid-template-columns: minmax(22rem, 50vw) minmax(0, 1fr);
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy > .cinelin-about-layout__kicker {
+  grid-column: 1;
+  justify-self: start;
+  margin-left: 0;
+  padding-left: 0;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-layout h1,
+.cinelin-page--about .cinelin-about-layout__copy p {
+  grid-column: 2;
+  justify-self: start;
+  margin-left: 0;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  margin-left: calc(50vw + clamp(3rem, 5vw, 7rem));
+  max-width: min(88rem, calc(50vw - clamp(3rem, 5vw, 7rem) - clamp(1.8rem, 4.5vw, 7rem)));
+}
+
+@media screen and (max-width: 989px) {
+  .cinelin-page--about .cinelin-about-layout {
+    padding-inline: clamp(1.4rem, 4vw, 3.2rem);
+  }
+
+  .cinelin-page--about .cinelin-about-layout__copy {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout h1,
+  .cinelin-page--about .cinelin-about-layout__copy p {
+    grid-column: 1;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details {
+    margin-left: 0;
+    max-width: none;
+  }
+}
+
+/* Pull the story content column further left. */
+.cinelin-page--about .cinelin-about-layout__copy {
+  grid-template-columns: minmax(14rem, 28vw) minmax(0, 1fr);
+}
+
+.cinelin-page--about .cinelin-about-layout h1,
+.cinelin-page--about .cinelin-about-layout__copy p {
+  max-width: 13ch;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy p {
+  max-width: 64rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  margin-left: calc(28vw + clamp(3rem, 5vw, 7rem));
+  max-width: min(92rem, calc(72vw - clamp(3rem, 5vw, 7rem) - clamp(1.8rem, 4.5vw, 7rem)));
+}
+
+@media screen and (max-width: 989px) {
+  .cinelin-page--about .cinelin-about-layout__copy {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details {
+    margin-left: 0;
+    max-width: none;
+  }
+}
+
+/* Final story placement: all brand story content starts from the far left. */
+.cinelin-page--about .cinelin-about-layout {
+  padding-inline: clamp(1.2rem, 3vw, 4rem);
+}
+
+.cinelin-page--about .cinelin-about-layout__copy {
+  display: grid;
+  gap: clamp(2rem, 3vw, 3.6rem);
+  grid-template-columns: 1fr;
+  justify-items: start;
+  max-width: 104rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy > .cinelin-about-layout__kicker,
+.cinelin-page--about .cinelin-about-layout h1,
+.cinelin-page--about .cinelin-about-layout__copy p {
+  grid-column: 1;
+  justify-self: start;
+  margin-left: 0;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-layout h1 {
+  max-width: 12ch;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy p {
+  max-width: 66rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  margin-left: 0;
+  max-width: 86rem;
+}
+
+/* Add a full-height right visual back into the story hero. */
+.cinelin-page--about .cinelin-about-layout {
+  align-items: stretch;
+  display: grid;
+  gap: clamp(3rem, 5vw, 7rem);
+  grid-template-columns: minmax(0, 0.52fr) minmax(34rem, 0.48fr);
+}
+
+.cinelin-page--about .cinelin-about-layout__left {
+  align-content: start;
+  display: grid;
+}
+
+.cinelin-page--about .cinelin-about-layout__right {
+  align-self: stretch;
+  display: block;
+  margin: 0;
+  max-width: none;
+  min-height: clamp(52rem, 72vh, 86rem);
+  overflow: hidden;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__right img,
+.cinelin-page--about .cinelin-about-layout__right .cinelin-about-blank-image {
+  display: block;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__right .cinelin-about-blank-image {
+  background:
+    linear-gradient(145deg, rgb(var(--cinelin-home-blue) / 0.32), rgb(var(--cinelin-home-panel)) 48%, rgb(var(--cinelin-home-pink) / 0.28)),
+    rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-about-layout__right span {
+  display: none;
+}
+
+@media screen and (max-width: 989px) {
+  .cinelin-page--about .cinelin-about-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__right {
+    min-height: clamp(28rem, 72vw, 48rem);
+  }
+}
+
+/* Our Difference: text-only, no boxes or frames. */
+.cinelin-page--about .cinelin-about-values {
+  background: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-about-values__intro {
+  margin: 0;
+  max-width: 96rem;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-values__intro h2,
+.cinelin-page--about .cinelin-about-values__intro p {
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-values__intro p {
+  display: block;
+  margin-top: clamp(1.6rem, 2.4vw, 3rem);
+  max-width: 74rem;
+}
+
+.cinelin-page--about .cinelin-about-values__statement,
+.cinelin-page--about .cinelin-about-process__steps,
+.cinelin-page--about .cinelin-about-pillars {
+  gap: clamp(2rem, 4vw, 6rem);
+}
+
+.cinelin-page--about .cinelin-about-values__statement span,
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article {
+  background: transparent;
+  border: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-about-values__statement span:nth-child(2),
+.cinelin-page--about .cinelin-about-values__statement span:nth-child(3) {
+  background: transparent;
+}
+
+/* About page normalization: one clean alignment system for every section. */
+.cinelin-page--about {
+  --about-page-pad: clamp(1.6rem, 4vw, 6.4rem);
+  --about-section-y: clamp(6.4rem, 10vw, 12rem);
+  --about-content-max: 168rem;
+  --about-copy-max: 68rem;
+  background: rgb(var(--cinelin-home-panel));
+}
+
+.cinelin-page--about .cinelin-about-layout,
+.cinelin-page--about .cinelin-about-film,
+.cinelin-page--about .cinelin-about-values,
+.cinelin-page--about .cinelin-contact-layout {
+  background: rgb(var(--cinelin-home-panel));
+  border: 0;
+  margin: 0;
+  padding: var(--about-section-y) var(--about-page-pad);
+}
+
+.cinelin-page--about .cinelin-about-layout {
+  align-items: start;
+  gap: clamp(3.2rem, 5vw, 7.2rem);
+  grid-template-columns: minmax(0, 0.54fr) minmax(30rem, 0.46fr);
+  min-height: calc(100svh - 5.8rem);
+}
+
+.cinelin-page--about .cinelin-about-layout__left,
+.cinelin-page--about .cinelin-about-layout__right,
+.cinelin-page--about .cinelin-about-film,
+.cinelin-page--about .cinelin-about-values__intro,
+.cinelin-page--about .cinelin-about-values__statement,
+.cinelin-page--about .cinelin-about-process,
+.cinelin-page--about .cinelin-about-pillars,
+.cinelin-page--about .cinelin-contact-layout {
+  margin-inline: auto;
+  max-width: var(--about-content-max);
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__left {
+  gap: clamp(3.2rem, 5vw, 6rem);
+  margin: 0;
+  max-width: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy,
+.cinelin-page--about .cinelin-about-values__intro,
+.cinelin-page--about .cinelin-about-process__heading,
+.cinelin-page--about .cinelin-contact-layout__intro,
+.cinelin-page--about .cinelin-contact-layout__form-wrap {
+  justify-items: start;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy {
+  gap: clamp(1.8rem, 2.4vw, 3rem);
+  max-width: 96rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker,
+.cinelin-page--about .cinelin-contact-layout__kicker {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: clamp(1rem, 0.9vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-layout h1,
+.cinelin-page--about .cinelin-about-film__copy h2,
+.cinelin-page--about .cinelin-about-values__intro h2,
+.cinelin-page--about .cinelin-contact-layout__intro h2,
+.cinelin-page--about .cinelin-contact-layout__form-wrap h2 {
+  color: rgb(var(--cinelin-home-ink));
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.96;
+  margin: 0;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-layout h1 {
+  font-size: clamp(4.8rem, 6.8vw, 12rem);
+  max-width: 11ch;
+}
+
+.cinelin-page--about .cinelin-about-film__copy h2,
+.cinelin-page--about .cinelin-about-values__intro h2,
+.cinelin-page--about .cinelin-contact-layout__intro h2,
+.cinelin-page--about .cinelin-contact-layout__form-wrap h2 {
+  font-size: clamp(3.4rem, 4.6vw, 7.2rem);
+  max-width: 12ch;
+}
+
+.cinelin-page--about .cinelin-about-layout__copy p,
+.cinelin-page--about .cinelin-about-film__copy p,
+.cinelin-page--about .cinelin-about-values__intro p,
+.cinelin-page--about .cinelin-contact-layout__intro p,
+.cinelin-page--about .cinelin-about-layout__details dd,
+.cinelin-page--about .cinelin-about-process__steps p,
+.cinelin-page--about .cinelin-about-pillars p {
+  color: rgb(var(--cinelin-home-muted) / 0.82);
+  font-size: clamp(1.25rem, 1.25vw, 1.75rem);
+  line-height: 1.42;
+  max-width: var(--about-copy-max);
+}
+
+.cinelin-page--about .cinelin-about-layout__details,
+.cinelin-page--about .cinelin-about-values__statement,
+.cinelin-page--about .cinelin-about-process__steps,
+.cinelin-page--about .cinelin-about-pillars {
+  gap: clamp(2rem, 3vw, 4.8rem);
+  margin: 0;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 96rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div:first-child {
+  grid-column: auto;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div,
+.cinelin-page--about .cinelin-about-values__statement span,
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article {
+  background: transparent;
+  border: 0;
+  min-height: 0;
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dt,
+.cinelin-page--about .cinelin-about-process__steps span,
+.cinelin-page--about .cinelin-about-pillars span {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: clamp(0.95rem, 0.9vw, 1.1rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  margin: 0 0 0.8rem;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-film {
+  align-items: start;
+  display: grid;
+  gap: clamp(3.2rem, 5vw, 7.2rem);
+  grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+}
+
+.cinelin-page--about .cinelin-about-film__media,
+.cinelin-page--about .cinelin-about-layout__right {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-panel)) 0%, rgb(var(--cinelin-home-blue) / 0.2) 100%);
+  min-height: clamp(36rem, 58vw, 72rem);
+}
+
+.cinelin-page--about .cinelin-about-film__copy {
+  align-content: start;
+  display: grid;
+  gap: clamp(1.8rem, 2.4vw, 3rem);
+  padding: 0;
+  position: static;
+}
+
+.cinelin-page--about .cinelin-about-values {
+  display: grid;
+  gap: clamp(4rem, 6vw, 8rem);
+}
+
+.cinelin-page--about .cinelin-about-values__statement {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cinelin-page--about .cinelin-about-values__statement span {
+  align-items: start;
+  color: rgb(var(--cinelin-home-ink));
+  display: block;
+  font-size: clamp(2.4rem, 3vw, 4.6rem);
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-process {
+  display: grid;
+  gap: clamp(3rem, 5vw, 7.2rem);
+  grid-template-columns: minmax(20rem, 0.32fr) minmax(0, 0.68fr);
+}
+
+.cinelin-page--about .cinelin-about-process__steps,
+.cinelin-page--about .cinelin-about-pillars {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cinelin-page--about .cinelin-about-process__steps strong,
+.cinelin-page--about .cinelin-about-pillars h3 {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: clamp(1.6rem, 1.5vw, 2.2rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(3.2rem, 5vw, 7.2rem);
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+}
+
+.cinelin-page--about .cinelin-contact-layout__details,
+.cinelin-page--about .cinelin-contact-layout__form {
+  max-width: var(--about-copy-max);
+}
+
+@media screen and (max-width: 989px) {
+  .cinelin-page--about .cinelin-about-layout,
+  .cinelin-page--about .cinelin-about-film,
+  .cinelin-page--about .cinelin-about-process,
+  .cinelin-page--about .cinelin-contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details,
+  .cinelin-page--about .cinelin-about-values__statement,
+  .cinelin-page--about .cinelin-about-process__steps,
+  .cinelin-page--about .cinelin-about-pillars {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Brand Story details: three tidy single-line rows. */
+.cinelin-page--about .cinelin-about-layout__details {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: 1fr;
+  max-width: 88rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div,
+.cinelin-page--about .cinelin-about-layout__details div:first-child {
+  align-items: baseline;
+  display: grid;
+  gap: clamp(1.2rem, 2vw, 2.4rem);
+  grid-column: auto;
+  grid-template-columns: minmax(8.8rem, max-content) minmax(0, 1fr);
+}
+
+.cinelin-page--about .cinelin-about-layout__details dt {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dd {
+  margin: 0;
+  max-width: none;
+  overflow-wrap: normal;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-page--about .cinelin-about-layout__details div,
+  .cinelin-page--about .cinelin-about-layout__details div:first-child {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details dd {
+    white-space: normal;
+  }
+}
+
+/* Our Difference cleanup: equal columns, left aligned, with light dividers. */
+.cinelin-page--about .cinelin-about-values__statement {
+  border-top: 0.1rem solid rgb(var(--cinelin-home-muted) / 0.28);
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cinelin-page--about .cinelin-about-values__statement span {
+  align-items: start;
+  border-bottom: 0.1rem solid rgb(var(--cinelin-home-muted) / 0.28);
+  color: rgb(var(--cinelin-home-ink));
+  display: flex;
+  font-size: clamp(2rem, 2.55vw, 3.8rem);
+  font-weight: 900;
+  justify-content: flex-start;
+  line-height: 1.02;
+  min-height: clamp(13rem, 14vw, 22rem);
+  padding: clamp(1.6rem, 2.2vw, 3rem) clamp(1.2rem, 2vw, 2.4rem) clamp(1.6rem, 2.2vw, 3rem) 0;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-values__statement span + span {
+  border-left: 0.1rem solid rgb(var(--cinelin-home-muted) / 0.22);
+  padding-left: clamp(1.6rem, 2.2vw, 3rem);
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-page--about .cinelin-about-values__statement {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-values__statement span {
+    min-height: 0;
+    padding-left: 0;
+  }
+
+  .cinelin-page--about .cinelin-about-values__statement span + span {
+    border-left: 0;
+  }
+}
+
+/* Process and values visuals: lightweight silver-jewelry mockups until real assets arrive. */
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article {
+  display: grid;
+  gap: 1rem;
+}
+
+.cinelin-page--about .cinelin-about-sample {
+  aspect-ratio: 16 / 10;
+  background:
+    radial-gradient(circle at 42% 44%, rgb(var(--cinelin-home-panel)) 0 1.4rem, transparent 1.5rem),
+    linear-gradient(135deg, rgb(var(--cinelin-home-blue) / 0.2), rgb(var(--cinelin-home-green) / 0.22)),
+    rgb(var(--cinelin-home-panel));
+  margin-bottom: clamp(0.8rem, 1.2vw, 1.4rem);
+  max-width: 30rem;
+  overflow: hidden;
+  position: relative;
+  width: min(100%, 30rem);
+}
+
+.cinelin-page--about .cinelin-about-sample::before,
+.cinelin-page--about .cinelin-about-sample::after {
+  content: "";
+  position: absolute;
+}
+
+.cinelin-page--about .cinelin-about-sample::before {
+  background:
+    radial-gradient(ellipse at center, transparent 42%, rgb(var(--cinelin-home-muted) / 0.56) 44% 52%, transparent 54%),
+    linear-gradient(135deg, rgb(var(--cinelin-home-panel) / 0.18), transparent);
+  border-radius: 50%;
+  height: 46%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -48%) rotate(-14deg);
+  width: 54%;
+}
+
+.cinelin-page--about .cinelin-about-sample::after {
+  background: rgb(var(--cinelin-home-blue) / 0.5);
+  border-radius: 50%;
+  box-shadow:
+    1.8rem 1rem 0 rgb(var(--cinelin-home-pink) / 0.46),
+    -1.5rem 1.3rem 0 rgb(var(--cinelin-home-green) / 0.58);
+  height: 1.2rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.2rem;
+}
+
+.cinelin-page--about .cinelin-about-sample--sketch {
+  background:
+    linear-gradient(18deg, transparent 40%, rgb(var(--cinelin-home-muted) / 0.18) 41% 42%, transparent 43%),
+    linear-gradient(-16deg, transparent 46%, rgb(var(--cinelin-home-muted) / 0.14) 47% 48%, transparent 49%),
+    rgb(var(--cinelin-home-green) / 0.18);
+}
+
+.cinelin-page--about .cinelin-about-sample--model::before {
+  transform: translate(-50%, -48%) rotate(22deg);
+}
+
+.cinelin-page--about .cinelin-about-sample--cast {
+  background:
+    radial-gradient(circle at 32% 36%, rgb(var(--cinelin-home-muted) / 0.26) 0 1.3rem, transparent 1.4rem),
+    radial-gradient(circle at 64% 58%, rgb(var(--cinelin-home-muted) / 0.22) 0 1.6rem, transparent 1.7rem),
+    rgb(var(--cinelin-home-blue) / 0.16);
+}
+
+.cinelin-page--about .cinelin-about-sample--polish::before,
+.cinelin-page--about .cinelin-about-sample--handcrafted::before {
+  background:
+    radial-gradient(ellipse at center, transparent 38%, rgb(var(--cinelin-home-muted) / 0.6) 40% 48%, transparent 50%);
+  transform: translate(-50%, -48%) rotate(8deg);
+}
+
+.cinelin-page--about .cinelin-about-sample--owned,
+.cinelin-page--about .cinelin-about-sample--trade,
+.cinelin-page--about .cinelin-about-sample--wages,
+.cinelin-page--about .cinelin-about-sample--handcrafted {
+  max-width: 24rem;
+  width: min(100%, 24rem);
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-page--about .cinelin-about-sample {
+    max-width: none;
+    width: 100%;
+  }
 }

@@ -205,12 +205,72 @@ const initCinelinPageMenus = (container = document) => {
   });
 };
 
+const initCinelinAboutScrollEffects = (container = document) => {
+  const aboutPages = Array.from(container.querySelectorAll('.cinelin-page--about'));
+  if (container.matches?.('.cinelin-page--about')) {
+    aboutPages.push(container);
+  }
+
+  aboutPages.forEach((page) => {
+    if (page.cinelinAboutScrollEffects) return;
+    page.cinelinAboutScrollEffects = true;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = Array.from(page.querySelectorAll('[data-about-reveal]'));
+    const floatItems = Array.from(page.querySelectorAll('[data-about-float]'));
+
+    if (reducedMotion) {
+      revealItems.forEach((item) => item.classList.add('is-visible'));
+      return;
+    }
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px', threshold: 0.12 }
+    );
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+
+    let isTicking = false;
+    const updateFloat = () => {
+      isTicking = false;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+      floatItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        const progress = (rect.top + rect.height / 2 - viewportHeight / 2) / viewportHeight;
+        const offset = Math.max(-1, Math.min(1, progress)) * -28;
+        item.style.setProperty('--about-parallax', `${offset.toFixed(2)}px`);
+      });
+    };
+
+    const requestFloatUpdate = () => {
+      if (isTicking) return;
+      isTicking = true;
+      window.requestAnimationFrame(updateFloat);
+    };
+
+    updateFloat();
+    window.addEventListener('scroll', requestFloatUpdate, { passive: true });
+    window.addEventListener('resize', requestFloatUpdate);
+  });
+};
+
 initCinelinPageMenus();
 initCinelinProductModelGrids();
 initCinelinProductPages();
+initCinelinAboutScrollEffects();
 
 document.addEventListener('shopify:section:load', (event) => {
   initCinelinPageMenus(event.target);
   initCinelinProductModelGrids(event.target);
   initCinelinProductPages(event.target);
+  initCinelinAboutScrollEffects(event.target);
 });
