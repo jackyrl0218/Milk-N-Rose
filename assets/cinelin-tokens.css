@@ -27,6 +27,10 @@
   --cinelin-about-paper: 247 246 242;
   --cinelin-about-blank: 229 233 241;
   --cinelin-about-media: 144 167 196;
+  --milk-rose-brand-blush: 242 202 185;
+  --milk-rose-brand-blush-soft: 250 236 230;
+  --milk-rose-silver: 216 224 228;
+  --milk-rose-editorial-gray: 92 120 132;
   --cinelin-unified-font: "Helvetica Neue", Helvetica, Arial, sans-serif;
   --cinelin-home-font: var(--cinelin-unified-font);
   --font-body-family: var(--cinelin-unified-font);

@@ -1,5 +1,6 @@
 {{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
 {{ 'cinelin-pages.css' | asset_url | stylesheet_tag }}
+{{ 'milk-rose-about.css' | asset_url | stylesheet_tag }}
 <script src="{{ 'cinelin-pages.js' | asset_url }}" defer="defer"></script>
 
 <section class="cinelin-page cinelin-page--about" data-cinelin-page>
@@ -73,7 +74,7 @@
           </div>
           <div data-about-reveal>
             <dt>{{ section.settings.detail_two_label | escape }}</dt>
-            <dd>{{ section.settings.detail_two_text | replace: '\n', ' / ' | escape }}</dd>
+            <dd>{{ section.settings.detail_two_text | newline_to_br | replace: '<br />', ' / ' | strip_html | escape }}</dd>
           </div>
           <div data-about-reveal>
             <dt>{{ section.settings.detail_three_label | escape }}</dt>

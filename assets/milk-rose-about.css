@@ -1,0 +1,452 @@
+.cinelin-page--about {
+  --about-pad-x: clamp(1.6rem, 4vw, 6.4rem);
+  --about-pad-y: clamp(6.4rem, 10vw, 12rem);
+  --about-max: 168rem;
+  --about-copy: 70rem;
+  --about-ink: var(--cinelin-home-ink);
+  --about-muted: var(--milk-rose-editorial-gray);
+  --about-line: var(--milk-rose-editorial-gray);
+  --about-blush: var(--milk-rose-brand-blush);
+  --about-blush-soft: var(--milk-rose-brand-blush-soft);
+  background: rgb(var(--cinelin-home-panel));
+  color: rgb(var(--about-ink));
+  font-family: var(--cinelin-unified-font);
+}
+
+.cinelin-page--about * {
+  box-sizing: border-box;
+}
+
+.cinelin-page--about .cinelin-page__shell {
+  background: rgb(var(--cinelin-home-panel));
+  max-width: none;
+  padding: 0;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-page__topline {
+  background: rgb(var(--cinelin-home-panel) / 0.88);
+  border: 0;
+  min-height: 5.8rem;
+  padding-inline: var(--about-pad-x);
+}
+
+.cinelin-page--about .cinelin-about-layout,
+.cinelin-page--about .cinelin-about-film,
+.cinelin-page--about .cinelin-about-values,
+.cinelin-page--about .cinelin-contact-layout {
+  background: rgb(var(--cinelin-home-panel));
+  border: 0;
+  margin: 0;
+  padding: var(--about-pad-y) var(--about-pad-x);
+}
+
+.cinelin-page--about .cinelin-about-layout {
+  display: grid;
+  gap: clamp(3.2rem, 5vw, 7.2rem);
+  grid-template-columns: minmax(0, 0.54fr) minmax(30rem, 0.46fr);
+  min-height: calc(100svh - 5.8rem);
+}
+
+.cinelin-page--about .cinelin-about-layout__left,
+.cinelin-page--about .cinelin-about-layout__right,
+.cinelin-page--about .cinelin-about-film,
+.cinelin-page--about .cinelin-about-values__intro,
+.cinelin-page--about .cinelin-about-values__statement,
+.cinelin-page--about .cinelin-about-process,
+.cinelin-page--about .cinelin-about-pillars,
+.cinelin-page--about .cinelin-contact-layout {
+  margin-inline: auto;
+  max-width: var(--about-max);
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__left {
+  align-content: start;
+  display: grid;
+  gap: clamp(3rem, 5vw, 5.6rem);
+  margin: 0;
+  max-width: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__intro,
+.cinelin-page--about .cinelin-about-layout__copy {
+  display: grid;
+  gap: clamp(1.8rem, 2.8vw, 3.4rem);
+  grid-template-columns: 1fr;
+  max-width: 98rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__thumb {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker,
+.cinelin-page--about .cinelin-contact-layout__kicker {
+  color: rgb(var(--about-muted));
+  font-size: clamp(1rem, 0.9vw, 1.25rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker::before,
+.cinelin-page--about .cinelin-contact-layout__kicker::before {
+  content: "[ ";
+}
+
+.cinelin-page--about .cinelin-about-layout__kicker::after,
+.cinelin-page--about .cinelin-contact-layout__kicker::after {
+  content: " ]";
+}
+
+.cinelin-page--about h1,
+.cinelin-page--about h2,
+.cinelin-page--about h3 {
+  color: rgb(var(--about-ink));
+  font-weight: 900;
+  letter-spacing: 0;
+  line-height: 0.96;
+  margin: 0;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-layout h1 {
+  font-size: clamp(4.8rem, 6.7vw, 12rem);
+  max-width: 11ch;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-film h2,
+.cinelin-page--about .cinelin-about-values h2,
+.cinelin-page--about .cinelin-contact-layout h2,
+.cinelin-page--about .cinelin-about-process h3 {
+  font-size: clamp(3.4rem, 4.8vw, 7.6rem);
+  max-width: 12ch;
+}
+
+.cinelin-page--about p,
+.cinelin-page--about dd,
+.cinelin-page--about .cinelin-about-process__steps p,
+.cinelin-page--about .cinelin-about-pillars p {
+  color: rgb(var(--about-muted) / 0.84);
+  font-size: clamp(1.25rem, 1.25vw, 1.75rem);
+  line-height: 1.42;
+  margin: 0;
+  max-width: var(--about-copy);
+}
+
+.cinelin-page--about .cinelin-about-layout__link {
+  background: rgb(var(--about-blush));
+  border: 0;
+  border-radius: 0;
+  color: rgb(var(--about-ink));
+  justify-self: start;
+}
+
+.cinelin-page--about .cinelin-about-layout__details {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: 1fr;
+  margin: 0;
+  max-width: 92rem;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div {
+  align-items: baseline;
+  background: transparent;
+  border: 0;
+  display: grid;
+  gap: clamp(1.2rem, 2vw, 2.4rem);
+  grid-template-columns: minmax(8.8rem, max-content) minmax(0, 1fr);
+  min-height: 0;
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-about-layout__details div:first-child {
+  grid-column: auto;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dt,
+.cinelin-page--about .cinelin-about-process__steps span,
+.cinelin-page--about .cinelin-about-pillars span {
+  color: rgb(var(--about-muted));
+  font-size: clamp(0.95rem, 0.9vw, 1.1rem);
+  font-weight: 800;
+  letter-spacing: 0;
+  margin: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cinelin-page--about .cinelin-about-layout__details dd {
+  max-width: none;
+  white-space: nowrap;
+}
+
+.cinelin-page--about .cinelin-about-layout__right,
+.cinelin-page--about .cinelin-about-film__media {
+  background:
+    radial-gradient(circle at 24% 18%, rgb(var(--about-blush) / 0.5), transparent 26rem),
+    linear-gradient(135deg, rgb(var(--cinelin-home-panel)) 0%, rgb(var(--milk-rose-silver) / 0.7) 100%);
+  min-height: clamp(36rem, 58vw, 76rem);
+  overflow: hidden;
+}
+
+.cinelin-page--about .cinelin-about-layout__right img,
+.cinelin-page--about .cinelin-about-film__media img,
+.cinelin-page--about .cinelin-about-layout__right .cinelin-about-blank-image,
+.cinelin-page--about .cinelin-about-film__blank {
+  display: block;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cinelin-page--about .cinelin-about-layout__right span,
+.cinelin-page--about .cinelin-about-blank-image::before,
+.cinelin-page--about .cinelin-about-blank-image::after,
+.cinelin-page--about .cinelin-about-film__blank::before,
+.cinelin-page--about .cinelin-about-film__blank::after {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-about-film {
+  align-items: start;
+  display: grid;
+  gap: clamp(3.2rem, 5vw, 7.2rem);
+  grid-template-columns: minmax(0, 0.48fr) minmax(0, 0.52fr);
+}
+
+.cinelin-page--about .cinelin-about-film__copy {
+  align-content: start;
+  display: grid;
+  gap: clamp(1.8rem, 2.6vw, 3.4rem);
+  padding: 0;
+  position: static;
+}
+
+.cinelin-page--about .cinelin-about-values {
+  display: grid;
+  gap: clamp(4rem, 6vw, 8rem);
+}
+
+.cinelin-page--about .cinelin-about-values__intro {
+  display: grid;
+  gap: clamp(1.6rem, 2.6vw, 3.2rem);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.cinelin-page--about .cinelin-about-values__statement {
+  border-top: 0.1rem solid rgb(var(--about-line) / 0.28);
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cinelin-page--about .cinelin-about-values__statement span {
+  align-items: flex-start;
+  background: transparent;
+  border: 0;
+  border-bottom: 0.1rem solid rgb(var(--about-line) / 0.28);
+  color: rgb(var(--about-ink));
+  display: flex;
+  font-size: clamp(2rem, 2.55vw, 3.8rem);
+  font-weight: 900;
+  justify-content: flex-start;
+  line-height: 1.02;
+  min-height: clamp(13rem, 14vw, 22rem);
+  padding: clamp(1.6rem, 2.2vw, 3rem) clamp(1.2rem, 2vw, 2.4rem) clamp(1.6rem, 2.2vw, 3rem) 0;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.cinelin-page--about .cinelin-about-values__statement span + span {
+  border-left: 0.1rem solid rgb(var(--about-line) / 0.22);
+  padding-left: clamp(1.6rem, 2.2vw, 3rem);
+}
+
+.cinelin-page--about .cinelin-about-process {
+  display: grid;
+  gap: clamp(3.2rem, 5vw, 7.2rem);
+  grid-template-columns: minmax(20rem, 0.32fr) minmax(0, 0.68fr);
+}
+
+.cinelin-page--about .cinelin-about-process__steps,
+.cinelin-page--about .cinelin-about-pillars {
+  display: grid;
+  gap: clamp(2.4rem, 3vw, 4.8rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-about-process__steps li,
+.cinelin-page--about .cinelin-about-pillars article {
+  background: transparent;
+  border: 0;
+  display: grid;
+  gap: 1rem;
+  min-height: 0;
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-about-process__steps strong,
+.cinelin-page--about .cinelin-about-pillars h3 {
+  color: rgb(var(--about-ink));
+  font-size: clamp(1.6rem, 1.5vw, 2.2rem);
+  line-height: 1.1;
+  margin: 0;
+}
+
+.cinelin-page--about .cinelin-about-sample {
+  aspect-ratio: 16 / 10;
+  background:
+    radial-gradient(circle at 42% 44%, rgb(var(--cinelin-home-panel)) 0 1.4rem, transparent 1.5rem),
+    linear-gradient(135deg, rgb(var(--about-blush) / 0.36), rgb(var(--milk-rose-silver) / 0.52)),
+    rgb(var(--cinelin-home-panel));
+  margin-bottom: clamp(0.8rem, 1.2vw, 1.4rem);
+  max-width: 30rem;
+  overflow: hidden;
+  position: relative;
+  width: min(100%, 30rem);
+}
+
+.cinelin-page--about .cinelin-about-sample::before,
+.cinelin-page--about .cinelin-about-sample::after {
+  content: "";
+  position: absolute;
+}
+
+.cinelin-page--about .cinelin-about-sample::before {
+  background:
+    radial-gradient(ellipse at center, transparent 42%, rgb(var(--about-muted) / 0.5) 44% 52%, transparent 54%),
+    linear-gradient(135deg, rgb(var(--cinelin-home-panel) / 0.18), transparent);
+  border-radius: 50%;
+  height: 46%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -48%) rotate(-14deg);
+  width: 54%;
+}
+
+.cinelin-page--about .cinelin-about-sample::after {
+  background: rgb(var(--about-blush) / 0.78);
+  border-radius: 50%;
+  box-shadow:
+    1.8rem 1rem 0 rgb(var(--cinelin-home-blue) / 0.34),
+    -1.5rem 1.3rem 0 rgb(var(--cinelin-home-green) / 0.42);
+  height: 1.2rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 1.2rem;
+}
+
+.cinelin-page--about .cinelin-contact-layout {
+  align-items: start;
+  display: grid;
+  gap: clamp(3.2rem, 5vw, 7.2rem);
+  grid-template-columns: minmax(0, 0.44fr) minmax(0, 0.56fr);
+}
+
+.cinelin-page--about .cinelin-contact-layout__visual {
+  display: none;
+}
+
+.cinelin-page--about .cinelin-contact-layout__content,
+.cinelin-page--about .cinelin-contact-layout__form-wrap {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.cinelin-page--about .cinelin-contact-layout__details,
+.cinelin-page--about .cinelin-contact-layout__form {
+  max-width: var(--about-copy);
+}
+
+.cinelin-page--about .cinelin-contact-layout__details a,
+.cinelin-page--about .cinelin-contact-layout__form .cinelin-contact__field {
+  background:
+    linear-gradient(rgb(var(--about-blush)), rgb(var(--about-blush))) 0 100% / 0 0.14rem no-repeat,
+    linear-gradient(rgb(var(--about-line) / 0.22), rgb(var(--about-line) / 0.22)) 0 100% / 100% 0.1rem no-repeat;
+  border: 0;
+}
+
+.cinelin-page--about [data-about-reveal] {
+  opacity: 0;
+  transform: translateY(2.4rem);
+  transition:
+    opacity 620ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cinelin-page--about [data-about-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(var(--about-parallax, 0));
+}
+
+@media screen and (max-width: 989px) {
+  .cinelin-page--about .cinelin-about-layout,
+  .cinelin-page--about .cinelin-about-film,
+  .cinelin-page--about .cinelin-about-process,
+  .cinelin-page--about .cinelin-contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details,
+  .cinelin-page--about .cinelin-about-values__statement,
+  .cinelin-page--about .cinelin-about-process__steps,
+  .cinelin-page--about .cinelin-about-pillars {
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details dd {
+    white-space: normal;
+  }
+
+  .cinelin-page--about .cinelin-about-values__statement span {
+    min-height: 0;
+    padding-left: 0;
+  }
+
+  .cinelin-page--about .cinelin-about-values__statement span + span {
+    border-left: 0;
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-page--about {
+    --about-pad-x: 1.4rem;
+    --about-pad-y: 5.6rem;
+  }
+
+  .cinelin-page--about .cinelin-about-layout {
+    min-height: auto;
+  }
+
+  .cinelin-page--about .cinelin-about-layout__details div {
+    gap: 0.4rem;
+    grid-template-columns: 1fr;
+  }
+
+  .cinelin-page--about .cinelin-about-sample {
+    max-width: none;
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinelin-page--about [data-about-reveal],
+  .cinelin-page--about [data-about-reveal].is-visible,
+  .cinelin-page--about [data-about-float].is-visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
