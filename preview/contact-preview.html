@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>X Contact Preview</title>
+    <link rel="stylesheet" href="../assets/cinelin-tokens.css">
+    <link rel="stylesheet" href="../assets/cinelin-pages.css">
+    <script src="../assets/cinelin-pages.js" defer></script>
+    <style>
+      html { font-size: 62.5%; }
+      body { margin: 0; }
+    </style>
+  </head>
+  <body>
+    <section class="cinelin-page cinelin-page--contact" data-cinelin-page>
+      <div class="cinelin-page__shell">
+        <nav class="cinelin-page__topline" aria-label="Page navigation">
+          <div class="cinelin-page__left-actions">
+            <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-preview" aria-expanded="false">
+              <span class="visually-hidden">Open menu</span>
+              <svg viewBox="0 0 18 16" aria-hidden="true"><path fill="currentColor" d="M1 3h16v2H1zm0 4h16v2H1zm0 4h16v2H1z"/></svg>
+            </button>
+          </div>
+          <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+            <a href="collection-preview.html">Collection</a>
+            <a href="about-preview.html">About</a>
+          </nav>
+          <a class="cinelin-page__topline-brand" href="homepage-preview.html" aria-label="Milk N Rose">
+            <img src="../assets/cow%20_1.png" alt="Milk N Rose">
+          </a>
+          <div class="cinelin-page__actions">
+            <a class="cinelin-page__utility-link" href="collection-preview.html">Shop</a>
+            <a class="cinelin-page__icon-button" href="sign-in-preview.html" aria-label="Account">
+              <svg viewBox="0 0 18 19" aria-hidden="true"><path fill="currentColor" d="M9 .5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 10c5.7 0 8.5 1.6 8.5 7.5v.5H.5V18c0-5.9 2.8-7.5 8.5-7.5Z"/></svg>
+            </a>
+            <a class="cinelin-page__icon-button" href="cart-preview.html" aria-label="Cart">
+              <svg class="icon-cart" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20.5 6.5a4.75 4.75 0 0 0-4.75 4.75v.56h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.77-11.6h-3.16v-.57A4.75 4.75 0 0 0 20.5 6.5Z"/></svg>
+            </a>
+          </div>
+          <div class="cinelin-page__menu-list" id="CinelinPageMenu-preview" data-cinelin-menu>
+            <div class="cinelin-page__menu-nav">
+              <a href="homepage-preview.html">Home</a>
+              <a href="collection-preview.html">Collection</a>
+              <a href="about-preview.html">About</a>
+              <a href="cart-preview.html">Cart</a>
+            </div>
+          </div>
+        </nav>
+
+        <div class="cinelin-contact-layout">
+          <div class="cinelin-contact-layout__content">
+            <div class="cinelin-contact-layout__intro">
+              <p class="cinelin-contact-layout__kicker">Contact</p>
+              <h1>Tell us what you are looking for.</h1>
+              <p>Questions, sizing notes, custom requests, and quiet little messages all land here. We read every note with care.</p>
+            </div>
+
+            <div class="cinelin-contact-layout__details" aria-label="Contact details">
+              <a href="mailto:studio@example.com"><span>Email</span><span>studio@example.com</span></a>
+              <a href="cart-preview.html"><span>Customer care</span><span>Orders and sizing</span></a>
+              <a href="collection-preview.html"><span>Studio notes</span><span>Custom requests</span></a>
+            </div>
+          </div>
+
+          <div class="cinelin-contact-layout__visual" aria-label="Sterling silver sizing rings and care note for custom requests">
+            <img src="../assets/milk-n-rose-silver-contact.jpg" alt="Sterling silver sizing rings and care note for custom requests">
+          </div>
+
+          <div class="cinelin-contact-layout__form-wrap">
+            <div>
+              <p class="cinelin-contact-layout__kicker">Message</p>
+              <h2>Send a note</h2>
+            </div>
+            <form class="cinelin-contact__form cinelin-contact-layout__form">
+              <div class="cinelin-contact__row">
+                <input class="cinelin-contact__field" type="text" placeholder="Name">
+                <input class="cinelin-contact__field" type="email" placeholder="Email">
+              </div>
+              <input class="cinelin-contact__field" type="tel" placeholder="Phone">
+              <textarea class="cinelin-contact__field" rows="8" placeholder="Comment"></textarea>
+              <button class="cinelin-page__button" type="button">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

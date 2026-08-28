@@ -1,0 +1,196 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-entry.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cinelin-entry.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign grid_columns = 3
+  assign grid_rows = 3
+  assign frame_count = 9
+-%}
+
+<section
+  id="CinelinEntry-{{ section.id }}"
+  class="cinelin-entry"
+  data-cinelin-entry
+  data-live-duration="{{ section.settings.frame_live_duration }}"
+  data-gap-duration="{{ section.settings.gap_duration }}"
+  data-cookie-name="cinelin_entry_bypass"
+  style="--cinelin-entry-columns: {{ grid_columns }}; --cinelin-entry-rows: {{ grid_rows }}; --cinelin-entry-frame-live: {{ section.settings.frame_live_duration }}ms; --cinelin-entry-gap: {{ section.settings.gap_duration }}ms;"
+>
+  <div class="cinelin-entry__wall" aria-hidden="true">
+    {%- for frame_index in (1..frame_count) -%}
+      {%- liquid
+        assign is_center_frame = false
+        if frame_index == 5
+          assign is_center_frame = true
+        endif
+      -%}
+
+      <div
+        class="cinelin-entry__frame{% if is_center_frame %} cinelin-entry__frame--center{% endif %}"
+        {% unless is_center_frame %}data-entry-frame{% endunless %}
+        style="--cinelin-frame-index: {{ forloop.index }};"
+      >
+        <span class="cinelin-entry__placeholder"></span>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="cinelin-entry__media-pool" data-entry-media-pool hidden>
+    {%- for block in section.blocks -%}
+      <template data-entry-media-template {{ block.shopify_attributes }}>
+        {%- if block.settings.video_url != blank -%}
+          <video class="cinelin-entry__video" muted playsinline preload="metadata" loop>
+            <source src="{{ block.settings.video_url | escape }}" type="video/mp4">
+          </video>
+        {%- elsif block.settings.image != blank -%}
+          {{
+            block.settings.image
+            | image_url: width: 1600
+            | image_tag:
+              class: 'cinelin-entry__placeholder-image',
+              loading: 'eager',
+              widths: '480, 720, 960, 1280, 1600',
+              sizes: '(min-width: 750px) 33vw, 50vw',
+              alt: block.settings.image.alt
+          }}
+        {%- else -%}
+          <span class="cinelin-entry__placeholder"></span>
+        {%- endif -%}
+      </template>
+    {%- endfor -%}
+  </div>
+
+  <div class="cinelin-entry__scanlines" aria-hidden="true"></div>
+  <div class="cinelin-entry__grain" aria-hidden="true"></div>
+
+  <div class="cinelin-entry__content">
+    <form class="cinelin-entry__form" data-entry-form>
+      <h2 class="cinelin-entry__headline" id="CinelinEntryHeading-{{ section.id }}">
+        {{ section.settings.headline_text | escape }}
+      </h2>
+
+      {%- if section.settings.sub_copy_text != blank -%}
+        <p class="cinelin-entry__copy">{{ section.settings.sub_copy_text | escape }}</p>
+      {%- endif -%}
+
+      <div class="cinelin-entry__field">
+        <label class="visually-hidden" for="CinelinEntryEmail-{{ section.id }}">Email address</label>
+        <input
+          id="CinelinEntryEmail-{{ section.id }}"
+          class="cinelin-entry__input"
+          type="email"
+          name="email"
+          autocomplete="email"
+          placeholder="Email address"
+          required
+          data-entry-email
+        >
+      </div>
+
+      <button class="cinelin-entry__button" type="submit">{{ section.settings.button_label | escape }}</button>
+
+      {%- if section.settings.note_text != blank -%}
+        <p class="cinelin-entry__note">{{ section.settings.note_text | escape }}</p>
+      {%- endif -%}
+
+      <p class="cinelin-entry__success" role="status" data-entry-success hidden></p>
+    </form>
+
+    <div class="cinelin-entry__controls">
+      <button class="cinelin-entry__control" type="button" data-entry-mute aria-pressed="false">
+        <span data-entry-mute-label>Sound on</span>
+      </button>
+      <button class="cinelin-entry__control" type="button" data-entry-skip>Continue as guest</button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinelin entry splash",
+  "tag": "section",
+  "class": "section-cinelin-entry",
+  "settings": [
+    {
+      "type": "range",
+      "id": "frame_live_duration",
+      "label": "Frame live duration",
+      "min": 300,
+      "max": 4000,
+      "step": 100,
+      "unit": "ms",
+      "default": 3000
+    },
+    {
+      "type": "range",
+      "id": "gap_duration",
+      "label": "Gap duration",
+      "min": 100,
+      "max": 2000,
+      "step": 100,
+      "unit": "ms",
+      "default": 250
+    },
+    {
+      "type": "text",
+      "id": "headline_text",
+      "label": "Headline text",
+      "default": "ELDRA"
+    },
+    {
+      "type": "textarea",
+      "id": "sub_copy_text",
+      "label": "Sub-copy text",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Join"
+    },
+    {
+      "type": "text",
+      "id": "note_text",
+      "label": "Note text",
+      "default": "For VIP events, secret sales & birthday gifts."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "media",
+      "name": "Wall media",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "video_url",
+          "label": "MP4 video URL",
+          "info": "Video takes priority when both an image and URL are set."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinelin entry splash",
+      "blocks": [
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        },
+        {
+          "type": "media"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

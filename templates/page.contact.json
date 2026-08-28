@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "contact": {
+      "type": "cinelin-contact",
+      "settings": {}
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

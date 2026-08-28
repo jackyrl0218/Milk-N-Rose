@@ -1,0 +1,746 @@
+.cinelin-entry {
+  --cinelin-entry-frame-live: 3000ms;
+  --cinelin-entry-gap: 250ms;
+  --cinelin-entry-frame-radius: 0.65rem;
+  background:
+    radial-gradient(48rem 34rem at 50% 52%, rgb(var(--cinelin-home-ink) / 0.08), rgb(var(--cinelin-home-background) / 0) 72%),
+    rgb(var(--cinelin-home-background));
+  color: rgb(var(--cinelin-home-ink));
+  display: grid;
+  font-family: var(--cinelin-home-font);
+  inset: 0;
+  letter-spacing: 0;
+  min-height: 100svh;
+  overflow: hidden;
+  place-items: center;
+  position: fixed;
+  z-index: 40;
+}
+
+.cinelin-entry,
+.cinelin-entry *,
+.cinelin-entry *::before,
+.cinelin-entry *::after {
+  box-sizing: border-box;
+}
+
+.cinelin-entry::before {
+  color: rgb(var(--cinelin-home-ink) / 0.035);
+  content: "CINELIN";
+  font-family: var(--cinelin-font-wordmark);
+  font-size: clamp(8.5rem, 24vw, 29rem);
+  font-weight: 400;
+  inset-inline: -4vw;
+  letter-spacing: 0;
+  line-height: 0.78;
+  pointer-events: none;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 6.6rem;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.cinelin-entry[hidden],
+.cinelin-entry.is-hidden {
+  display: none;
+}
+
+.cinelin-entry__wall {
+  display: grid;
+  gap: 0.22rem;
+  grid-template-columns: repeat(var(--cinelin-entry-columns, 5), minmax(0, 1fr));
+  grid-template-rows: repeat(var(--cinelin-entry-rows, 4), minmax(0, 1fr));
+  height: 100%;
+  inset: 0;
+  padding: 0.22rem;
+  position: absolute;
+  width: 100%;
+  z-index: 0;
+}
+
+.cinelin-entry__frame {
+  align-items: center;
+  aspect-ratio: 1 / 1;
+  background:
+    radial-gradient(circle at 50% 46%, rgb(var(--cinelin-home-panel)), rgb(var(--cinelin-home-surface)) 62%),
+    rgb(var(--cinelin-home-surface));
+  border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.07);
+  border-radius: var(--cinelin-entry-frame-radius);
+  box-shadow: inset 0 0 0 0.1rem rgb(var(--cinelin-home-panel) / 0.72);
+  display: flex;
+  justify-content: center;
+  min-height: 0;
+  opacity: 0.34;
+  overflow: hidden;
+  position: relative;
+  transform: scale(0.985);
+  transition:
+    opacity var(--cinelin-entry-gap) ease,
+    transform var(--cinelin-entry-gap) ease,
+    filter var(--cinelin-entry-gap) ease,
+    border-color var(--cinelin-entry-gap) ease,
+    box-shadow var(--cinelin-entry-gap) ease;
+}
+
+.cinelin-entry__frame::before {
+  background:
+    linear-gradient(115deg, rgb(var(--cinelin-home-panel) / 0), rgb(var(--cinelin-home-panel) / 0.42), rgb(var(--cinelin-home-panel) / 0)),
+    repeating-linear-gradient(0deg, rgb(var(--cinelin-home-ink) / 0.06) 0 0.1rem, rgb(var(--cinelin-home-panel) / 0) 0.1rem 0.42rem);
+  content: "";
+  inset: 0;
+  mix-blend-mode: multiply;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 3;
+}
+
+.cinelin-entry__frame::after {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-home-panel) / 0.12), rgb(var(--cinelin-home-ink) / 0.06)),
+    radial-gradient(circle at 50% 50%, rgb(var(--cinelin-home-panel) / 0), rgb(var(--cinelin-home-ink) / 0.16) 78%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.cinelin-entry__frame.is-live {
+  border-color: rgb(var(--cinelin-home-ink) / 0.78);
+  box-shadow:
+    inset 0 0 0 0.1rem rgb(var(--cinelin-home-panel) / 0.86),
+    0 1.4rem 3.4rem rgb(var(--cinelin-home-shadow) / 0.12);
+  filter: saturate(1.08) contrast(1.02);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cinelin-entry__frame.is-live::before {
+  opacity: 0.42;
+}
+
+.cinelin-entry__video,
+.cinelin-entry__placeholder,
+.cinelin-entry__placeholder-image {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.cinelin-entry__video,
+.cinelin-entry__placeholder-image {
+  filter: grayscale(1) brightness(1.18) contrast(0.86);
+  transform: scale(1.045);
+  transition:
+    filter var(--cinelin-entry-gap) ease,
+    transform var(--cinelin-entry-gap) ease;
+}
+
+.cinelin-entry__frame.is-live .cinelin-entry__video,
+.cinelin-entry__frame.is-live .cinelin-entry__placeholder-image {
+  filter: grayscale(0.16) brightness(1.04) contrast(1.02) saturate(0.94);
+  transform: scale(1);
+}
+
+.cinelin-entry__placeholder {
+  align-items: center;
+  background:
+    radial-gradient(circle at 50% 46%, rgb(var(--cinelin-home-panel)), rgb(var(--cinelin-home-surface)) 58%),
+    rgb(var(--cinelin-home-surface));
+  display: flex;
+  filter: grayscale(0.56) saturate(0.56);
+  justify-content: center;
+  opacity: 0.88;
+  position: relative;
+  transform: scale(0.96);
+  transition:
+    filter var(--cinelin-entry-gap) ease,
+    opacity var(--cinelin-entry-gap) ease,
+    transform var(--cinelin-entry-gap) ease;
+}
+
+.cinelin-entry__placeholder::before,
+.cinelin-entry__placeholder::after {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+.cinelin-entry__placeholder::before {
+  border: clamp(0.28rem, 0.8vw, 0.55rem) solid rgb(var(--cinelin-home-ink));
+  border-block-end-color: transparent;
+  border-radius: 50% 50% 42% 42%;
+  height: clamp(4rem, 9vw, 9rem);
+  transform: rotate(calc((var(--cinelin-frame-index, 1) - 10) * 1deg));
+  width: clamp(3.6rem, 8vw, 8rem);
+  z-index: 2;
+}
+
+.cinelin-entry__placeholder::after {
+  background:
+    radial-gradient(circle at 35% 28%, rgb(var(--cinelin-home-panel) / 0.88), rgb(var(--cinelin-home-blue) / 0) 24%),
+    rgb(var(--cinelin-home-blue));
+  border-radius: 42% 42% 30% 30%;
+  box-shadow:
+    inset 0.2rem 0.4rem 0.8rem rgb(var(--cinelin-home-panel) / 0.72),
+    inset -0.4rem -0.6rem 1rem rgb(var(--cinelin-home-shadow) / 0.14),
+    0 1.2rem 2rem rgb(var(--cinelin-home-shadow) / 0.1);
+  height: clamp(4.8rem, 11vw, 11rem);
+  transform: translateY(12%) rotate(calc((var(--cinelin-frame-index, 1) - 8) * -0.7deg));
+  width: clamp(3.8rem, 8vw, 8rem);
+  z-index: 1;
+}
+
+.cinelin-entry__frame:nth-child(4n + 1) .cinelin-entry__placeholder::after {
+  background:
+    radial-gradient(circle at 36% 28%, rgb(var(--cinelin-home-panel) / 0.92), rgb(var(--cinelin-home-green) / 0) 24%),
+    rgb(var(--cinelin-home-green));
+  border-radius: 50%;
+}
+
+.cinelin-entry__frame:nth-child(4n + 2) .cinelin-entry__placeholder::after {
+  background:
+    linear-gradient(135deg, rgb(var(--cinelin-home-panel) / 0.82), rgb(var(--cinelin-home-pink))),
+    rgb(var(--cinelin-home-pink));
+  border-radius: 28% 72% 58% 42%;
+}
+
+.cinelin-entry__frame:nth-child(4n + 3) .cinelin-entry__placeholder::after {
+  background:
+    linear-gradient(145deg, rgb(var(--cinelin-home-panel) / 0.54), rgb(var(--cinelin-home-gold)) 48%, rgb(var(--cinelin-home-shadow) / 0.2)),
+    rgb(var(--cinelin-home-gold));
+  border-radius: 22% 22% 48% 48%;
+}
+
+.cinelin-entry__frame.is-live .cinelin-entry__placeholder {
+  filter: grayscale(0) saturate(1.04);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cinelin-entry__scanlines,
+.cinelin-entry__grain {
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  z-index: 4;
+}
+
+.cinelin-entry__scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    rgb(var(--cinelin-home-ink) / 0.035) 0 0.1rem,
+    rgb(var(--cinelin-home-panel) / 0) 0.1rem 0.42rem
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.24;
+}
+
+.cinelin-entry__grain {
+  animation: cinelin-entry-grain 1.2s steps(2, end) infinite;
+  background:
+    radial-gradient(circle at 18% 31%, rgb(var(--cinelin-home-ink) / 0.07), rgb(var(--cinelin-home-background) / 0) 17%),
+    radial-gradient(circle at 78% 22%, rgb(var(--cinelin-home-muted) / 0.08), rgb(var(--cinelin-home-background) / 0) 16%),
+    radial-gradient(circle at 44% 80%, rgb(var(--cinelin-home-ink) / 0.05), rgb(var(--cinelin-home-background) / 0) 19%);
+  background-size: 16rem 16rem, 21rem 21rem, 13rem 13rem;
+  opacity: 0.24;
+}
+
+.cinelin-entry__content {
+  align-items: stretch;
+  background: rgb(var(--cinelin-home-panel) / 0.86);
+  border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.12);
+  border-radius: 2.4rem;
+  box-shadow: 0 1.8rem 5.4rem rgb(var(--cinelin-home-shadow) / 0.12);
+  display: grid;
+  font-family: var(--cinelin-home-font);
+  gap: 0.8rem;
+  inline-size: min(88vw, 43rem);
+  overflow: hidden;
+  padding: 1.1rem;
+  position: relative;
+  text-align: left;
+  z-index: 5;
+}
+
+.cinelin-entry__form {
+  display: grid;
+  gap: 1rem;
+  padding: 1.3rem;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.cinelin-entry__headline {
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-font-wordmark);
+  font-size: clamp(4.1rem, 8vw, 6rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 0.76;
+  margin: 0;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  z-index: 1;
+}
+
+.cinelin-entry__copy,
+.cinelin-entry__note,
+.cinelin-entry__success {
+  letter-spacing: 0;
+  margin: 0;
+}
+
+.cinelin-entry__copy {
+  color: rgb(var(--cinelin-home-muted));
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.16;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.cinelin-entry__field {
+  display: grid;
+  gap: 0.8rem;
+  margin-block-start: 0.4rem;
+}
+
+.cinelin-entry__input {
+  appearance: none;
+  background: rgb(var(--cinelin-home-surface));
+  border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.09);
+  border-radius: 999rem;
+  color: rgb(var(--cinelin-home-ink));
+  font-family: var(--cinelin-home-font);
+  font-size: 1rem;
+  font-weight: 700;
+  inline-size: 100%;
+  letter-spacing: 0;
+  min-height: 3.8rem;
+  padding: 0.9rem 1.2rem;
+  text-transform: uppercase;
+}
+
+.cinelin-entry__input::placeholder {
+  color: rgb(var(--cinelin-home-muted));
+}
+
+.cinelin-entry__input:focus-visible,
+.cinelin-entry__button:focus-visible,
+.cinelin-entry__control:focus-visible {
+  outline: 0.2rem solid rgb(var(--cinelin-color-focus));
+  outline-offset: 0.2rem;
+}
+
+.cinelin-entry__button {
+  align-items: center;
+  appearance: none;
+  background: rgb(var(--cinelin-home-ink));
+  border: 0.1rem solid rgb(var(--cinelin-home-ink));
+  border-radius: 999rem;
+  color: rgb(var(--cinelin-home-panel));
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--cinelin-home-font);
+  font-size: 1.05rem;
+  font-weight: 800;
+  justify-content: center;
+  letter-spacing: 0;
+  min-height: 3.8rem;
+  padding: 0.9rem 1.4rem;
+  text-transform: uppercase;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+.cinelin-entry__button:hover {
+  background: rgb(var(--cinelin-home-panel));
+  color: rgb(var(--cinelin-home-ink));
+  transform: translateY(-0.1rem);
+}
+
+.cinelin-entry__success {
+  color: rgb(var(--cinelin-home-ink));
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.cinelin-entry__controls {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+  padding: 0 1.3rem 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.cinelin-entry__control {
+  align-items: center;
+  appearance: none;
+  background: rgb(var(--cinelin-home-ink));
+  border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.78);
+  border-radius: 999rem;
+  color: rgb(var(--cinelin-home-panel));
+  cursor: pointer;
+  display: inline-flex;
+  font-family: var(--cinelin-home-font);
+  font-size: 0.82rem;
+  font-weight: 800;
+  justify-content: center;
+  letter-spacing: 0;
+  min-height: 2.6rem;
+  min-width: 5.6rem;
+  padding: 0.62rem 0.95rem;
+  text-transform: uppercase;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+.cinelin-entry__control:hover {
+  background: rgb(var(--cinelin-home-panel));
+  color: rgb(var(--cinelin-home-ink));
+  transform: translateY(-0.1rem);
+}
+
+html.shopify-design-mode .cinelin-entry {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes cinelin-entry-grain {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(-1.2rem, 0.8rem, 0);
+  }
+
+  100% {
+    transform: translate3d(0.8rem, -0.8rem, 0);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-entry {
+    --cinelin-entry-columns: 3;
+    --cinelin-entry-rows: 5;
+  }
+
+  .cinelin-entry::before {
+    top: 7.2rem;
+  }
+
+  .cinelin-entry__wall {
+    gap: 0.16rem;
+    padding: 0.16rem;
+  }
+
+  .cinelin-entry__content {
+    border-radius: 1.6rem;
+    inline-size: min(92vw, 36rem);
+  }
+
+  .cinelin-entry__form {
+    padding: 1.1rem;
+  }
+
+  .cinelin-entry__headline {
+    font-size: clamp(2.8rem, 13vw, 4.6rem);
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .cinelin-entry__content {
+    inline-size: min(45vw, 52rem);
+  }
+
+  .cinelin-entry__form {
+    gap: 1.05rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .cinelin-entry__headline,
+  .cinelin-entry__copy,
+  .cinelin-entry__success {
+    grid-column: 1 / -1;
+  }
+
+  .cinelin-entry__button {
+    align-self: end;
+    min-width: 8rem;
+  }
+}
+
+/* Dark 3x3 TV-wall treatment. The center screen is reserved for entry controls. */
+.cinelin-entry {
+  background: rgb(var(--cinelin-entry-background));
+  color: rgb(var(--cinelin-entry-gold));
+  display: block;
+  padding: 0;
+}
+
+.cinelin-entry::before {
+  display: none;
+}
+
+.cinelin-entry__wall {
+  gap: clamp(0.7rem, 0.9vw, 1.4rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  padding: clamp(1rem, 1.2vw, 1.8rem);
+}
+
+.cinelin-entry__frame {
+  aspect-ratio: auto;
+  background:
+    radial-gradient(circle at 50% 50%, rgb(var(--cinelin-entry-screen) / 0.92), rgb(var(--cinelin-entry-screen-deep)) 78%);
+  border: clamp(0.3rem, 0.35vw, 0.55rem) solid rgb(var(--cinelin-entry-frame) / 0.72);
+  border-radius: clamp(1.2rem, 1.4vw, 2.2rem);
+  box-shadow:
+    inset 0 0 3.8rem rgb(var(--cinelin-entry-background) / 0.42),
+    inset 0 0 0 0.1rem rgb(var(--cinelin-entry-gold) / 0.04);
+  opacity: 1;
+  transform: none;
+}
+
+.cinelin-entry__frame::before {
+  background: repeating-linear-gradient(
+    0deg,
+    rgb(var(--cinelin-entry-background) / 0.16) 0 0.1rem,
+    rgb(var(--cinelin-entry-gold) / 0) 0.1rem 0.38rem
+  );
+  mix-blend-mode: multiply;
+  opacity: 0.2;
+}
+
+.cinelin-entry__frame::after {
+  background:
+    linear-gradient(180deg, rgb(var(--cinelin-entry-gold) / 0.035), rgb(var(--cinelin-entry-background) / 0.12)),
+    radial-gradient(circle at 50% 50%, rgb(var(--cinelin-entry-gold) / 0), rgb(var(--cinelin-entry-background) / 0.36) 90%);
+}
+
+.cinelin-entry__frame--center {
+  grid-column: 2;
+  grid-row: 2;
+  background: rgb(var(--cinelin-entry-screen-deep));
+}
+
+.cinelin-entry__frame--center .cinelin-entry__placeholder,
+.cinelin-entry__placeholder::before,
+.cinelin-entry__placeholder::after {
+  display: none;
+}
+
+.cinelin-entry__frame.is-live {
+  border-color: rgb(var(--cinelin-entry-frame) / 0.92);
+  box-shadow:
+    inset 0 0 1.8rem rgb(var(--cinelin-entry-background) / 0.18),
+    0 0 2.4rem rgb(var(--cinelin-entry-screen) / 0.36);
+  filter: saturate(1.04) contrast(1.04);
+}
+
+.cinelin-entry__video,
+.cinelin-entry__placeholder-image {
+  filter: sepia(0.12) saturate(0.88) contrast(1.06);
+  transform: scale(1.015);
+}
+
+.cinelin-entry__frame.is-live .cinelin-entry__video,
+.cinelin-entry__frame.is-live .cinelin-entry__placeholder-image {
+  filter: sepia(0.08) saturate(0.96) contrast(1.04);
+  transform: scale(1);
+}
+
+.cinelin-entry__placeholder {
+  background: transparent;
+  opacity: 1;
+}
+
+.cinelin-entry__scanlines {
+  mix-blend-mode: screen;
+  opacity: 0.08;
+}
+
+.cinelin-entry__grain {
+  opacity: 0.12;
+}
+
+.cinelin-entry__content {
+  background: rgb(var(--cinelin-entry-screen-deep) / 0.96);
+  border: clamp(0.3rem, 0.35vw, 0.55rem) solid rgb(var(--cinelin-entry-frame) / 0.72);
+  border-radius: clamp(1.2rem, 1.4vw, 2.2rem);
+  box-shadow: inset 0 0 3.8rem rgb(var(--cinelin-entry-background) / 0.38);
+  inline-size: calc((100vw - clamp(4.1rem, 5.1vw, 7.4rem)) / 3);
+  left: 50%;
+  min-height: calc((100svh - clamp(4.1rem, 5.1vw, 7.4rem)) / 3);
+  overflow: visible;
+  padding: clamp(0.8rem, 1.1vw, 1.5rem);
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cinelin-entry__form {
+  align-content: center;
+  gap: clamp(0.8rem, 1vw, 1.4rem);
+  grid-template-columns: 1fr;
+  min-height: 100%;
+  padding: clamp(1rem, 1.8vw, 2.8rem);
+}
+
+.cinelin-entry__headline {
+  color: rgb(var(--cinelin-entry-gold));
+  font-family: var(--cinelin-font-wordmark);
+  font-size: clamp(2.8rem, 4vw, 5.8rem);
+  line-height: 0.8;
+  overflow-wrap: anywhere;
+}
+
+.cinelin-entry__copy,
+.cinelin-entry__note,
+.cinelin-entry__success {
+  color: rgb(var(--cinelin-entry-copy));
+  font-family: var(--cinelin-font-copy);
+  font-size: clamp(0.78rem, 0.82vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-align: center;
+  text-transform: none;
+}
+
+.cinelin-entry__input {
+  background: rgb(var(--cinelin-entry-background) / 0.38);
+  border: 0.1rem solid rgb(var(--cinelin-entry-copy) / 0.42);
+  border-radius: 0.4rem;
+  color: rgb(var(--cinelin-entry-gold));
+  font-family: var(--cinelin-font-copy);
+  font-weight: 400;
+  min-height: clamp(3.6rem, 4vw, 5rem);
+  padding-inline: 1.4rem;
+}
+
+.cinelin-entry__input::placeholder {
+  color: rgb(var(--cinelin-entry-copy) / 0.8);
+}
+
+.cinelin-entry__button {
+  background: rgb(var(--cinelin-entry-gold));
+  border-color: rgb(var(--cinelin-entry-gold));
+  border-radius: 0;
+  color: rgb(var(--cinelin-entry-background));
+  font-family: var(--cinelin-font-copy);
+  font-size: clamp(0.9rem, 0.9vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  min-height: clamp(3.5rem, 3.8vw, 5rem);
+}
+
+.cinelin-entry__button:hover {
+  background: rgb(var(--cinelin-entry-background));
+  color: rgb(var(--cinelin-entry-gold));
+}
+
+.cinelin-entry__controls {
+  justify-content: center;
+  padding: 0 1.3rem clamp(0.8rem, 1vw, 1.4rem);
+}
+
+.cinelin-entry__control {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  color: rgb(var(--cinelin-entry-copy));
+  font-family: var(--cinelin-font-copy);
+  font-size: clamp(0.72rem, 0.76vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  min-height: auto;
+  padding: 0.3rem 0.5rem;
+}
+
+.cinelin-entry__control:hover {
+  background: transparent;
+  color: rgb(var(--cinelin-entry-gold));
+  transform: none;
+}
+
+.cinelin-entry__control[data-entry-mute] {
+  display: none;
+}
+
+@media screen and (max-width: 749px) {
+  .cinelin-entry {
+    --cinelin-entry-columns: 3;
+    --cinelin-entry-rows: 3;
+  }
+
+  .cinelin-entry__wall {
+    gap: 0.5rem;
+    padding: 0.6rem;
+  }
+
+  .cinelin-entry__frame {
+    border-width: 0.25rem;
+    border-radius: 0.9rem;
+  }
+
+  .cinelin-entry__content {
+    border-width: 0.3rem;
+    inline-size: min(90vw, 38rem);
+    min-height: auto;
+    padding: 0.8rem;
+  }
+
+  .cinelin-entry__form {
+    gap: 0.9rem;
+    min-height: auto;
+    padding: 1.2rem;
+  }
+
+  .cinelin-entry__headline {
+    font-size: clamp(3rem, 12vw, 4.8rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cinelin-entry *,
+  .cinelin-entry *::before,
+  .cinelin-entry *::after {
+    animation: none;
+    transition: none;
+  }
+
+  .cinelin-entry__frame {
+    opacity: 0.42;
+    transform: none;
+  }
+
+  .cinelin-entry__frame:first-child,
+  .cinelin-entry__frame:nth-child(6),
+  .cinelin-entry__frame:nth-child(14) {
+    opacity: 1;
+  }
+
+  .cinelin-entry__grain {
+    opacity: 0.12;
+  }
+}

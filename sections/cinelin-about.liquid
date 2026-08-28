@@ -1,0 +1,551 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-pages.css' | asset_url | stylesheet_tag }}
+{{ 'milk-rose-about.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cinelin-pages.js' | asset_url }}" defer="defer"></script>
+
+<section class="cinelin-page cinelin-page--about" data-cinelin-page>
+  <div class="cinelin-page__shell">
+    <nav class="cinelin-page__topline" aria-label="Page navigation">
+      <div class="cinelin-page__left-actions">
+        <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
+          <span class="visually-hidden">Open menu</span>
+          {{ 'icon-hamburger.svg' | inline_asset_content }}
+        </button>
+      </div>
+      <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+        <a href="{{ routes.all_products_collection_url }}">Collection</a>
+        <a href="/pages/about">About</a>
+      </nav>
+      <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}" aria-label="Milk N Rose">
+        <img src="{{ 'cow _1.png' | asset_url }}" alt="Milk N Rose" loading="eager">
+      </a>
+      <div class="cinelin-page__actions">
+        <a class="cinelin-page__utility-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="cinelin-page__icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+        <a class="cinelin-page__icon-button" href="{{ routes.cart_url }}" aria-label="Cart">
+          {{ 'icon-cart.svg' | inline_asset_content }}
+        </a>
+      </div>
+      <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
+        <div class="cinelin-page__menu-nav">
+          <a href="{{ routes.root_url }}">Home</a>
+          <a href="{{ routes.all_products_collection_url }}">Collection</a>
+          <a href="/pages/about">About</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="cinelin-about-layout" data-about-reveal>
+      <div class="cinelin-about-layout__left">
+        <div class="cinelin-about-layout__intro">
+          <div class="cinelin-about-layout__thumb" data-about-reveal data-about-float>
+            {%- if section.settings.thumbnail_image != blank -%}
+              {{
+                section.settings.thumbnail_image
+                | image_url: width: 900
+                | image_tag:
+                  loading: 'eager',
+                  widths: '320, 480, 640, 900',
+                  sizes: '(min-width: 990px) 24vw, 44vw',
+                  alt: section.settings.thumbnail_alt
+              }}
+            {%- else -%}
+              <div class="cinelin-about-blank-image" aria-hidden="true"></div>
+            {%- endif -%}
+          </div>
+          <div class="cinelin-about-layout__copy" data-about-reveal>
+            <p class="cinelin-about-layout__kicker">{{ section.settings.kicker | escape }}</p>
+            <h1>{{ section.settings.title | escape }}</h1>
+            <p>{{ section.settings.copy | escape }}</p>
+            <a href="{{ section.settings.cta_link | default: routes.all_products_collection_url }}" class="cinelin-about-layout__link">
+              {{ section.settings.cta_label | escape }}
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <dl class="cinelin-about-layout__details">
+          <div data-about-reveal>
+            <dt>{{ section.settings.detail_one_label | escape }}</dt>
+            <dd>{{ section.settings.detail_one_text | escape }}</dd>
+          </div>
+          <div data-about-reveal>
+            <dt>{{ section.settings.detail_two_label | escape }}</dt>
+            <dd>{{ section.settings.detail_two_text | newline_to_br | replace: '<br />', ' / ' | strip_html | escape }}</dd>
+          </div>
+          <div data-about-reveal>
+            <dt>{{ section.settings.detail_three_label | escape }}</dt>
+            <dd>{{ section.settings.detail_three_text | escape }}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="cinelin-about-layout__right" aria-label="{{ section.settings.hero_alt | escape }}" data-about-reveal data-about-float>
+        {%- if section.settings.hero_image != blank -%}
+          {{
+            section.settings.hero_image
+            | image_url: width: 1800
+            | image_tag:
+              loading: 'eager',
+              widths: '640, 900, 1200, 1500, 1800',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              alt: section.settings.hero_alt
+          }}
+        {%- else -%}
+          <div class="cinelin-about-blank-image" aria-hidden="true"></div>
+        {%- endif -%}
+        <span>{{ section.settings.scroll_hint | escape }}</span>
+      </div>
+    </header>
+
+    <section class="cinelin-about-film" id="maker" aria-labelledby="CinelinAboutFilm-{{ section.id }}" data-about-reveal>
+      <div class="cinelin-about-film__media" data-about-float>
+        {%- if section.settings.brand_video != blank -%}
+          {{
+            section.settings.brand_video
+            | video_tag:
+              image_size: '1600x',
+              autoplay: true,
+              loop: true,
+              muted: true,
+              controls: true,
+              playsinline: true
+          }}
+        {%- elsif section.settings.film_image != blank -%}
+          {{
+            section.settings.film_image
+            | image_url: width: 1800
+            | image_tag:
+              loading: 'lazy',
+              widths: '640, 900, 1200, 1500, 1800',
+              sizes: '(min-width: 990px) 58vw, 100vw',
+              alt: section.settings.film_alt
+          }}
+          <span class="cinelin-about-film__play" aria-hidden="true">Play</span>
+        {%- else -%}
+          <div class="cinelin-about-film__blank" aria-hidden="true"></div>
+        {%- endif -%}
+      </div>
+      <div class="cinelin-about-film__copy" data-about-reveal>
+        <p class="cinelin-about-layout__kicker">{{ section.settings.film_kicker | escape }}</p>
+        <h2 id="CinelinAboutFilm-{{ section.id }}">{{ section.settings.film_title | escape }}</h2>
+        <p>{{ section.settings.film_copy | escape }}</p>
+      </div>
+    </section>
+
+    <section class="cinelin-about-values" aria-labelledby="CinelinAboutValues-{{ section.id }}" data-about-reveal>
+      <div class="cinelin-about-values__intro" data-about-reveal>
+        <p class="cinelin-about-layout__kicker">{{ section.settings.values_kicker | escape }}</p>
+        <h2 id="CinelinAboutValues-{{ section.id }}">{{ section.settings.values_title | escape }}</h2>
+        <p>{{ section.settings.values_copy | escape }}</p>
+      </div>
+
+      <div class="cinelin-about-values__statement" aria-label="Brand principles" data-about-reveal>
+        <span>{{ section.settings.value_one | escape }}</span>
+        <span>{{ section.settings.value_two | escape }}</span>
+        <span>{{ section.settings.value_three | escape }}</span>
+      </div>
+
+      <div class="cinelin-about-process" aria-labelledby="CinelinAboutProcess-{{ section.id }}" data-about-reveal>
+        <div class="cinelin-about-process__heading">
+          <p class="cinelin-about-layout__kicker">{{ section.settings.process_kicker | escape }}</p>
+          <h3 id="CinelinAboutProcess-{{ section.id }}">{{ section.settings.process_title | escape }}</h3>
+        </div>
+        <ol class="cinelin-about-process__steps">
+          <li><div class="cinelin-about-sample cinelin-about-sample--sketch" aria-hidden="true"></div><span>01</span><strong>Hand sketching</strong><p>Ideas begin on paper, where proportion and softness are worked out before metal is touched.</p></li>
+          <li><div class="cinelin-about-sample cinelin-about-sample--model" aria-hidden="true"></div><span>02</span><strong>3D modeling</strong><p>Forms are refined digitally so scale, comfort, and detail can be tested with precision.</p></li>
+          <li><div class="cinelin-about-sample cinelin-about-sample--cast" aria-hidden="true"></div><span>03</span><strong>Mold and casting</strong><p>Fine metals are cast with care, keeping material use intentional and waste low.</p></li>
+          <li><div class="cinelin-about-sample cinelin-about-sample--polish" aria-hidden="true"></div><span>04</span><strong>Assembling and polishing</strong><p>Each piece is finished by hand, polished slowly, and checked before it leaves the studio.</p></li>
+        </ol>
+      </div>
+
+      <div class="cinelin-about-pillars" aria-label="Milk N Rose pillars" data-about-reveal>
+        <article><div class="cinelin-about-sample cinelin-about-sample--owned" aria-hidden="true"></div><span>01</span><h3>Woman-owned</h3><p>Independently led, with decisions shaped by sustainability and long-term craft rather than investor pressure.</p></article>
+        <article><div class="cinelin-about-sample cinelin-about-sample--trade" aria-hidden="true"></div><span>02</span><h3>Fair trade</h3><p>Materials are sourced thoughtfully, and production partners in Italy and Turkey are chosen for ethical, lower-waste practices.</p></article>
+        <article><div class="cinelin-about-sample cinelin-about-sample--wages" aria-hidden="true"></div><span>03</span><h3>Fair wages</h3><p>The handmade studio supports generational artisans with fair pay, ethical treatment, and a pace that respects the work.</p></article>
+        <article><div class="cinelin-about-sample cinelin-about-sample--handcrafted" aria-hidden="true"></div><span>04</span><h3>Handcrafted</h3><p>Many pieces start from scrap silver or silver beads and are built through traditional jewelry-making methods.</p></article>
+      </div>
+    </section>
+
+    <section class="cinelin-contact-layout cinelin-contact-layout--about" id="contact" aria-labelledby="CinelinAboutContact-{{ section.id }}" data-about-reveal>
+      <div class="cinelin-contact-layout__content">
+        <div class="cinelin-contact-layout__intro">
+          <p class="cinelin-contact-layout__kicker">{{ section.settings.contact_kicker | escape }}</p>
+          <h2 id="CinelinAboutContact-{{ section.id }}">{{ section.settings.contact_title | escape }}</h2>
+          <p>{{ section.settings.contact_copy | escape }}</p>
+        </div>
+
+        <div class="cinelin-contact-layout__details" aria-label="Contact details">
+          <a href="mailto:{{ section.settings.contact_email | escape }}"><span>Email</span><span>{{ section.settings.contact_email | escape }}</span></a>
+          <a href="{{ routes.cart_url }}"><span>{{ section.settings.contact_detail_two_label | escape }}</span><span>{{ section.settings.contact_detail_two_text | escape }}</span></a>
+          <a href="{{ routes.all_products_collection_url }}"><span>{{ section.settings.contact_detail_three_label | escape }}</span><span>{{ section.settings.contact_detail_three_text | escape }}</span></a>
+        </div>
+      </div>
+
+      <div class="cinelin-contact-layout__visual" aria-label="{{ section.settings.contact_image_alt | escape }}">
+        {%- if section.settings.contact_image != blank -%}
+          {{
+            section.settings.contact_image
+            | image_url: width: 1800
+            | image_tag:
+              loading: 'lazy',
+              widths: '640, 900, 1200, 1500, 1800',
+              sizes: '(min-width: 990px) 42vw, 100vw',
+              alt: section.settings.contact_image_alt
+          }}
+        {%- else -%}
+          <div class="cinelin-about-blank-image" aria-hidden="true"></div>
+        {%- endif -%}
+      </div>
+
+      <div class="cinelin-contact-layout__form-wrap">
+        <div>
+          <p class="cinelin-contact-layout__kicker">{{ section.settings.contact_form_kicker | escape }}</p>
+          <h2>{{ section.settings.contact_form_title | escape }}</h2>
+        </div>
+
+        {%- form 'contact', id: 'CinelinAboutContactForm', class: 'cinelin-contact__form cinelin-contact-layout__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="cinelin-contact__status" tabindex="-1" autofocus>{{ 'templates.contact.form.post_success' | t }}</p>
+          {%- elsif form.errors -%}
+            <p class="cinelin-contact__error" role="alert" tabindex="-1" autofocus>{{ 'templates.contact.form.error_heading' | t }}</p>
+          {%- endif -%}
+
+          <div class="cinelin-contact__row">
+            <input
+              class="cinelin-contact__field"
+              autocomplete="name"
+              type="text"
+              id="CinelinAboutContactForm-name"
+              name="contact[{{ 'templates.contact.form.name' | t }}]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="{{ 'templates.contact.form.name' | t }}"
+            >
+            <input
+              autocomplete="email"
+              type="email"
+              id="CinelinAboutContactForm-email"
+              class="cinelin-contact__field"
+              name="contact[email]"
+              spellcheck="false"
+              autocapitalize="off"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              aria-required="true"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="CinelinAboutContactForm-email-error"
+              {% endif %}
+              placeholder="{{ 'templates.contact.form.email' | t }}"
+            >
+          </div>
+
+          {%- if form.errors contains 'email' -%}
+            <p class="cinelin-contact__error" id="CinelinAboutContactForm-email-error">
+              {{ form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email }}
+            </p>
+          {%- endif -%}
+
+          <input
+            type="tel"
+            id="CinelinAboutContactForm-phone"
+            class="cinelin-contact__field"
+            autocomplete="tel"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            pattern="[0-9\-]*"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.phone' | t }}"
+          >
+
+          <textarea
+            rows="8"
+            id="CinelinAboutContactForm-body"
+            class="cinelin-contact__field"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            placeholder="{{ 'templates.contact.form.comment' | t }}"
+          >
+            {{- form.body -}}
+          </textarea>
+
+          <button type="submit" class="cinelin-page__button">
+            {{ 'templates.contact.form.send' | t }}
+          </button>
+        {%- endform -%}
+      </div>
+    </section>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Milk N Rose about",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Brand story"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Fine silver jewelry with a softer way of doing business."
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Milk & Rose makes jewelry that feels as good as it looks: romantic, wearable, responsibly made, and priced so quality does not feel out of reach."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Link label",
+      "default": "Explore the collection"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail_image",
+      "label": "Intro image"
+    },
+    {
+      "type": "text",
+      "id": "thumbnail_alt",
+      "label": "Intro image alt text",
+      "default": "Sterling silver jewelry with rose details in the Milk N Rose palette"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Large right image"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Large right image alt text",
+      "default": "Sterling silver rings and necklace styled with rose petals for Milk N Rose"
+    },
+    {
+      "type": "text",
+      "id": "scroll_hint",
+      "label": "Scroll hint",
+      "default": "Scroll for the story"
+    },
+    {
+      "type": "text",
+      "id": "detail_one_label",
+      "label": "First detail label",
+      "default": "Services"
+    },
+    {
+      "type": "text",
+      "id": "detail_one_text",
+      "label": "First detail text",
+      "default": "Handmade sterling silver / Essentials / Custom moments"
+    },
+    {
+      "type": "text",
+      "id": "detail_two_label",
+      "label": "Second detail label",
+      "default": "Studio"
+    },
+    {
+      "type": "textarea",
+      "id": "detail_two_text",
+      "label": "Second detail text",
+      "default": "Slow fabrication / Soft polish / Made with care"
+    },
+    {
+      "type": "text",
+      "id": "detail_three_label",
+      "label": "Third detail label",
+      "default": "Materials"
+    },
+    {
+      "type": "text",
+      "id": "detail_three_text",
+      "label": "Third detail text",
+      "default": "Fine metals / Up-cycled silver / FSC-certified packaging"
+    },
+    {
+      "type": "header",
+      "content": "Brand film"
+    },
+    {
+      "type": "video",
+      "id": "brand_video",
+      "label": "Brand video"
+    },
+    {
+      "type": "image_picker",
+      "id": "film_image",
+      "label": "Fallback film image"
+    },
+    {
+      "type": "text",
+      "id": "film_alt",
+      "label": "Film image alt text",
+      "default": "Handmade sterling silver jewelry tools and maker process"
+    },
+    {
+      "type": "text",
+      "id": "film_kicker",
+      "label": "Film kicker",
+      "default": "Maker"
+    },
+    {
+      "type": "text",
+      "id": "film_title",
+      "label": "Film title",
+      "default": "Made slowly, from sketch to silver."
+    },
+    {
+      "type": "textarea",
+      "id": "film_copy",
+      "label": "Film copy",
+      "default": "Our handmade process moves from hand sketching to 3D modeling, casting, assembling, and polishing. The studio keeps the pace human so every piece can hold the care that made it."
+    },
+    {
+      "type": "header",
+      "content": "Values and process"
+    },
+    {
+      "type": "text",
+      "id": "values_kicker",
+      "label": "Values kicker",
+      "default": "Our difference"
+    },
+    {
+      "type": "text",
+      "id": "values_title",
+      "label": "Values title",
+      "default": "Sustainability as a love language."
+    },
+    {
+      "type": "textarea",
+      "id": "values_copy",
+      "label": "Values copy",
+      "default": "We believe luxury is knowing where your jewelry comes from. Fine metals let us rework damaged pieces and returns into something new, while biodegradable FSC-certified packaging keeps the care going beyond the studio."
+    },
+    {
+      "type": "text",
+      "id": "value_one",
+      "label": "First value",
+      "default": "Beauty over the bottom line"
+    },
+    {
+      "type": "text",
+      "id": "value_two",
+      "label": "Second value",
+      "default": "Community over conversion"
+    },
+    {
+      "type": "text",
+      "id": "value_three",
+      "label": "Third value",
+      "default": "Buying better, not more"
+    },
+    {
+      "type": "text",
+      "id": "process_kicker",
+      "label": "Process kicker",
+      "default": "Our process"
+    },
+    {
+      "type": "text",
+      "id": "process_title",
+      "label": "Process title",
+      "default": "Four steps, one careful piece."
+    },
+    {
+      "type": "header",
+      "content": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "contact_kicker",
+      "label": "Contact kicker",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "contact_title",
+      "label": "Contact title",
+      "default": "Tell us what you are looking for."
+    },
+    {
+      "type": "textarea",
+      "id": "contact_copy",
+      "label": "Contact copy",
+      "default": "Questions, sizing notes, custom requests, and quiet little messages all land here. We read every note with care."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact email",
+      "default": "studio@example.com"
+    },
+    {
+      "type": "text",
+      "id": "contact_detail_two_label",
+      "label": "Second contact detail label",
+      "default": "Customer care"
+    },
+    {
+      "type": "text",
+      "id": "contact_detail_two_text",
+      "label": "Second contact detail text",
+      "default": "Orders and sizing"
+    },
+    {
+      "type": "text",
+      "id": "contact_detail_three_label",
+      "label": "Third contact detail label",
+      "default": "Studio notes"
+    },
+    {
+      "type": "text",
+      "id": "contact_detail_three_text",
+      "label": "Third contact detail text",
+      "default": "Custom requests"
+    },
+    {
+      "type": "image_picker",
+      "id": "contact_image",
+      "label": "Contact image"
+    },
+    {
+      "type": "text",
+      "id": "contact_image_alt",
+      "label": "Contact image alt text",
+      "default": "Sterling silver sizing rings and care note for custom requests"
+    },
+    {
+      "type": "text",
+      "id": "contact_form_kicker",
+      "label": "Contact form kicker",
+      "default": "Message"
+    },
+    {
+      "type": "text",
+      "id": "contact_form_title",
+      "label": "Contact form title",
+      "default": "Send a note"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Milk N Rose about"
+    }
+  ]
+}
+{% endschema %}

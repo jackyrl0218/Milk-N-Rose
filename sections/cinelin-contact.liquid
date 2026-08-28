@@ -1,0 +1,231 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-pages.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cinelin-pages.js' | asset_url }}" defer="defer"></script>
+
+<section class="cinelin-page cinelin-page--contact" data-cinelin-page>
+  <div class="cinelin-page__shell">
+    <nav class="cinelin-page__topline" aria-label="Page navigation">
+      <div class="cinelin-page__left-actions">
+        <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
+          <span class="visually-hidden">Open menu</span>
+          {{ 'icon-hamburger.svg' | inline_asset_content }}
+        </button>
+      </div>
+      <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+        <a href="{{ routes.all_products_collection_url }}">Collection</a>
+        <a href="/pages/about">About</a>
+      </nav>
+      <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}" aria-label="Milk N Rose">
+        <img src="{{ 'cow _1.png' | asset_url }}" alt="Milk N Rose" loading="eager">
+      </a>
+      <div class="cinelin-page__actions">
+        <a class="cinelin-page__utility-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="cinelin-page__icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+        <a class="cinelin-page__icon-button" href="{{ routes.cart_url }}" aria-label="Cart">
+          {{ 'icon-cart.svg' | inline_asset_content }}
+        </a>
+      </div>
+      <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
+        <div class="cinelin-page__menu-nav">
+          <a href="{{ routes.root_url }}">Home</a>
+          <a href="{{ routes.all_products_collection_url }}">Collection</a>
+          <a href="/pages/about">About</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="cinelin-contact-layout">
+      <div class="cinelin-contact-layout__content">
+        <div class="cinelin-contact-layout__intro">
+          <p class="cinelin-contact-layout__kicker">{{ section.settings.kicker | escape }}</p>
+          <h1>{{ section.settings.title | escape }}</h1>
+          <p>{{ section.settings.copy | escape }}</p>
+        </div>
+
+        <div class="cinelin-contact-layout__details" aria-label="Contact details">
+          <a href="mailto:{{ section.settings.email | escape }}"><span>Email</span><span>{{ section.settings.email | escape }}</span></a>
+          <a href="{{ routes.cart_url }}"><span>{{ section.settings.detail_two_label | escape }}</span><span>{{ section.settings.detail_two_text | escape }}</span></a>
+          <a href="{{ routes.all_products_collection_url }}"><span>{{ section.settings.detail_three_label | escape }}</span><span>{{ section.settings.detail_three_text | escape }}</span></a>
+        </div>
+      </div>
+
+      <div class="cinelin-contact-layout__visual" aria-label="{{ section.settings.image_alt | escape }}">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1800
+            | image_tag:
+              loading: 'eager',
+              widths: '640, 900, 1200, 1500, 1800',
+              sizes: '(min-width: 990px) 42vw, 100vw',
+              alt: section.settings.image_alt
+          }}
+        {%- else -%}
+          <img src="{{ 'milk-n-rose-silver-contact.jpg' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" loading="eager">
+        {%- endif -%}
+      </div>
+
+      <div class="cinelin-contact-layout__form-wrap">
+        <div>
+          <p class="cinelin-contact-layout__kicker">{{ section.settings.form_kicker | escape }}</p>
+          <h2>{{ section.settings.form_title | escape }}</h2>
+        </div>
+
+        {%- form 'contact', id: 'CinelinContactForm', class: 'cinelin-contact__form cinelin-contact-layout__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="cinelin-contact__status" tabindex="-1" autofocus>{{ 'templates.contact.form.post_success' | t }}</p>
+          {%- elsif form.errors -%}
+            <p class="cinelin-contact__error" role="alert" tabindex="-1" autofocus>{{ 'templates.contact.form.error_heading' | t }}</p>
+          {%- endif -%}
+
+          <div class="cinelin-contact__row">
+            <input
+              class="cinelin-contact__field"
+              autocomplete="name"
+              type="text"
+              id="CinelinContactForm-name"
+              name="contact[{{ 'templates.contact.form.name' | t }}]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="{{ 'templates.contact.form.name' | t }}"
+            >
+            <input
+              autocomplete="email"
+              type="email"
+              id="CinelinContactForm-email"
+              class="cinelin-contact__field"
+              name="contact[email]"
+              spellcheck="false"
+              autocapitalize="off"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              aria-required="true"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="CinelinContactForm-email-error"
+              {% endif %}
+              placeholder="{{ 'templates.contact.form.email' | t }}"
+            >
+          </div>
+
+          {%- if form.errors contains 'email' -%}
+            <p class="cinelin-contact__error" id="CinelinContactForm-email-error">
+              {{ form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email }}
+            </p>
+          {%- endif -%}
+
+          <input
+            type="tel"
+            id="CinelinContactForm-phone"
+            class="cinelin-contact__field"
+            autocomplete="tel"
+            name="contact[{{ 'templates.contact.form.phone' | t }}]"
+            pattern="[0-9\-]*"
+            value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+            placeholder="{{ 'templates.contact.form.phone' | t }}"
+          >
+
+          <textarea
+            rows="8"
+            id="CinelinContactForm-body"
+            class="cinelin-contact__field"
+            name="contact[{{ 'templates.contact.form.comment' | t }}]"
+            placeholder="{{ 'templates.contact.form.comment' | t }}"
+          >
+            {{- form.body -}}
+          </textarea>
+
+          <button type="submit" class="cinelin-page__button">
+            {{ 'templates.contact.form.send' | t }}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinelin contact",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Tell us what you are looking for."
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Questions, sizing notes, custom requests, and quiet little messages all land here. We read every note with care."
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "studio@example.com"
+    },
+    {
+      "type": "text",
+      "id": "detail_two_label",
+      "label": "Second detail label",
+      "default": "Customer care"
+    },
+    {
+      "type": "text",
+      "id": "detail_two_text",
+      "label": "Second detail text",
+      "default": "Orders and sizing"
+    },
+    {
+      "type": "text",
+      "id": "detail_three_label",
+      "label": "Third detail label",
+      "default": "Studio notes"
+    },
+    {
+      "type": "text",
+      "id": "detail_three_text",
+      "label": "Third detail text",
+      "default": "Custom requests"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Contact image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Contact image alt text",
+      "default": "Sterling silver sizing rings and care note for custom requests"
+    },
+    {
+      "type": "text",
+      "id": "form_kicker",
+      "label": "Form kicker",
+      "default": "Message"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Form title",
+      "default": "Send a note"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinelin contact"
+    }
+  ]
+}
+{% endschema %}

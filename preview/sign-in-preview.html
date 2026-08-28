@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>X Sign In Preview</title>
+    <link rel="stylesheet" href="../assets/cinelin-tokens.css">
+    <link rel="stylesheet" href="../assets/cinelin-pages.css">
+    <script src="../assets/cinelin-pages.js" defer></script>
+    <style>
+      html { font-size: 62.5%; }
+      body { margin: 0; }
+      .cinelin-auth-preview {
+        color: rgb(var(--cinelin-home-ink));
+        font-family: var(--cinelin-home-font);
+        min-height: 76vh;
+        padding: clamp(3rem, 6vw, 7rem) clamp(2rem, 5vw, 7.2rem) clamp(5rem, 8vw, 9rem);
+        position: relative;
+      }
+      .cinelin-auth-preview::before {
+        background:
+          radial-gradient(circle at 7% 34%, rgb(var(--cinelin-home-blue) / 0.22) 0 0.14rem, transparent 0.18rem),
+          radial-gradient(circle at 56% 18%, rgb(var(--cinelin-home-blue) / 0.2) 0 0.12rem, transparent 0.16rem),
+          radial-gradient(circle at 88% 61%, rgb(var(--cinelin-home-blue) / 0.2) 0 0.16rem, transparent 0.2rem);
+        content: "";
+        inset: 0;
+        pointer-events: none;
+        position: absolute;
+      }
+      .cinelin-auth-preview > * { position: relative; }
+      .cinelin-auth-preview__kicker {
+        color: rgb(var(--cinelin-home-muted));
+        font-size: clamp(1.2rem, 1.4vw, 1.5rem);
+        font-weight: 700;
+        letter-spacing: 0.32em;
+        margin: 0 0 clamp(2.4rem, 5vw, 5.6rem);
+        text-transform: uppercase;
+      }
+      .cinelin-auth-preview h1 {
+        font-size: clamp(6rem, 14vw, 14rem);
+        font-weight: 400;
+        letter-spacing: 0;
+        line-height: 0.84;
+        margin: 0 0 clamp(2.4rem, 4vw, 4.2rem);
+        text-align: center;
+      }
+      .cinelin-auth-preview__panel {
+        max-width: 100rem;
+      }
+      .cinelin-auth-preview__create {
+        align-items: center;
+        border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.16);
+        border-radius: 1.3rem;
+        color: rgb(var(--cinelin-home-ink));
+        display: inline-flex;
+        font-size: 1.2rem;
+        font-weight: 700;
+        justify-content: center;
+        letter-spacing: 0.22em;
+        min-height: 4.8rem;
+        min-width: 13rem;
+        padding: 0 2.4rem;
+        text-decoration: none;
+        text-transform: uppercase;
+      }
+      .cinelin-auth-preview form {
+        display: grid;
+        gap: 1.6rem;
+      }
+      .cinelin-auth-preview label {
+        color: rgb(var(--cinelin-home-muted));
+        display: grid;
+        font-size: clamp(1.2rem, 1.35vw, 1.6rem);
+        font-weight: 700;
+        gap: 1rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      .cinelin-auth-preview input {
+        border: 0.1rem solid rgb(var(--cinelin-home-ink) / 0.22);
+        color: rgb(var(--cinelin-home-ink));
+        font: inherit;
+        font-size: clamp(2rem, 3vw, 3rem);
+        min-height: 6.4rem;
+        padding: 1.5rem 1.8rem;
+      }
+      .cinelin-auth-preview input::placeholder {
+        color: rgb(var(--cinelin-home-muted) / 0.72);
+        opacity: 1;
+      }
+      .cinelin-auth-preview button {
+        background: rgb(var(--cinelin-home-ink));
+        border: 0;
+        border-radius: 1.3rem;
+        color: rgb(var(--cinelin-home-panel));
+        cursor: pointer;
+        font-size: 1.35rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        min-height: 6.4rem;
+        text-transform: uppercase;
+      }
+      .cinelin-auth-preview__helper {
+        color: rgb(var(--cinelin-home-muted));
+        font-size: 1.2rem;
+        font-weight: 700;
+        justify-self: start;
+        text-transform: uppercase;
+      }
+      .cinelin-auth-preview__divider {
+        align-items: center;
+        display: grid;
+        font-size: 1.6rem;
+        gap: 2rem;
+        grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+        letter-spacing: 0.12em;
+        margin: 1.6rem 0 1.2rem;
+        text-transform: uppercase;
+      }
+      .cinelin-auth-preview__divider::before,
+      .cinelin-auth-preview__divider::after {
+        background: rgb(var(--cinelin-home-ink) / 0.16);
+        content: "";
+        height: 0.1rem;
+      }
+      .cinelin-auth-preview__create {
+        background: rgb(var(--cinelin-home-panel));
+        min-height: 6.4rem;
+        width: 100%;
+      }
+      @media (min-width: 750px) {
+        .cinelin-auth-preview__panel { margin-left: clamp(0rem, 7vw, 9rem); }
+      }
+      @media (max-width: 749px) {
+        .cinelin-auth-preview h1 { text-align: left; }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="cinelin-page cinelin-page--auth" data-cinelin-page>
+      <div class="cinelin-page__shell">
+        <nav class="cinelin-page__topline" aria-label="Page navigation">
+          <div class="cinelin-page__left-actions">
+            <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-preview" aria-expanded="false">
+              <span class="visually-hidden">Open menu</span>
+              <svg viewBox="0 0 18 16" aria-hidden="true"><path fill="currentColor" d="M1 3h16v2H1zm0 4h16v2H1zm0 4h16v2H1z"/></svg>
+            </button>
+          </div>
+          <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+            <a href="collection-preview.html">Collection</a>
+            <a href="about-preview.html">About</a>
+          </nav>
+          <a class="cinelin-page__topline-brand" href="homepage-preview.html" aria-label="Milk N Rose">
+            <img src="../assets/cow%20_1.png" alt="Milk N Rose">
+          </a>
+          <div class="cinelin-page__actions">
+            <a class="cinelin-page__utility-link" href="collection-preview.html">Shop</a>
+            <a class="cinelin-page__icon-button" href="sign-in-preview.html" aria-label="Account">
+              <svg viewBox="0 0 18 19" aria-hidden="true"><path fill="currentColor" d="M9 .5a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 10c5.7 0 8.5 1.6 8.5 7.5v.5H.5V18c0-5.9 2.8-7.5 8.5-7.5Z"/></svg>
+            </a>
+            <a class="cinelin-page__icon-button" href="cart-preview.html" aria-label="Cart">
+              <svg class="icon-cart" viewBox="0 0 40 40" aria-hidden="true"><path fill="currentColor" d="M20.5 6.5a4.75 4.75 0 0 0-4.75 4.75v.56h-3.16l-.77 11.6a5 5 0 0 0 4.99 5.34h7.38a5 5 0 0 0 4.99-5.33l-.77-11.6h-3.16v-.57A4.75 4.75 0 0 0 20.5 6.5Z"/></svg>
+            </a>
+          </div>
+          <div class="cinelin-page__menu-list" id="CinelinPageMenu-preview" data-cinelin-menu>
+            <div class="cinelin-page__menu-nav">
+              <a href="homepage-preview.html">Home</a>
+              <a href="collection-preview.html">Collection</a>
+              <a href="about-preview.html">About</a>
+              <a href="cart-preview.html">Cart</a>
+            </div>
+          </div>
+        </nav>
+
+        <main class="cinelin-auth-preview">
+          <p class="cinelin-auth-preview__kicker">Account</p>
+          <h1>Log In</h1>
+          <div class="cinelin-auth-preview__panel">
+            <form>
+              <label>
+                * Email address
+                <input type="email" placeholder="E-Mail" autocomplete="email">
+              </label>
+              <label>
+                Password
+                <input type="password" placeholder="minimum 6 characters" autocomplete="current-password">
+              </label>
+              <a class="cinelin-auth-preview__helper" href="#">Forgot your password?</a>
+              <button type="button">Log in</button>
+              <div class="cinelin-auth-preview__divider" aria-hidden="true"><span>Or</span></div>
+              <a class="cinelin-auth-preview__create" id="create-account" href="create-account-preview.html">Create account</a>
+            </form>
+          </div>
+        </main>
+      </div>
+    </section>
+  </body>
+</html>

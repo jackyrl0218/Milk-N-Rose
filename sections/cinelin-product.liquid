@@ -1,0 +1,377 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-pages.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'cinelin-pages.js' | asset_url }}" defer="defer"></script>
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign product_form_id = 'CinelinProductForm-' | append: section.id
+  assign back_url = routes.all_products_collection_url
+  if collection.url != blank
+    assign back_url = collection.url
+  endif
+  if section.settings.back_link != blank
+    assign back_url = section.settings.back_link
+  endif
+
+  assign related_collection = section.settings.related_collection
+  if related_collection == blank and product.collections.first != blank
+    assign related_collection = product.collections.first
+  endif
+-%}
+
+<section class="cinelin-page cinelin-page--product" data-cinelin-page>
+  <div class="cinelin-page__shell">
+    <nav class="cinelin-page__topline" aria-label="Page navigation">
+      <div class="cinelin-page__left-actions">
+        <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
+          <span class="visually-hidden">Open menu</span>
+          {{ 'icon-hamburger.svg' | inline_asset_content }}
+        </button>
+      </div>
+      <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+        <a href="{{ routes.all_products_collection_url }}">Collection</a>
+        <a href="/pages/about">About</a>
+      </nav>
+      <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}" aria-label="Milk N Rose">
+        <img src="{{ 'cow _1.png' | asset_url }}" alt="Milk N Rose" loading="eager">
+      </a>
+      <div class="cinelin-page__actions">
+        <a class="cinelin-page__utility-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="cinelin-page__icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+        <a class="cinelin-page__icon-button" href="{{ routes.cart_url }}" aria-label="Cart">
+          {{ 'icon-cart.svg' | inline_asset_content }}
+        </a>
+      </div>
+      <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
+        <div class="cinelin-page__menu-nav">
+          <a href="{{ routes.root_url }}">Home</a>
+          <a href="{{ routes.all_products_collection_url }}">Collection</a>
+          <a href="/pages/about">About</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
+        </div>
+      </div>
+    </nav>
+
+    <a class="cinelin-page__button cinelin-page__button--back cinelin-product__back" href="{{ back_url }}">
+      {{ section.settings.back_label | escape }}
+    </a>
+
+    <div class="cinelin-product" data-cinelin-product>
+      <div class="cinelin-product__media" data-cinelin-product-media>
+        <div class="cinelin-product__stage" data-cinelin-model-card>
+          <button class="cinelin-product__model-button" type="button" aria-label="Spin {{ product.title | escape }} 3D model" data-cinelin-model-button>
+            <span class="cinelin-card__model cinelin-product__model">
+              <span class="cinelin-card__gem"></span>
+              <span class="cinelin-card__ring"></span>
+              <span class="cinelin-card__stone"></span>
+              <span class="cinelin-card__shadow"></span>
+            </span>
+          </button>
+          <p class="cinelin-product__stage-note">{{ section.settings.model_hint | escape }}</p>
+        </div>
+
+        <div class="cinelin-product__gallery" aria-label="{{ product.title | escape }} media gallery">
+          {%- if product.media.size > 0 -%}
+            {%- for media in product.media limit: section.settings.gallery_limit -%}
+              <button class="cinelin-product__thumb{% if forloop.first %} is-active{% endif %}" type="button" data-cinelin-product-thumb aria-label="Show media {{ forloop.index }}">
+                {%- if media.preview_image != blank -%}
+                  {{
+                    media.preview_image
+                    | image_url: width: 760
+                    | image_tag:
+                      loading: 'lazy',
+                      widths: '180, 320, 520, 760',
+                      sizes: '(min-width: 990px) 18vw, 44vw',
+                      alt: media.alt
+                  }}
+                {%- else -%}
+                  <span class="cinelin-product__thumb-fallback"></span>
+                {%- endif -%}
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for index in (1..4) -%}
+              <button class="cinelin-product__thumb{% if forloop.first %} is-active{% endif %}" type="button" data-cinelin-product-thumb aria-label="Show placeholder media {{ index }}">
+                <span class="cinelin-product__thumb-fallback cinelin-product__thumb-fallback--{{ index }}"></span>
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="cinelin-product__info">
+        <p class="cinelin-page__kicker">{{ section.settings.kicker | escape }}</p>
+        <h1 class="cinelin-product__title">{{ product.title | escape }}</h1>
+
+        <div class="cinelin-product__price" id="price-{{ section.id }}" role="status">
+          {%- render 'price', product: product, use_variant: true, show_badges: true -%}
+        </div>
+
+        <div class="cinelin-product__options" aria-label="Product selections">
+          <div class="cinelin-product__option-row">
+            <span class="cinelin-product__option-label">{{ section.settings.color_label | escape }}</span>
+            <span class="cinelin-product__option-value">
+              <span class="cinelin-product__swatch" aria-hidden="true"></span>
+              {{ section.settings.color_value | escape }}
+            </span>
+          </div>
+          <div class="cinelin-product__option-row">
+            <span class="cinelin-product__option-label">{{ section.settings.size_label | escape }}</span>
+            <span class="cinelin-product__option-value">{{ section.settings.size_value | escape }}</span>
+          </div>
+        </div>
+
+        {%- if product.description != blank -%}
+          <div class="cinelin-product__description rte">
+            {{ product.description }}
+          </div>
+        {%- else -%}
+          <p class="cinelin-product__description">{{ section.settings.fallback_description | escape }}</p>
+        {%- endif -%}
+
+        <product-form class="cinelin-product__form product-form" data-hide-errors="false" data-section-id="{{ section.id }}">
+          <div class="product-form__error-message-wrapper cinelin-product__error" role="alert" hidden>
+            <span class="svg-wrapper">{{ 'icon-error.svg' | inline_asset_content }}</span>
+            <span class="product-form__error-message"></span>
+          </div>
+
+          {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+            {%- unless product.has_only_default_variant -%}
+              <label class="cinelin-product__label" for="CinelinProductVariant-{{ section.id }}">Option</label>
+              <select class="cinelin-product__select" id="CinelinProductVariant-{{ section.id }}" name="id" data-cinelin-variant-select>
+                {%- for variant in product.variants -%}
+                  <option
+                    value="{{ variant.id }}"
+                    {% if variant == current_variant %}selected="selected"{% endif %}
+                    {% unless variant.available %}disabled{% endunless %}
+                  >
+                    {{ variant.title | escape }} - {{ variant.price | money }}{% unless variant.available %} / Sold out{% endunless %}
+                  </option>
+                {%- endfor -%}
+              </select>
+            {%- else -%}
+              <input
+                type="hidden"
+                name="id"
+                value="{{ current_variant.id }}"
+                {% unless current_variant.available %}disabled{% endunless %}
+                class="product-variant-id"
+              >
+            {%- endunless -%}
+
+            <label class="cinelin-product__label" for="CinelinProductQuantity-{{ section.id }}">Quantity</label>
+            <input
+              class="cinelin-product__quantity"
+              id="CinelinProductQuantity-{{ section.id }}"
+              type="number"
+              name="quantity"
+              value="1"
+              min="1"
+              inputmode="numeric"
+            >
+
+            <div class="cinelin-product__buttons">
+              <button
+                id="ProductSubmitButton-{{ section.id }}"
+                type="submit"
+                name="add"
+                class="cinelin-page__button cinelin-product__submit"
+                {% unless current_variant.available %}disabled{% endunless %}
+              >
+                <span>
+                  {%- if current_variant.available -%}
+                    Add to bag
+                  {%- else -%}
+                    Sold out
+                  {%- endif -%}
+                </span>
+                {%- render 'loading-spinner' -%}
+              </button>
+              {{ form | payment_button }}
+            </div>
+          {%- endform -%}
+        </product-form>
+
+        <div class="cinelin-product__details" aria-label="Product details">
+          <details open>
+            <summary>Materials</summary>
+            <p>{{ section.settings.materials_text | escape }}</p>
+          </details>
+          <details>
+            <summary>Shipping</summary>
+            <p>{{ section.settings.shipping_text | escape }}</p>
+          </details>
+          <details>
+            <summary>Care</summary>
+            <p>{{ section.settings.care_text | escape }}</p>
+          </details>
+        </div>
+      </div>
+    </div>
+
+    <section class="cinelin-product__related" aria-labelledby="CinelinProductRelated-{{ section.id }}">
+      <div class="cinelin-page__toolbar">
+        <span id="CinelinProductRelated-{{ section.id }}">{{ section.settings.related_heading | escape }}</span>
+        <span>{{ section.settings.related_note | escape }}</span>
+      </div>
+
+      <div class="cinelin-page__grid cinelin-product__related-grid" data-cinelin-product-grid>
+        {%- assign related_count = 0 -%}
+        {%- if related_collection.products.size > 0 -%}
+          {%- for related_product in related_collection.products limit: 8 -%}
+            {%- unless related_product.id == product.id -%}
+              {%- assign related_count = related_count | plus: 1 -%}
+              <article class="cinelin-card" data-cinelin-model-card>
+                <button class="cinelin-card__media" type="button" aria-label="Spin {{ related_product.title | escape }} 3D model" data-cinelin-model-button>
+                  <span class="cinelin-card__model">
+                    <span class="cinelin-card__gem"></span>
+                    <span class="cinelin-card__ring"></span>
+                    <span class="cinelin-card__stone"></span>
+                    <span class="cinelin-card__shadow"></span>
+                  </span>
+                </button>
+                <a class="cinelin-card__body" href="{{ related_product.url }}">
+                  <span class="cinelin-card__title">{{ related_product.title | escape }}</span>
+                  <span class="cinelin-card__price">{{ related_product.price | money }}</span>
+                </a>
+              </article>
+            {%- endunless -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- if related_count == 0 -%}
+          {%- for index in (1..4) -%}
+            <article class="cinelin-card" data-cinelin-model-card>
+              <button class="cinelin-card__media" type="button" aria-label="Spin suggested piece {{ index }} 3D model" data-cinelin-model-button>
+                <span class="cinelin-card__model">
+                  <span class="cinelin-card__gem"></span>
+                  <span class="cinelin-card__ring"></span>
+                  <span class="cinelin-card__stone"></span>
+                  <span class="cinelin-card__shadow"></span>
+                </span>
+              </button>
+              <a class="cinelin-card__body" href="{{ routes.all_products_collection_url }}">
+                <span class="cinelin-card__title">Suggested piece {{ index }}</span>
+                <span class="cinelin-card__price">Explore</span>
+              </a>
+            </article>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+    </section>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinelin product",
+  "settings": [
+    {
+      "type": "url",
+      "id": "back_link",
+      "label": "Back link override"
+    },
+    {
+      "type": "text",
+      "id": "back_label",
+      "label": "Back label",
+      "default": "Back"
+    },
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Individual object"
+    },
+    {
+      "type": "text",
+      "id": "model_hint",
+      "label": "3D model hint",
+      "default": "Drag the object to rotate"
+    },
+    {
+      "type": "range",
+      "id": "gallery_limit",
+      "label": "Gallery media limit",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "color_label",
+      "label": "Color label",
+      "default": "Color"
+    },
+    {
+      "type": "text",
+      "id": "color_value",
+      "label": "Color value",
+      "default": "Sterling silver rose"
+    },
+    {
+      "type": "text",
+      "id": "size_label",
+      "label": "Size label",
+      "default": "Size"
+    },
+    {
+      "type": "text",
+      "id": "size_value",
+      "label": "Size value",
+      "default": "One size"
+    },
+    {
+      "type": "textarea",
+      "id": "fallback_description",
+      "label": "Fallback description",
+      "default": "A handmade piece shaped to feel sculptural, wearable, and quietly strange."
+    },
+    {
+      "type": "textarea",
+      "id": "materials_text",
+      "label": "Materials text",
+      "default": "Hand-finished metal with luminous stone details. Replace this with the exact product materials."
+    },
+    {
+      "type": "textarea",
+      "id": "shipping_text",
+      "label": "Shipping text",
+      "default": "Ships in protective packaging. Delivery timing can be adjusted in the product settings."
+    },
+    {
+      "type": "textarea",
+      "id": "care_text",
+      "label": "Care text",
+      "default": "Keep dry, store softly, and wipe with a clean cloth after wear."
+    },
+    {
+      "type": "collection",
+      "id": "related_collection",
+      "label": "Related collection"
+    },
+    {
+      "type": "text",
+      "id": "related_heading",
+      "label": "Related heading",
+      "default": "Other pieces"
+    },
+    {
+      "type": "text",
+      "id": "related_note",
+      "label": "Related note",
+      "default": "Keep looking"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinelin product"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,148 @@
+{
+  "sections": {
+    "homepage": {
+      "type": "homepage",
+      "blocks": {
+        "model_1": {
+          "type": "model_item",
+          "settings": {
+            "product": "",
+            "link": "shopify://collections/all",
+            "label": "Pearl loop",
+            "model_style": "style-1"
+          }
+        },
+        "model_2": {
+          "type": "model_item",
+          "settings": {
+            "product": "",
+            "link": "shopify://collections/all",
+            "label": "Green drop",
+            "model_style": "style-2"
+          }
+        },
+        "model_3": {
+          "type": "model_item",
+          "settings": {
+            "product": "",
+            "link": "shopify://collections/all",
+            "label": "Rose charm",
+            "model_style": "style-3"
+          }
+        },
+        "model_4": {
+          "type": "model_item",
+          "settings": {
+            "product": "",
+            "link": "shopify://collections/all",
+            "label": "Silver piece",
+            "model_style": "style-4"
+          }
+        },
+        "model_5": {
+          "type": "model_item",
+          "settings": {
+            "product": "",
+            "link": "shopify://collections/all",
+            "label": "Silver charm",
+            "model_style": "style-1"
+          }
+        },
+        "model_6": {
+          "type": "model_item",
+          "settings": {
+            "product": "",
+            "link": "shopify://collections/all",
+            "label": "Tiny pearl",
+            "model_style": "style-3"
+          }
+        },
+        "model_7": {
+          "type": "model_item",
+          "settings": {
+            "product": "",
+            "link": "shopify://collections/all",
+            "label": "Mint ring",
+            "model_style": "style-2"
+          }
+        },
+        "model_8": {
+          "type": "model_item",
+          "settings": {
+            "product": "",
+            "link": "shopify://collections/all",
+            "label": "Oval silver",
+            "model_style": "style-4"
+          }
+        },
+        "featured_1": {
+          "type": "featured_piece",
+          "settings": {
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all",
+            "title": "Silver loop",
+            "price": "Explore",
+            "placeholder_style": "style-1"
+          }
+        },
+        "featured_2": {
+          "type": "featured_piece",
+          "settings": {
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all",
+            "title": "Rose form",
+            "price": "Explore",
+            "placeholder_style": "style-2"
+          }
+        },
+        "featured_3": {
+          "type": "featured_piece",
+          "settings": {
+            "product": "",
+            "image": "",
+            "link": "shopify://collections/all",
+            "title": "Silver orbit",
+            "price": "Explore",
+            "placeholder_style": "style-3"
+          }
+        }
+      },
+      "block_order": [
+        "model_1",
+        "model_2",
+        "model_3",
+        "model_4",
+        "model_5",
+        "model_6",
+        "model_7",
+        "model_8",
+        "featured_1",
+        "featured_2",
+        "featured_3"
+      ],
+      "settings": {
+        "brand_name": "Milk N Rose",
+        "menu_items": "Home\nCollection\nAbout\nCart",
+        "default_menu_link": "shopify://collections/all",
+        "hero_kicker": "",
+        "hero_title": "New available",
+        "hero_copy": "Explore handmade pieces through a rotating product orbit.",
+        "hero_link_label": "View collection",
+        "orbit_label": "Interactive X product model orbit",
+        "auto_rotate": true,
+        "rotation_speed": 18,
+        "video_url": "",
+        "video_image": "",
+        "video_alt": "Jewelry making process close-up",
+        "video_button_label": "Play the making process video",
+        "featured_kicker": "Selected objects",
+        "featured_title": "Featured pieces"
+      }
+    }
+  },
+  "order": [
+    "homepage"
+  ]
+}

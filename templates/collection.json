@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "collection": {
+      "type": "cinelin-collection",
+      "settings": {}
+    }
+  },
+  "order": [
+    "collection"
+  ]
+}

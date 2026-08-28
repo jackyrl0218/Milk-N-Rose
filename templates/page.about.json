@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "about": {
+      "type": "cinelin-about",
+      "settings": {}
+    }
+  },
+  "order": [
+    "about"
+  ]
+}

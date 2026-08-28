@@ -1,0 +1,171 @@
+{{ 'cinelin-tokens.css' | asset_url | stylesheet_tag }}
+{{ 'cinelin-pages.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cinelin-pages.js' | asset_url }}" defer="defer"></script>
+
+<section class="cinelin-page cinelin-page--collection" data-cinelin-page>
+  <div class="cinelin-page__shell">
+    <nav class="cinelin-page__topline" aria-label="Page navigation">
+      <div class="cinelin-page__left-actions">
+        <button class="cinelin-page__menu-button" type="button" data-cinelin-menu-toggle aria-controls="CinelinPageMenu-{{ section.id }}" aria-expanded="false">
+          <span class="visually-hidden">Open menu</span>
+          {{ 'icon-hamburger.svg' | inline_asset_content }}
+        </button>
+      </div>
+      <nav class="cinelin-page__topnav" aria-label="Primary navigation">
+        <a href="{{ routes.all_products_collection_url }}">Collection</a>
+        <a href="/pages/about">About</a>
+      </nav>
+      <a class="cinelin-page__topline-brand" href="{{ routes.root_url }}" aria-label="Milk N Rose">
+        <img src="{{ 'cow _1.png' | asset_url }}" alt="Milk N Rose" loading="eager">
+      </a>
+      <div class="cinelin-page__actions">
+        <a class="cinelin-page__utility-link" href="{{ routes.all_products_collection_url }}">Shop</a>
+        <a class="cinelin-page__icon-button" href="{{ routes.account_url }}" aria-label="Account">
+          {{ 'icon-account.svg' | inline_asset_content }}
+        </a>
+        <a class="cinelin-page__icon-button" href="{{ routes.cart_url }}" aria-label="Cart">
+          {{ 'icon-cart.svg' | inline_asset_content }}
+        </a>
+      </div>
+      <div class="cinelin-page__menu-list" id="CinelinPageMenu-{{ section.id }}" data-cinelin-menu>
+        <div class="cinelin-page__menu-nav">
+          <a href="{{ routes.root_url }}">Home</a>
+          <a href="{{ routes.all_products_collection_url }}">Collection</a>
+          <a href="/pages/about">About</a>
+          <a href="{{ routes.cart_url }}">Cart</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="cinelin-collection-hero">
+      {%- if section.settings.hero_image != blank -%}
+        {{ section.settings.hero_image | image_url: width: 2400 | image_tag: class: 'cinelin-collection-hero__image', loading: 'eager', alt: section.settings.hero_alt }}
+      {%- elsif collection.image != blank -%}
+        {{ collection.image | image_url: width: 2400 | image_tag: class: 'cinelin-collection-hero__image', loading: 'eager', alt: collection.title }}
+      {%- else -%}
+        <img class="cinelin-collection-hero__image" src="{{ 'milk-n-rose-silver-hero.jpg' | asset_url }}" alt="{{ section.settings.hero_alt | escape }}" loading="eager">
+      {%- endif -%}
+      <div class="cinelin-collection-hero__content">
+        <p class="cinelin-page__kicker">{{ section.settings.kicker | escape }}</p>
+        <h1 class="cinelin-collection-hero__title">
+          {%- if collection.title != blank -%}
+            {{ collection.title | escape }}
+          {%- else -%}
+            {{ section.settings.title | escape }}
+          {%- endif -%}
+        </h1>
+        <a class="cinelin-collection-hero__link" href="#CollectionProducts-{{ section.id }}">{{ section.settings.hero_link_label | escape }}</a>
+      </div>
+    </header>
+
+    <div class="cinelin-collection-intro">
+      <h2 id="CollectionProducts-{{ section.id }}">{{ section.settings.grid_heading | escape }}</h2>
+      <p>
+        {%- if collection.description != blank -%}
+          {{ collection.description | strip_html }}
+        {%- else -%}
+          {{ section.settings.copy | escape }}
+        {%- endif -%}
+      </p>
+    </div>
+
+    <div class="cinelin-collection-grid" aria-label="{{ section.settings.grid_label | escape }}">
+      {%- paginate collection.products by section.settings.products_per_page -%}
+        {%- if collection.products.size > 0 -%}
+          {%- for product in collection.products -%}
+            <article class="cinelin-collection-card">
+              <a href="{{ product.url }}">
+                {%- if product.featured_image != blank -%}
+                  {{ product.featured_image | image_url: width: 900 | image_tag: class: 'cinelin-collection-card__image', loading: 'lazy', alt: product.title }}
+                {%- else -%}
+                  <span class="cinelin-collection-card__media cinelin-collection-card__media--pearl"></span>
+                {%- endif -%}
+                <span class="cinelin-collection-card__title">{{ product.title | escape }}</span>
+                <span class="cinelin-collection-card__price">{{ product.price | money }}</span>
+              </a>
+            </article>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for index in (1..8) -%}
+            <article class="cinelin-collection-card">
+              <a href="{{ routes.all_products_collection_url }}">
+                <span class="cinelin-collection-card__media cinelin-collection-card__media--{% cycle 'pearl', 'green', 'rose', 'gold', 'silver' %}"></span>
+                <span class="cinelin-collection-card__title">Collection piece {{ index }}</span>
+                <span class="cinelin-collection-card__price">Coming soon</span>
+              </a>
+            </article>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endpaginate -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cinelin collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Fallback title",
+      "default": "Browse our latest pieces"
+    },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Fallback copy",
+      "default": "Handmade jewelry arranged in a clean catalog rhythm. The hero carries the mood, and the product area stays simple."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Hero image alt text",
+      "default": "Abstract illustrated landscape for the X collection"
+    },
+    {
+      "type": "text",
+      "id": "hero_link_label",
+      "label": "Hero link label",
+      "default": "Shop all"
+    },
+    {
+      "type": "text",
+      "id": "grid_heading",
+      "label": "Grid heading",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "grid_label",
+      "label": "Grid accessibility label",
+      "default": "Collection products"
+    },
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 4,
+      "max": 32,
+      "step": 4,
+      "default": 16
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cinelin collection"
+    }
+  ]
+}
+{% endschema %}
